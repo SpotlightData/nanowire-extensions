@@ -9,9 +9,9 @@
   "author": "Augustinas <augustinas@spotlightdata.co.uk>",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
+    "test": "BABEL_ENV=test kcd-scripts test --config=jest.config.js",
+    "build": "BABEL_ENV=build rollup -c",
     "dev": "rollup -c -w",
-    "test": "node test/test.js",
     "pretest": "npm run build"
   },
   "devDependencies": {
@@ -19,9 +19,12 @@
     "@babel/preset-env": "^7.0.0-beta.51",
     "@babel/preset-react": "^7.0.0-beta.51",
     "@babel/preset-stage-1": "^7.0.0-beta.51",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "^23.0.1",
     "jest": "^23.1.0",
     "kcd-scripts": "^0.39.1",
     "react-testing-library": "^4.0.1",
+    "regenerator-runtime": "^0.11.1",
     "rollup": "^0.60.7",
     "rollup-plugin-babel": "^4.0.0-beta.5"
   },

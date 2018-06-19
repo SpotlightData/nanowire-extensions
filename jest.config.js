@@ -1,11 +1,13 @@
-const jestConfig = require('kcd-scripts/jest');
-
-module.exports = Object.assign(jestConfig, {
-  rootDir: __dirname,
-  roots: [__dirname],
+module.exports = {
+  verbose: true,
+  transform: {
+    '^.+\\.js$': 'babel-jest',
+  },
+  testMatch: ['<rootDir>/tests/helpers/query.test.js'],
   displayName: 'nanowire-extensions',
-  // moduleNameMapper: {
-  //   // this is just here so our examples look like they would in a real project
-  //   'react-testing-library': require.resolve('../src'),
-  // },
-});
+  testEnvironment: 'jsdom',
+  moduleNameMapper: {
+    // this is just here so our examples look like they would in a real project
+    'nanowire-extensions': require.resolve('./src'),
+  },
+};
