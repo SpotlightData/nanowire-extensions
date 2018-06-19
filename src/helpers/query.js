@@ -26,7 +26,7 @@ function buildBaseJsQuery(items) {
 /**
  * Makes easier to write jmespath specifications by allowing to use objects as well as arrays
  * @example
- *
+ * import { buildJsQuery } from '@spotlightdata/nanowire-extensions';
  * const sizeJsQuery = buildJsQuery({
  *  vars: {
  *    SLD: '_source.jsonLD',
@@ -68,6 +68,11 @@ export function buildJsQuery(spec) {
 }
 /**
  * Helps to handle any failures that can occur when a jmespath spec is run
+ * @example
+ * import { runJsQuery } from '@spotlightdata/nanowire-extensions';
+ *
+ * runJsQuery({ x: {y: 'a'}}, 'x.y'); // 'a'
+ * runJsQuery({ x: {} }, 'x.y', 'b'); // 'b'
  * @param {object|any[]} data -- Data the query will be ran on
  * @param {string} query -- jmespath query
  * @param {any} or -- If query fails this will be returned
