@@ -1,0 +1,39 @@
+{
+  "name": "nanowire-extensions",
+  "version": "1.0.0",
+  "description": "utilities and components used in nanowire platform",
+  "main": "dist/nanowire-extensions.cjs.js",
+  "module": "dist/nanowire-extensions.esm.js",
+  "browser": "dist/nanowire-extensions.umd.js",
+  "repository": "git@github.com:SpotlightData/nanowire-extensions.git",
+  "author": "Augustinas <augustinas@spotlightdata.co.uk>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "node test/test.js",
+    "pretest": "npm run build"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/preset-react": "^7.0.0-beta.51",
+    "@babel/preset-stage-1": "^7.0.0-beta.51",
+    "jest": "^23.1.0",
+    "kcd-scripts": "^0.39.1",
+    "react-testing-library": "^4.0.1",
+    "rollup": "^0.60.7",
+    "rollup-plugin-babel": "^4.0.0-beta.5"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "antd": "^3.6.3",
+    "react": "^16.4.1"
+  },
+  "dependencies": {
+    "jmespath": "^0.15.0",
+    "ramda": "^0.25.0"
+  }
+}
