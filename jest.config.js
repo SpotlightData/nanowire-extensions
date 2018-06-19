@@ -3,7 +3,7 @@ module.exports = {
   transform: {
     '^.+\\.js$': 'babel-jest',
   },
-  testMatch: ['<rootDir>/tests/helpers/query.test.js'],
+  testMatch: ['<rootDir>/tests/helpers/*.test.js'],
   displayName: '@spotlightdata/nanowire-extensions',
   testEnvironment: 'jsdom',
   moduleNameMapper: {
