@@ -43,7 +43,7 @@ function buildBaseJsQuery(items) {
  *    ],
  * });
  *
- * @param {object|(string|object)[]} spec - jmespath spec
+ * @param {Object|Array.<Object|String>} spec - jmespath spec
  * @param {any} data - Data to be validated by the schema
  */
 export function buildJsQuery(spec) {
