@@ -1,11 +1,7 @@
-import { flatten } from 'ramda';
 import jmespath from 'jmespath';
+import { flatten } from './shared';
 
-function stringReg(str) {
-  return new RegExp(str, 'g');
-}
-
-function queryToStr(query) {
+function queryToString(query) {
   if (typeof query === 'string') {
     return query;
   } else if (!Array.isArray(query)) {
@@ -19,9 +15,12 @@ function queryToStr(query) {
   throw 'Unknown query passed';
 }
 
-function buildBaseJsQuery(list) {
-  return flatten(list)
-    .map(queryToStr)
+function buildBaseJsQuery(items) {
+  if (typeof items === 'string') {
+    return items;
+  }
+  return flatten(items)
+    .map(queryToString)
     .join('');
 }
 /**
@@ -63,7 +62,7 @@ export function buildJsQuery(spec) {
   const { vars, query } = spec;
 
   return Object.keys(vars).reduce(
-    (q, vName) => q.replace(stringReg(vName), queryToStr(vars[vName])),
+    (q, vName) => q.replace(new RegExp(vName, 'g'), queryToString(vars[vName])),
     buildBaseJsQuery(query)
   );
 }
