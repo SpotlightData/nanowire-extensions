@@ -12,7 +12,7 @@ function queryToString(query) {
     );
     return `{${obj} }`;
   }
-  throw 'Unknown query passed';
+  throw `Invalid query type passed ${typeof query}`;
 }
 
 function buildBaseJsQuery(items) {
