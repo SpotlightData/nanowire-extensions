@@ -15,9 +15,9 @@ export function queryObjectToString(query) {
  * @example
  * import { buildUrl } from '@spotlightdata/nanowire-extensions';
  * buildUrl(true, '/api', '/test', { test: 'value' }); // '/api/test?test=value'
- * @param {boolean} withBase Choose whether prefix will be added
- * @param {string} baseUrl The prefix to url
- * @param {string} url Url to be configured
+ * @param {Boolean} withBase Choose whether prefix will be added
+ * @param {String} baseUrl The prefix to url
+ * @param {String} url Url to be configured
  * @param {Object} query Key value object containing query that will be put into the url
  */
 export function buildUrl(withBase, baseUrl, url, query) {
