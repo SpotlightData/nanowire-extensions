@@ -1,4 +1,4 @@
-import { buildJsQuery } from 'nanowire-extensions';
+import { buildJsQuery } from '@spotlightdata/nanowire-extensions';
 
 describe('helpers/query', () => {
   describe('buildQuery', () => {

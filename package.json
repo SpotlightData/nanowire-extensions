@@ -1,5 +1,5 @@
 {
-  "name": "nanowire-extensions",
+  "name": "@spotlightdata/nanowire-extensions",
   "version": "0.0.1",
   "description": "utilities and components used in nanowire platform",
   "main": "dist/nanowire-extensions.cjs.js",
