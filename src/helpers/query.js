@@ -49,8 +49,17 @@ function buildBaseJsQuery(list) {
  */
 export function buildJsQuery(spec) {
   if (Array.isArray(spec)) {
+    if (spec.length === 0) {
+      throw new Error('Query builder cannot be empty');
+    }
     return buildBaseJsQuery(spec);
+  } else if (typeof spec === 'string') {
+    if (spec.length === 0) {
+      throw new Error('Query builder cannot be empty');
+    }
+    return spec;
   }
+
   const { vars, query } = spec;
 
   return Object.keys(vars).reduce(
@@ -65,15 +74,13 @@ export function buildJsQuery(spec) {
  * @param {any} or -- If query fails this will be returned
  */
 export function runJsQuery(data, query, or) {
-  let resp = or;
+  let resp;
   try {
     resp = jmespath.search(data, query);
   } catch (e) {
     if (or === undefined) {
-      console.error(`Failed to run query: ${query}`);
-      console.error(e);
+      throw `Failed to run query: ${query}`;
     }
-    resp = or;
   }
   return resp || or;
 }
