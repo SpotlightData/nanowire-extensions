@@ -9,7 +9,7 @@
   "author": "Augustinas <augustinas@spotlightdata.co.uk>",
   "license": "MIT",
   "scripts": {
-    "test": "BABEL_ENV=test kcd-scripts test --config=jest.config.js",
+    "test": "BABEL_ENV=test kcd-scripts test --config=jest.config.js --maxWorkers=4",
     "build": "BABEL_ENV=build rollup -c",
     "dev": "rollup -c -w",
     "pretest": "npm run build"
