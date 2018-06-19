@@ -6,6 +6,6 @@ export function queryObjectToString(query) {
 
 export function buildUrl(hasBase, baseUrl, query, url) {
   const params = queryObjectToString(query);
-  const fullUrl = url + (params.length !== 0 ? `?${params}` : '');
+  const fullUrl = url + (params.length !== 0 ? '?' + params : '');
   return hasBase ? baseUrl + fullUrl : fullUrl;
 }
