@@ -4,17 +4,20 @@ import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import pkg from './package.json';
 
+const external = ['react', 'antd'];
+
 export default [
   {
     input: 'src/index.js',
-    external: ['react', 'antd'],
+    external,
     output: [{ file: pkg.main, format: 'cjs' }, { file: pkg.module, format: 'es' }],
     plugins: [
       resolve({
         module: true,
       }),
       commonjs({
-        include: 'node_modules/**', // Default: undefined
+        include: 'node_modules/**',
+        ignore: external,
       }),
       babel({
         exclude: ['node_modules/**'],
