@@ -2,7 +2,7 @@
 
 ### About
 
-Header for showing job state progress. All classes can be overriden using classOverride prop
+Header for showing job state progress. Uses https://ant.design/components/steps/
 
 ### Parameters
 
@@ -14,12 +14,10 @@ const propTypes = {
   }),
   current: PropTypes.number.isRequired,
   steps: PropTypes.arrayOf(PropTypes.string),
-  classOverrides: PropTypes.shape({}),
 };
 
 const defaultProps = {
   steps: ['Create job', 'Add files', 'Process'],
-  classOverrides: {},
 };
 ```
 
