@@ -25,5 +25,3 @@ export function timeSort(keyAccess) {
     return timeA > timeB ? 1 : -1;
   };
 }
-
-export const timeRender = text => defaultTimeFormat(text);
