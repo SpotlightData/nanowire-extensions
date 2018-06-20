@@ -4,7 +4,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import pkg from './package.json';
 
-const external = ['react', 'antd'];
+const external = ['react', 'antd', 'moment'];
 
 export default [
   {
