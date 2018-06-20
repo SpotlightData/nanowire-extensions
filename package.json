@@ -12,13 +12,15 @@
     "test": "BABEL_ENV=test kcd-scripts test --config=jest.config.js --maxWorkers=4",
     "build": "BABEL_ENV=build rollup -c",
     "dev": "rollup -c -w",
-    "prepublish": "yarn build"
+    "prepublish": "yarn build",
+    "prepare": "install-self-peers -- --ignore-scripts"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.51",
     "@babel/preset-env": "^7.0.0-beta.51",
     "@babel/preset-react": "^7.0.0-beta.51",
     "@babel/preset-stage-1": "^7.0.0-beta.51",
+    "@team-griffin/install-self-peers": "^1.1.1",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^23.0.1",
     "jest": "^23.1.0",
