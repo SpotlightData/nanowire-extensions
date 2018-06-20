@@ -12,7 +12,20 @@ export function defaultTimeFormat(date) {
 }
 
 const value = time => moment(time).valueOf();
-
+/**
+ * Allows to specify time sorter for objects.
+ * Mainly used inside antd table column sorting
+ * @example
+ * import { timeSort } from 'helpers/time';
+ * {
+ *   title: 'Date created',
+ *   dataIndex: 'createdAt',
+ *   sorter: timeSort('createdAt'),
+ *   width: 120,
+ * },
+ * @param {String|(any) => any} keyAccess
+ * @return {(a, b) => Int}
+ */
 export function timeSort(keyAccess) {
   const accessor = typeof keyAccess === 'function' ? keyAccess : obj => obj[keyAccess];
 
