@@ -23,29 +23,7 @@ function buildBaseJsQuery(items) {
     .map(queryToString)
     .join('');
 }
-/**
- * Makes easier to write jmespath specifications by allowing to use objects as well as arrays
- * @example
- * import { buildJsQuery } from '@spotlightdata/nanowire-extensions';
- * const sizeJsQuery = buildJsQuery({
- *  vars: {
- *    SLD: '_source.jsonLD',
- *  },
- *  query: [
- *   'hits.hits[*]',
- *    '.',
- *    {
- *      taskId: '_id',
- *      fileSize: 'SLD.fileSize',
- *      fileType: 'SLD.fileFormat || SLD."@type"',
- *      name: 'SLD.name',
- *    },
- *    ],
- * });
- *
- * @param {Object|Array.<Object|String>} spec - jmespath spec
- * @param {any} data - Data to be validated by the schema
- */
+
 export function buildJsQuery(spec) {
   if (Array.isArray(spec)) {
     if (spec.length === 0) {
@@ -66,17 +44,7 @@ export function buildJsQuery(spec) {
     buildBaseJsQuery(query)
   );
 }
-/**
- * Helps to handle any failures that can occur when a jmespath spec is run
- * @example
- * import { runJsQuery } from '@spotlightdata/nanowire-extensions';
- *
- * runJsQuery({ x: {y: 'a'}}, 'x.y'); // 'a'
- * runJsQuery({ x: {} }, 'x.y', 'b'); // 'b'
- * @param {object|any[]} data -- Data the query will be ran on
- * @param {string} query -- jmespath query
- * @param {any} or -- If query fails this will be returned
- */
+
 export function runJsQuery(data, query, or) {
   let resp;
   try {
