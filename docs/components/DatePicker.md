@@ -2,7 +2,7 @@
 
 ### About
 
-A wrapper for ant designs `RangePicker`
+A wrapper for ant design's `RangePicker`
 
 ### Parameters
 
