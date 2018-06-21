@@ -33,5 +33,5 @@ const props = {
   label: 'Test label',
   defaultValue: true,
 };
-const badge = <Checkbox {...props} />;
+const checkbox = <Checkbox {...props} />;
 ```
