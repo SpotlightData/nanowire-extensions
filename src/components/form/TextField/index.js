@@ -9,26 +9,12 @@ export class TextField extends PureComponent {
       input.onChange(defaultValue, input.value);
     }
   }
-
-  handleKey = e => {
-    const { onEnterPress } = this.props;
-    if (e.key === 'Enter' && onEnterPress) {
-      onEnterPress(e);
-    }
-  };
-
   render() {
     const { type, placeholder, input, size, meta } = this.props;
     const error = meta.error || meta.submitError;
     return (
       <div className="field">
-        <Input
-          {...input}
-          placeholder={placeholder}
-          type={type}
-          size={size}
-          onKeyPress={this.handleKey}
-        />
+        <Input {...input} placeholder={placeholder} type={type} size={size} />
         {error && <span className="field-error">{error}</span>}
       </div>
     );
@@ -48,13 +34,11 @@ TextField.propTypes = {
     submitError: PropTypes.string,
   }).isRequired,
   defaultValue: PropTypes.string,
-  onEnterPress: PropTypes.func,
 };
 
 TextField.defaultProps = {
   type: '',
   placeholder: '',
-  onEnterPress: undefined,
   defaultValue: undefined,
   size: 'default',
 };
