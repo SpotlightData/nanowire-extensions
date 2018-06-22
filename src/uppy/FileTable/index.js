@@ -8,10 +8,12 @@ import { withUppy } from '../withUppy';
 import createDefaultColumns from './columns';
 
 class FileTable extends PureComponent {
-  state = { files: [] };
+  state = { files: [], loaded: false };
 
   componentDidMount() {
     const { uppy } = this.props;
+
+    this.updateFiles();
     uppy.on('file-batch', this.updateFiles);
     uppy.on('file-removed', this.updateFiles);
   }
@@ -21,22 +23,26 @@ class FileTable extends PureComponent {
     this.props.uppy.off('file-removed', this.updateFiles);
   }
 
+  takeFiles = () => Object.values(this.props.uppy.getState().files).slice();
+
   updateFiles = () => {
-    const files = Object.values(this.props.uppy.getState().files).slice();
     // The main reason for putting files to state is for re-rendering purposes
-    this.setState({ files });
+    this.setState({ files: this.takeFiles(), loaded: true });
   };
 
   handleRemove = id => () => this.props.uppy.removeFile(id);
 
   render() {
-    const { files } = this.state;
+    const { files, loaded } = this.state;
     const { className, sumbitRender, createColumns } = this.props;
+    if (!loaded) {
+      return null;
+    }
     return (
       <Card className={className}>
         <Row className="summary">
           <Col xs={4}>
-            <CardHeader>Pending Files</CardHeader>
+            <h2>Pending Files</h2>
           </Col>
           <Col xs={2} className="stats">
             <span>
