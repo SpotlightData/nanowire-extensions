@@ -33,7 +33,7 @@ export class OneDriveBare extends PureComponent {
 
   componentWillUnmount() {
     const plugin = this.getPlugin();
-    if (this.plugin) {
+    if (plugin) {
       this.props.uppy.removePlugin(plugin);
     }
   }
