@@ -1,7 +1,84 @@
 # OneDrive
 
+## File retrieval
+
 Because in OneDrive we are required to specify the exact urls we redirect from, we create a static html page that we link to.
-The problem with our current set up is that our url is `jobs/:id/upload` where id is **dynamic**, so we cannot specify fixed urls for OneDrive
+The problem with our current set up is that our url is `jobs/:id/upload` where id is **dynamic**, so we cannot specify fixed urls for OneDrive.
+
+The function that retrieves files from OneDrive can be found in `src/uppy/OneDrive/getFiles` it can also be rewritten and passed to `option` prop to `OneDrive` component.
+
+```javascript
+const options = {
+  upload: {
+    uploader: async settings => {
+      // ...do something
+      return uploaderResp;
+    },
+    spec,
+  },
+};
+```
+
+The value of `spec` inside `upload` object can be used to override default specification passed to uploader. Default settings:
+
+```javascript
+const settings = {
+  clientId: this.opts.appId,
+  action: 'query',
+  multiSelect: true,
+  openInNewWindow: true,
+  source:
+    process.env.NODE_ENV === 'development'
+      ? `http://localhost:${process.env.PORT}/services/onedrive`
+      : '/services/onedrive',
+  advanced: { queryParameters: `select=${includeKeys.join(',')}` },
+  ...this.settings.spec,
+};
+```
+
+## Meta
+
+The meta that we fetch from OneDrive is:
+
+```javascript
+const includeKeys = [
+  '@content.downloadUrl',
+  '@microsoft.graph.downloadUrl',
+  'id',
+  'name',
+  'webUrl',
+  'size',
+  'file',
+  'folder',
+  'photo',
+  'image',
+  'audio',
+  'video',
+  'location',
+  'createdBy',
+  'createdDateTime',
+  'lastModifiedBy',
+  'lastModifiedDateTime',
+];
+```
+
+## Example Usage
+
+```javascript
+const uppy = Uppy({
+  autoProceed: false,
+});
+const options = {
+  spec: { source: 'http://fakeurl.com'}
+};
+const content(
+  <UppyProvider uppy={uppy}>
+    <OneDrive text="testText" appId="myId" options={options} />
+  </UppyProvider>
+);
+```
+
+## Iframe
 
 HTML snippet that is opened within the iframe:
 
