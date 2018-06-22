@@ -6,27 +6,29 @@ import sid from 'shortid';
 import { Uploader } from './Uploader';
 import { withUppy } from '../withUppy';
 
-const defaultSettings = {
-  getMetaFromForm: true,
-  note: '',
-};
-
 export class OneDriveBare extends PureComponent {
   componentWillMount() {
     this.id = sid.generate();
   }
 
   componentDidMount() {
-    const { uppy, text, appId } = this.props;
+    const { uppy, text, appId, options } = this.props;
     if (this.getPlugin()) {
       return;
     }
 
-    const options = Object.assign(
-      { target: `#${this.id}`, appId, text, buttonClass: 'ant-btn ant-btn-primary' },
-      defaultSettings
+    const settings = Object.assign(
+      {
+        target: `#${this.id}`,
+        appId,
+        text,
+        buttonClass: 'ant-btn ant-btn-primary',
+        getMetaFromForm: true,
+        note: '',
+      },
+      options
     );
-    uppy.use(Uploader, options);
+    uppy.use(Uploader, settings);
   }
 
   componentWillUnmount() {
@@ -54,11 +56,13 @@ OneDriveBare.propTypes = {
   className: PropTypes.string,
   text: PropTypes.string,
   appId: PropTypes.string.isRequired,
+  options: PropTypes.shape({}),
 };
 
 OneDriveBare.defaultProps = {
   className: '',
   text: 'Upload OneDrive files',
+  options: {},
 };
 
 export const OneDrive = withUppy(OneDriveBare);

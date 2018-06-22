@@ -31,10 +31,11 @@ export class Uploader extends Plugin {
     this.id = this.opts.id || 'OneDriveUpload';
     this.title = 'Onedrive upload';
     this.opts = opts;
-    this.getFiles = opts.getFiles || getFiles;
+    // Uploader
+    this.settings = opts.upload || { uploader: getFiles, spec: {} };
   }
 
-  async uploadFiles(files) {
+  uploadFiles(files) {
     const upload = files.map(file =>
       this.uppy.addFile({
         source: 'ONEDRIVE',
@@ -49,21 +50,24 @@ export class Uploader extends Plugin {
         ),
       })
     );
-    await Promise.all(upload);
-    this.uppy.emit('file-batch');
+    Promise.all(upload).then(() => this.uppy.emit('file-batch'));
   }
 
   handleUploadReq = async e => {
     e.preventDefault();
-    const [error, resp] = await this.getFiles({
+    const settings = {
       clientId: this.opts.appId,
       action: 'query',
       multiSelect: true,
       openInNewWindow: true,
-      advanced: {
-        queryParameters: `select=${includeKeys.join(',')}`,
-      },
-    });
+      source:
+        process.env.NODE_ENV === 'development'
+          ? `http://localhost:${process.env.PORT}/services/onedrive`
+          : '/services/onedrive',
+      advanced: { queryParameters: `select=${includeKeys.join(',')}` },
+      ...this.settings.spec,
+    };
+    const [error, resp] = await this.settings.uploader(settings);
     if (error) {
       notification.open({
         message: 'Failed one drive upload',
@@ -73,8 +77,8 @@ export class Uploader extends Plugin {
       this.uploadFiles(resp.value);
     }
   };
-  // Because uppy uses preact
-  render = state =>
+  // Because uppy uses preact, we manually create render function
+  render = () =>
     h(
       'div',
       { className: 'wrapper' },

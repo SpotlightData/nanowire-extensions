@@ -1,7 +1,3 @@
-const IFRAME_SOURCE =
-  process.env.NODE_ENV === 'development'
-    ? `http://localhost:${process.env.PORT}/services/onedrive`
-    : '/services/onedrive';
 /**
  * Creates an iframe and uses it as a middleman for opening Onedrive file picker
  * @param {Object} options - Onedrive options
@@ -9,7 +5,7 @@ const IFRAME_SOURCE =
  */
 export function getFiles(options) {
   return new Promise((res, rej) => {
-    // To prevent a bug where request was sent twice
+    // To prevent an issue where request was sent twice
     let resolved = false;
     let iFrame;
 
@@ -26,7 +22,7 @@ export function getFiles(options) {
     window.addEventListener('message', handleMessages);
 
     iFrame = document.createElement('iframe');
-    iFrame.src = IFRAME_SOURCE;
+    iFrame.src = options.source;
     iFrame.style.display = 'none';
     // Sends onedrive options
     iFrame.onload = () => receiver.postMessage(JSON.stringify(options), '*');
