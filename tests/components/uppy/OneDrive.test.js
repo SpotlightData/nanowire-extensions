@@ -1,13 +1,26 @@
 import React from 'react';
 import { UppyProvider, OneDrive } from '@spotlightdata/nanowire-extensions';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import Uppy from 'uppy/lib/core';
 import waitForExpect from 'wait-for-expect';
+
+const uploaderResp = [
+  null,
+  {
+    value: [
+      {
+        name: 'test-file',
+        lastModifiedDateTime: new Date().toString(),
+        file: { mimeType: 'pdf' },
+      },
+    ],
+  },
+];
 
 describe('uppy/OneDrive', () => {
   it('should provide a labeled button', () => {
     const uppy = Uppy({ autoProceed: false });
-    const { debug, container, queryByText } = render(
+    const { queryByText } = render(
       <UppyProvider uppy={uppy}>
         <OneDrive text="testText" appId="fakeId" />
       </UppyProvider>
@@ -19,7 +32,7 @@ describe('uppy/OneDrive', () => {
     const uppy = Uppy({
       autoProceed: false,
     });
-    const { debug, container, queryByText } = render(
+    render(
       <UppyProvider uppy={uppy}>
         <OneDrive text="testText" appId="fakeId" />
       </UppyProvider>
@@ -27,18 +40,53 @@ describe('uppy/OneDrive', () => {
     expect(uppy.plugins.acquirer[0].id).toBe('OneDriveUpload');
   });
 
-  it('should remove itself from uppy plugin list when unmounted', async () => {
+  it('should pass upload specifications to uploader function', async done => {
     const uppy = Uppy({
       autoProceed: false,
     });
-    const { unmount } = render(
+    const spec = { test1: 'test1', test2: 'test2' };
+    const options = {
+      upload: {
+        uploader: async settings => {
+          expect(settings).toEqual(expect.objectContaining(spec));
+          done();
+          return uploaderResp;
+        },
+        spec,
+      },
+    };
+    const { queryByText } = render(
       <UppyProvider uppy={uppy}>
-        <OneDrive text="testText" appId="fakeId" />
+        <OneDrive text="testText" appId="fakeId" options={options} />
       </UppyProvider>
     );
-    unmount();
+    fireEvent.click(queryByText('testText'), {});
+  });
+
+  it('should store all uploaded meta to uppy store', async () => {
+    const uppy = Uppy({
+      autoProceed: false,
+    });
+    const spec = { test1: 'test1', test2: 'test2' };
+    const options = {
+      upload: {
+        uploader: async settings => {
+          return uploaderResp;
+        },
+        spec,
+      },
+    };
+    const { queryByText } = render(
+      <UppyProvider uppy={uppy}>
+        <OneDrive text="testText" appId="fakeId" options={options} />
+      </UppyProvider>
+    );
+    fireEvent.click(queryByText('testText'), {});
+
     await waitForExpect(() => {
-      expect(uppy.plugins.acquirer.length).toBe(0);
+      expect(uppy.getFiles()[0]).toEqual(
+        expect.objectContaining({ name: 'test-file', meta: { name: 'test-file', type: 'pdf' } })
+      );
     });
   });
 });
