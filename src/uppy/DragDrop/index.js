@@ -24,6 +24,13 @@ class DragDropBare extends PureComponent {
     uppy.use(Uploader, settings);
   }
 
+  componentWillUnmount() {
+    const plugin = this.getPlugin();
+    if (plugin) {
+      this.props.uppy.removePlugin(plugin);
+    }
+  }
+
   getPlugin() {
     return this.props.uppy.getPlugin('DragDrop');
   }
