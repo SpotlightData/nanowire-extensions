@@ -2,7 +2,7 @@
 
 ### About
 
-Wrapper for antd textare component, made to work with https://github.com/final-form/react-final-form
+Wrapper for antd text area component, made to work with https://github.com/final-form/react-final-form
 
 ### Parameters
 
