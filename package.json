@@ -41,7 +41,8 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-jss": "^8.5.1"
+    "react-jss": "^8.5.1",
+    "uppy": "^0.25.5"
   },
   "dependencies": {
     "hoist-non-react-statics": "^2.5.5",
