@@ -12,7 +12,7 @@ describe('uppy/withUppy', () => {
     };
     const Wrapper = withUppy(Component);
 
-    const { container, debug } = render(
+    render(
       <UppyProvider uppy={uppyMock}>
         <Wrapper />
       </UppyProvider>
@@ -29,7 +29,7 @@ describe('uppy/withUppy', () => {
     };
     const Wrapper = withUppy(Component);
 
-    const { container, debug } = render(
+    render(
       <UppyProvider uppy={uppyMock}>
         <Wrapper {...props} />
       </UppyProvider>
