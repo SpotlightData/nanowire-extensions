@@ -19,7 +19,7 @@ describe('helpers/Either', () => {
     ).toBe(2);
   });
 
-  it('should not change the type when using map', () => {
+  it('should not change the type when using map function', () => {
     const leftCall = jest.fn();
     const rightCall = jest.fn();
 

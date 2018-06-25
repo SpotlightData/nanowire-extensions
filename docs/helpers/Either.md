@@ -19,7 +19,7 @@ static from(arg1: any|[any, any], arg2: any, isLeft = false): Either
 ### Example
 
 ```javascript
-import { validateSchema } from '@spotlightdata/nanowire-extensions';
+import { Either } from '@spotlightdata/nanowire-extensions';
 
 const left = null;
 const right = 1;
