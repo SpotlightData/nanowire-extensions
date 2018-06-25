@@ -25,6 +25,19 @@ const { createClassFromSpec, default: Vega } = require('react-vega');
 //     }).pipe(map(([err, resp]) => resp || err));
 // }
 
+export function buildIndexTable(list) {
+  // If we pass more than one chart, will index them correctly
+  return list.reduce(
+    (table, spec, i) => ({
+      ...table,
+      [i]: table.last,
+      // As we can have more than one chart per handler
+      last: table.last + spec.charts.length,
+    }),
+    { last: 0 }
+  );
+}
+
 function listenerMiddleWare(cb) {
   return (type, data) => {
     if (data === null || Object.keys(data).length !== 0) {

@@ -7,19 +7,7 @@ import { of, from } from 'rxjs';
 import { mergeAll, switchMap } from 'rxjs/operators';
 
 import { placeHolderSub, identity } from '../../../shared/constants';
-import { createChart } from './utils';
-
-// If we pass more than one chart, will index them correctly
-function indexTable(list) {
-  return list.reduce(
-    (table, spec, i) => ({
-      ...table,
-      [i]: table.last,
-      last: table.last + spec.charts.length,
-    }),
-    { last: 0 }
-  );
-}
+import { createChart, buildIndexTable } from './utils';
 
 export class ChartManager extends PureComponent {
   state = { charts: {} };
@@ -50,7 +38,7 @@ export class ChartManager extends PureComponent {
 
   resetCharts(specs) {
     this.setState({ charts: {} });
-    this.placements = indexTable(specs);
+    this.placements = buildIndexTable(specs);
   }
 
   run(specs) {
@@ -78,7 +66,7 @@ export class ChartManager extends PureComponent {
 
       const handler = propOr(undefined, spec.handler, chartLib.handlers);
       const tailors = propOr({}, 'tailors', handler);
-      const hasData = propOr(() => false, 'hasEnough', handler);
+      const hasEnough = propOr(() => false, 'hasEnough', handler);
       const index = this.getPlacement(specI);
 
       function makeChart(data) {
@@ -109,7 +97,7 @@ export class ChartManager extends PureComponent {
       if (!handler) {
         throw new Error(`Handler ${spec.handler} not found`);
       }
-      const dataSource = hasData(initialValues)
+      const dataSource = hasEnough(initialValues)
         ? of(initialValues)
         : this.esConnector(handler.query(queryProp));
       return dataSource.pipe(switchMap(makeChart));
@@ -117,11 +105,14 @@ export class ChartManager extends PureComponent {
   }
 
   render() {
-    const { charts } = this.state;
-    if (Object.values(charts).length === 0) {
+    const { renderer } = this.props;
+    const items = Object.values(this.state.charts);
+    if (items.length === 0) {
       return null;
+    } else if (renderer) {
+      return renderer(items);
     }
-    return <React.Fragment>{Object.values(charts)}</React.Fragment>;
+    return <React.Fragment>{items}</React.Fragment>;
   }
 }
 
@@ -136,21 +127,22 @@ ChartManager.propTypes = {
       handler: PropTypes.string.isRequired,
       charts: PropTypes.arrayOf(PropTypes.string).isRequired,
       listeners: PropTypes.shape({}),
-      hasEnough: PropTypes.func,
-      Parent: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+      Parent: PropTypes.node,
       parentProps: PropTypes.shape({}),
     })
   ).isRequired,
-  initialValues: PropTypes.shape({}),
-  queryProp: PropTypes.shape({}),
   chartLib: PropTypes.shape({
     handlers: PropTypes.shape({}).isRequired,
     schemas: PropTypes.shape({}).isRequired,
   }).isRequired,
+  initialValues: PropTypes.shape({}),
+  queryProp: PropTypes.shape({}),
   requestBuilder: PropTypes.func.isRequired,
+  renderer: PropTypes.func,
 };
 
 ChartManager.defaultProps = {
   initialValues: {},
   queryProp: {},
+  renderer: undefined,
 };
