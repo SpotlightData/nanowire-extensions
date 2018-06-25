@@ -20,7 +20,7 @@ const buildBaseConfig = (token, extra) =>
 const isFunction = fn => typeof fn === 'function';
 
 export function configureBackEnd(onRequest, request = ajax) {
-  const pipes = [
+  const modifiers = [
     map(req => [null, req.response]),
     catchError(err => of([err, null])),
     isFunction(onRequest) ? tap(onRequest) : undefined,
@@ -35,7 +35,7 @@ export function configureBackEnd(onRequest, request = ajax) {
       const config = settings.aggregation
         ? aggregationBuilder(baseConfig, baseUrl, fullSettings)
         : Object.assign(baseConfig, fullSettings);
-      return request(config).pipe(...pipes);
+      return request(config).pipe(...modifiers);
     };
   };
 }
