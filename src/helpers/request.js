@@ -9,3 +9,14 @@ export function buildUrl(withBase, baseUrl, url, query) {
   const fullUrl = url + (extra.length !== 0 ? '?' + extra : '');
   return withBase ? baseUrl + fullUrl : fullUrl;
 }
+
+export function aggregationBuilder(baseConfig, baseUrl, { aggregation, ...request }) {
+  const { url, ...rest } = request;
+  const uri = url.includes(baseUrl) ? url.replace(baseUrl, '') : url;
+  return {
+    ...baseConfig,
+    url: `${baseUrl}/aggregations`,
+    method: 'post',
+    body: { request: { ...rest, uri }, aggregation },
+  };
+}
