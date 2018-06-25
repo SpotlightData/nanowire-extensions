@@ -35,6 +35,10 @@ describe('helpers/request', () => {
     it('should add base url when requested', () => {
       expect(buildUrl(true, '/api', '/test', { test: 'value' })).toBe('/api/test?test=value');
     });
+
+    it('should not break url if query is not specified', () => {
+      expect(buildUrl(true, '/api', '/test')).toBe('/api/test');
+    });
   });
 
   describe('aggregationBuilder', () => {

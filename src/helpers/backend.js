@@ -17,24 +17,25 @@ const buildBaseConfig = (token, extra) =>
     extra
   );
 
-const noop = a => a;
+const isFunction = fn => typeof fn === 'function';
 
-export function configureBackEnd(onRequest = noop, request = ajax) {
+export function configureBackEnd(onRequest, request = ajax) {
+  const pipes = [
+    map(req => [null, req.response]),
+    catchError(err => of([err, null])),
+    isFunction(onRequest) ? tap(onRequest) : undefined,
+  ].filter(p => p); // Remove the undefined entries
+
   return (token, baseUrl, extraConfig = {}) => {
     const baseConfig = buildBaseConfig(token, extraConfig);
 
     return ({ hasBase = true, data, body, ...settings }) => {
-      const url = buildUrl(hasBase, baseUrl, settings.query || {}, settings.url);
+      const url = buildUrl(hasBase, baseUrl, settings.url, settings.query);
       const fullSettings = { ...settings, url, body: data || body };
-
       const config = settings.aggregation
         ? aggregationBuilder(baseConfig, baseUrl, fullSettings)
         : Object.assign(baseConfig, fullSettings);
-      return request(config).pipe(
-        map(req => [null, req.response]),
-        catchError(err => of([err, null])),
-        tap(onRequest)
-      );
+      return request(config).pipe(...pipes);
     };
   };
 }
