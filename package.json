@@ -43,6 +43,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-jss": "^8.5.1",
+    "rxjs": "^6.2.1",
     "uppy": "^0.25.5"
   },
   "dependencies": {
