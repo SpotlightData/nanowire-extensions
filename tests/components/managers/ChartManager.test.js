@@ -1,6 +1,7 @@
 import React from 'react';
 import { ChartManager } from '@spotlightdata/nanowire-extensions';
 import { render } from 'react-testing-library';
+import { of } from 'rxjs';
 
 const identity = a => a;
 
@@ -12,9 +13,9 @@ const connection = {
 
 const specs = [];
 
-const chartLib = (hasEnough = identity) => ({
+const chartLib = (hasEnough = identity, query = () => {}) => ({
   handlers: {
-    test: { hasEnough },
+    test: { hasEnough, query },
   },
   schemas: {
     test: a => {},
@@ -45,5 +46,25 @@ describe('components/managers/ChartManager', () => {
     render(<ChartManager {...props} />);
     expect(hasEnough.mock.calls[0][0]).toEqual(props.initialValues);
     expect(request.mock.calls.length).toBe(0);
+  });
+
+  it('should get query from the handler', () => {
+    const testQuery = { test: 'test' };
+    const queryProp = { queryProp: 'test' };
+    const request = jest.fn().mockReturnValue({ pipe: () => of([]) });
+    const handlerQuery = jest.fn().mockReturnValue(testQuery);
+
+    const props = {
+      connection,
+      specs: [{ charts: [], handler: 'test' }],
+      chartLib: chartLib(() => false, handlerQuery),
+      requestBuilder: a => request,
+      initialValues: { test: 'test' },
+      queryProp: queryProp,
+    };
+
+    render(<ChartManager {...props} />);
+    expect(handlerQuery.mock.calls[0][0]).toEqual(queryProp);
+    expect(request.mock.calls[0][0]).toEqual(testQuery);
   });
 });
