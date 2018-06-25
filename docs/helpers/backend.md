@@ -33,6 +33,7 @@ function configureBackEnd(onRequest, request = ajax) {
 
 ```javascript
 import { configureBackEnd } from '@spotlightdata/nanowire-extensions';
+
 const request = configureBackEnd()('token', '/api');
 request({
   method: 'get',

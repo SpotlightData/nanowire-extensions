@@ -16,5 +16,7 @@ apply(...fns: [a => b])
 ### Example
 
 ```javascript
-const Component = apply(injectSheet(style), withRouter)(CoreComponent);
+import { apply } from '@spotlightdata/nanowire-extensions';
+
+const Component = apply(injectSheet(style), withRouter)(ComponentCore);
 ```
