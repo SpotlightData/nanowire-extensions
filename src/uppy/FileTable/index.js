@@ -73,7 +73,7 @@ FileTable.propTypes = {
   }).isRequired,
   className: PropTypes.string,
   sumbitRender: PropTypes.func.isRequired,
-  createColumns: PropTypes.func.isRequired,
+  createColumns: PropTypes.func,
 };
 
 FileTable.defaultProps = {
