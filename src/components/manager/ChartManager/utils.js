@@ -3,28 +3,6 @@ import React from 'react';
 // For some reason rollup does not find exports with es6 syntax
 const { createClassFromSpec, default: Vega } = require('react-vega');
 
-// import { configureBackEnd } from 'helpers/configureBackEnd';
-
-// export function esConnection({ token, level, resourceId }) {
-//   const backEnd = configureBackEnd(token);
-//   const config = {
-//     method: 'post',
-//     url: '/searches/searchkit/_search',
-//     headers: {
-//       'x-level': level,
-//       'x-resource-id': resourceId,
-//       Authorization: `JWT ${token}`,
-//       'Content-Type': 'application/json',
-//     },
-//   };
-//   return ({ aggregation, ...data }) =>
-//     backEnd({
-//       ...config,
-//       data,
-//       aggregation,
-//     }).pipe(map(([err, resp]) => resp || err));
-// }
-
 export function buildIndexTable(list) {
   // If we pass more than one chart, will index them correctly
   return list.reduce(
