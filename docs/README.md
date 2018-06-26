@@ -37,6 +37,8 @@
   - [reducers](redux/reducers.md)
   - [withMappedActions](redux/withMappedActions.md)
 - [Uppy](uppy/README.md)
+  - [UppyProvider](uppy/UppyProvider.md)
+  - [withUppy](uppy/withUppy.md)
   - [DragDrop](uppy/DragDrop.md)
   - [FileTable](uppy/FileTable.md)
   - [OneDrive](uppy/OneDrive.md)

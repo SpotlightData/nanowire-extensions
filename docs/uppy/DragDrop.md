@@ -30,7 +30,7 @@ const defaultProps = {
 ## Example Usage
 
 ```javascript
-import { DragDropUploader} from '@spotlightdata/nanowire-extensions';
+import { DragDropUploader, UppyProvider} from '@spotlightdata/nanowire-extensions';
 
 const uppy = Uppy({
   autoProceed: false,
