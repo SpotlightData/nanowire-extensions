@@ -11,5 +11,4 @@ module.exports = {
     '@spotlightdata/nanowire-extensions': require.resolve('./src'),
   },
   setupTestFrameworkScriptFile: require.resolve('./tests/setup-test-env.js'),
-  setupFiles: ['jest-canvas-mock'],
 };
