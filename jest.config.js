@@ -3,11 +3,12 @@ module.exports = {
   transform: {
     '^.+\\.js$': 'babel-jest',
   },
-  testMatch: ['<rootDir>/tests/helpers/query.test.js'],
-  displayName: 'nanowire-extensions',
+  testMatch: ['<rootDir>/tests/**/*.test.js'],
+  displayName: '@spotlightdata/nanowire-extensions',
   testEnvironment: 'jsdom',
   moduleNameMapper: {
-    // this is just here so our examples look like they would in a real project
-    'nanowire-extensions': require.resolve('./src'),
+    // This is just here so our examples look like they would in a real project
+    '@spotlightdata/nanowire-extensions': require.resolve('./src'),
   },
+  setupTestFrameworkScriptFile: require.resolve('./tests/setup-test-env.js'),
 };
