@@ -23,6 +23,7 @@
     "@team-griffin/install-self-peers": "^1.1.1",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^23.0.1",
+    "canvas": "^1.6.11",
     "jest": "^23.1.0",
     "kcd-scripts": "^0.39.1",
     "react-testing-library": "^4.0.1",
