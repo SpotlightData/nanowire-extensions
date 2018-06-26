@@ -12,7 +12,7 @@
     "test": "BABEL_ENV=test kcd-scripts test --config=jest.config.js --maxWorkers=4",
     "build": "BABEL_ENV=build rollup -c",
     "dev": "rollup -c -w",
-    "prepublish": "yarn build",
+    "prepublishOnly": "yarn build",
     "prepare": "install-self-peers -- --ignore-scripts"
   },
   "devDependencies": {
