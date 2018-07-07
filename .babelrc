@@ -6,7 +6,8 @@
         "targets": {
           "ie": 11
         },
-        "modules": false
+        "modules": false,
+        "exclude": ["transform-async-to-generator", "transform-regenerator"],
       }
     ],
     [

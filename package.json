@@ -1,6 +1,6 @@
 {
   "name": "@spotlightdata/nanowire-extensions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "utilities and components used in nanowire platform",
   "main": "dist/nanowire-extensions.cjs.js",
   "module": "dist/nanowire-extensions.esm.js",
@@ -47,15 +47,15 @@
     "react-vega": "^3.1.2",
     "rxjs": "^6.2.1",
     "uppy": "^0.25.5",
-    "vega": "^4.0.0-rc.3"
+    "vega": "^4.0.0-rc.3",
+    "ramda": "^0.25.0",
+    "shortid": "^2.2.8"
   },
   "dependencies": {
     "hoist-non-react-statics": "^2.5.5",
     "jmespath": "^0.15.0",
     "preact": "^8.2.9",
-    "ramda": "^0.25.0",
     "react-dnd": "^5.0.0",
-    "react-dnd-html5-backend": "^5.0.1",
-    "shortid": "^2.2.8"
+    "react-dnd-html5-backend": "^5.0.1"
   }
 }
