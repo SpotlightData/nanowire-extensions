@@ -21,6 +21,6 @@ makeActionType(prefix, types, defaultTypes = [])
 ```javascript
 import { makeActionType } from '@spotlightdata/nanowire-extensions';
 
-const USER = makeType('USER', ['ADD', 'REMOVE', 'UPDATE']);
+const USER = makeActionType('USER', ['ADD', 'REMOVE', 'UPDATE']);
 // { UPDATE: 'USER_UPDATE', REMOVE: 'USER_REMOVE', ADD: 'USER_ADD' }
 ```
