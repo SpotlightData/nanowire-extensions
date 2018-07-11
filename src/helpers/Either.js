@@ -24,6 +24,14 @@ export class Either {
     return (...args) => Either.from(...args).rightMap(fn);
   }
 
+  static ifLeft(fn) {
+    return (...args) => Either.from(...args).ifLeft(fn);
+  }
+
+  static ifRight(fn) {
+    return (...args) => Either.from(...args).ifRight(fn);
+  }
+
   static isEither(m) {
     return m instanceof Either;
   }
