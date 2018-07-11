@@ -6,3 +6,4 @@ export * from './time';
 export * from './Either';
 export * from './backend';
 export * from './fileFormat';
+export * from './error';
