@@ -102,4 +102,56 @@ describe('components/managers/Responsive', () => {
       xs: true,
     });
   });
+
+  it('should call render function if it is supplied', () => {
+    const container = makeContainer();
+    const make = jest.fn();
+    make.mockReturnValue(null);
+
+    render(
+      <ResponsiveProvider container={container}>
+        <div>
+          <ResponsiveConsumer render={make} />
+        </div>
+      </ResponsiveProvider>
+    );
+
+    expect(make.mock.calls.length).toBe(1);
+  });
+
+  it('should call children function if it is supplied', () => {
+    const container = makeContainer();
+    const make = jest.fn();
+    make.mockReturnValue(null);
+
+    render(
+      <ResponsiveProvider container={container}>
+        <div>
+          <ResponsiveConsumer>{make}</ResponsiveConsumer>
+        </div>
+      </ResponsiveProvider>
+    );
+
+    expect(make.mock.calls.length).toBe(1);
+  });
+
+  it('should be able to handle component as child', () => {
+    const container = makeContainer();
+    const make = jest.fn();
+    make.mockReturnValue(null);
+
+    class MockChild extends React.Component {
+      render = make;
+    }
+
+    render(
+      <ResponsiveProvider container={container}>
+        <div>
+          <ResponsiveConsumer><MockChild /></ResponsiveConsumer>
+        </div>
+      </ResponsiveProvider>
+    );
+
+    expect(make.mock.calls.length).toBe(1);
+  });
 });
