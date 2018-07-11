@@ -7,8 +7,9 @@ import { Uploader } from './Uploader';
 import { withUppy } from '../withUppy';
 
 export class OneDriveBare extends PureComponent {
-  componentWillMount() {
-    this.id = sid.generate();
+  constructor(props) {
+    super(props);
+    this.id = 'uploader_' + sid.generate();
   }
 
   componentDidMount() {
