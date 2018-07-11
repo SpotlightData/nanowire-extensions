@@ -11,7 +11,7 @@ import allowedExtensions from './allowedExtensions';
 class DragDropBare extends PureComponent {
   constructor(props) {
     super(props);
-    this.id = sid.generate();
+    this.id = 'drag_drop_' + sid.generate();
   }
 
   componentDidMount() {
