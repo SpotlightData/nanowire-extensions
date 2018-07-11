@@ -1066,8 +1066,8 @@ ansi-styles@^3.2.0, ansi-styles@^3.2.1:
     color-convert "^1.9.0"
 
 antd@^3.6.3:
-  version "3.6.5"
-  resolved "https://registry.yarnpkg.com/antd/-/antd-3.6.5.tgz#bed51a7e8c557a9c6331065087929f8ac4800cb2"
+  version "3.6.6"
+  resolved "https://registry.yarnpkg.com/antd/-/antd-3.6.6.tgz#fdfb9db5c5f88d29800a1dc6ae650d2776929522"
   dependencies:
     array-tree-filter "^2.0.0"
     babel-runtime "6.x"
@@ -6283,6 +6283,10 @@ nan@^2.10.0, nan@^2.9.2:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
 
+nanoid@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-1.0.7.tgz#23857a9514ae8efb7374221b923a2b92be3f74f2"
+
 nanomatch@^1.2.9:
   version "1.2.9"
   resolved "https://registry.yarnpkg.com/nanomatch/-/nanomatch-1.2.9.tgz#879f7150cb2dab7a471259066c104eee6e0fa7c2"
@@ -7167,8 +7171,8 @@ rc-editor-mention@^1.0.2:
     rc-editor-core "~0.8.3"
 
 rc-form@^2.1.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/rc-form/-/rc-form-2.2.0.tgz#ea596c6c92c7df6092f95cbbf8f15014ea07e9f5"
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/rc-form/-/rc-form-2.2.1.tgz#9c6d968f1460fd3872d2e9371324d717775af260"
   dependencies:
     async-validator "1.x"
     babel-runtime "6.x"
@@ -7234,8 +7238,8 @@ rc-notification@~3.1.1:
     rc-util "^4.0.4"
 
 rc-pagination@~1.16.1:
-  version "1.16.4"
-  resolved "https://registry.yarnpkg.com/rc-pagination/-/rc-pagination-1.16.4.tgz#239442d5cabfc531d1a2e53f87d92140085e9b0d"
+  version "1.16.5"
+  resolved "https://registry.yarnpkg.com/rc-pagination/-/rc-pagination-1.16.5.tgz#550a758035e1957ccfa2f71ee6e55657da729679"
   dependencies:
     babel-runtime "6.x"
     prop-types "^15.5.7"
@@ -7316,8 +7320,8 @@ rc-table@~6.1.0:
     warning "^3.0.0"
 
 rc-tabs@~9.2.0:
-  version "9.2.5"
-  resolved "https://registry.yarnpkg.com/rc-tabs/-/rc-tabs-9.2.5.tgz#fdd8e0633247f50c533030b73e3992270849f1f6"
+  version "9.2.6"
+  resolved "https://registry.yarnpkg.com/rc-tabs/-/rc-tabs-9.2.6.tgz#4bd88086496b4f2d19c75c832fe7ec08e6b1643d"
   dependencies:
     babel-runtime "6.x"
     classnames "2.x"
@@ -8191,8 +8195,10 @@ shellwords@^0.1.1:
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
 
 shortid@^2.2.8:
-  version "2.2.8"
-  resolved "https://registry.yarnpkg.com/shortid/-/shortid-2.2.8.tgz#033b117d6a2e975804f6f0969dbe7d3d0b355131"
+  version "2.2.11"
+  resolved "https://registry.yarnpkg.com/shortid/-/shortid-2.2.11.tgz#a77896f086b0dae7fce1237e29232d2aeef5738e"
+  dependencies:
+    nanoid "^1.0.7"
 
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
@@ -9048,7 +9054,7 @@ vega-dataflow@^4.0.0, vega-dataflow@^4.0.3:
     vega-loader "^3.0.1"
     vega-util "^1.7.0"
 
-vega-encode@^3.1.1:
+vega-encode@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/vega-encode/-/vega-encode-3.1.2.tgz#4ff176cce96c0cfe78143cc7710c881e27d1970f"
   dependencies:
@@ -9097,20 +9103,20 @@ vega-hierarchy@^3.0.2:
     vega-dataflow "^4.0.3"
     vega-util "^1.7.0"
 
-vega-lib@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/vega-lib/-/vega-lib-4.0.0.tgz#17a462ab3ab01e37e733149675f39ceb1a9b323e"
+vega-lib@4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/vega-lib/-/vega-lib-4.1.0.tgz#9b730af49b3a167238c3551843ddf183407fd3cf"
   dependencies:
     vega-crossfilter "^3.0.0"
     vega-dataflow "^4.0.3"
-    vega-encode "^3.1.1"
+    vega-encode "^3.1.2"
     vega-event-selector "^2.0.0"
     vega-expression "^2.3.1"
     vega-force "^3.0.0"
     vega-geo "^3.1.0"
     vega-hierarchy "^3.0.2"
     vega-loader "^3.0.1"
-    vega-parser "^3.5.0"
+    vega-parser "^3.6.1"
     vega-projection "^1.2.0"
     vega-runtime "^3.0.3"
     vega-scale "^2.4.0"
@@ -9120,7 +9126,7 @@ vega-lib@4.0.0:
     vega-typings "*"
     vega-util "^1.7.0"
     vega-view "^3.3.2"
-    vega-view-transforms "^2.0.1"
+    vega-view-transforms "^2.0.2"
     vega-voronoi "^3.0.0"
     vega-wordcloud "^3.0.0"
 
@@ -9134,26 +9140,9 @@ vega-loader@^3.0.1:
     topojson-client "^3.0.0"
     vega-util "^1.7.0"
 
-vega-parser@3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/vega-parser/-/vega-parser-3.5.0.tgz#eeb1e323e1535479cd40587352e08dbbccd24eed"
-  dependencies:
-    d3-array "^1.2.1"
-    d3-color "^1.2.0"
-    d3-format "^1.3.0"
-    d3-geo "^1.10.0"
-    d3-time-format "^2.1.1"
-    vega-dataflow "^4.0.3"
-    vega-event-selector "^2.0.0"
-    vega-expression "^2.3.1"
-    vega-scale "^2.4.0"
-    vega-scenegraph "^3.2.1"
-    vega-statistics "^1.2.1"
-    vega-util "^1.7.0"
-
-vega-parser@^3.5.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/vega-parser/-/vega-parser-3.6.0.tgz#ce0e331e8876942ef45ea96fab24bb93543caa45"
+vega-parser@3.6.1, vega-parser@^3.5.0, vega-parser@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/vega-parser/-/vega-parser-3.6.1.tgz#fbce5531a55ac6394c0b727e2da5d9fb9d4a7989"
   dependencies:
     d3-array "^1.2.1"
     d3-color "^1.2.0"
@@ -9218,8 +9207,8 @@ vega-transforms@^2.1.0:
     vega-util "^1.7.0"
 
 vega-typings@*:
-  version "0.3.22"
-  resolved "https://registry.yarnpkg.com/vega-typings/-/vega-typings-0.3.22.tgz#b8f4950342a4e69642707a7a2a660dd4071aae9b"
+  version "0.3.29"
+  resolved "https://registry.yarnpkg.com/vega-typings/-/vega-typings-0.3.29.tgz#569f98cc07143ea5fbd488dfbb7a1bb2609d88df"
   dependencies:
     vega-util "^1.7.0"
 
@@ -9227,7 +9216,7 @@ vega-util@1, vega-util@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/vega-util/-/vega-util-1.7.0.tgz#0ca0512bb8dcc6541165c34663d115d0712e0cf1"
 
-vega-view-transforms@^2.0.1:
+vega-view-transforms@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/vega-view-transforms/-/vega-view-transforms-2.0.2.tgz#5c2877bb9e7ebef296f740b60c5e1612d2666dcd"
   dependencies:
@@ -9266,11 +9255,11 @@ vega-wordcloud@^3.0.0:
     vega-util "^1.7.0"
 
 vega@^4.0.0-rc.3:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/vega/-/vega-4.0.0.tgz#9ee84fac66bd382593cc14d13f6c294d48e18ae2"
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/vega/-/vega-4.1.0.tgz#77f4169f1c56835a5d9fc8c72462d3ca6f665a01"
   dependencies:
-    vega-lib "4.0.0"
-    vega-parser "3.5.0"
+    vega-lib "4.1.0"
+    vega-parser "3.6.1"
     vega-typings "*"
     yargs "12"
   optionalDependencies:
