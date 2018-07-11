@@ -58,4 +58,48 @@ describe('components/managers/Responsive', () => {
       xs: false,
     });
   });
+  it('should re-render when container resizes', () => {
+    const container = makeContainer();
+    let callListener;
+    container.addEventListener = (name, fn) => {
+      callListener = fn;
+    };
+    container.innerWidth = 600;
+    container.innerHeight = 600;
+    const make = jest.fn();
+    make.mockReturnValue(null);
+
+    render(
+      <ResponsiveProvider container={container}>
+        <div>
+          <ResponsiveConsumer>{make}</ResponsiveConsumer>
+        </div>
+      </ResponsiveProvider>
+    );
+    container.innerWidth = 200;
+    container.innerHeight = 200;
+    callListener();
+
+    expect(make.mock.calls.length).toBe(2);
+    expect(make.mock.calls[0][0]).toEqual({
+      height: 600,
+      lg: false,
+      md: false,
+      sm: true,
+      width: 600,
+      xl: false,
+      xll: false,
+      xs: false,
+    });
+    expect(make.mock.calls[1][0]).toEqual({
+      height: 200,
+      lg: false,
+      md: false,
+      sm: false,
+      width: 200,
+      xl: false,
+      xll: false,
+      xs: true,
+    });
+  });
 });
