@@ -1,6 +1,6 @@
 {
   "name": "@spotlightdata/nanowire-extensions",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "utilities and components used in nanowire platform",
   "main": "dist/nanowire-extensions.cjs.js",
   "module": "dist/nanowire-extensions.esm.js",
@@ -13,7 +13,8 @@
     "build": "BABEL_ENV=build rollup -c",
     "dev": "rollup -c -w",
     "prepublishOnly": "yarn build",
-    "prepare": "install-self-peers -- --ignore-scripts"
+    "prepare": "install-self-peers -- --ignore-scripts",
+    "clean-code": "prettier --write 'src/**/*.js' 'tests/**/*.js' "
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.51",
@@ -41,15 +42,15 @@
     "antd": "^3.6.3",
     "moment": "^2.22.2",
     "prop-types": "^15.6.2",
+    "ramda": "^0.25.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-jss": "^8.5.1",
     "react-vega": "^3.1.2",
     "rxjs": "^6.2.1",
+    "shortid": "^2.2.8",
     "uppy": "^0.25.5",
-    "vega": "^4.0.0-rc.3",
-    "ramda": "^0.25.0",
-    "shortid": "^2.2.8"
+    "vega": "^4.0.0-rc.3"
   },
   "dependencies": {
     "hoist-non-react-statics": "^2.5.5",

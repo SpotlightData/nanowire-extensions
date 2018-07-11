@@ -17,8 +17,9 @@ describe('components/form/TextField', () => {
   it('should submit react to enter press if handler is specified', () => {
     const onPressEnter = jest.fn();
     const props = {
-      input: { value: '', onChange: console.log, onPressEnter },
+      input: { value: '', onChange: console.log },
       meta: {},
+      onPressEnter,
     };
     const { container, debug } = render(<TextField {...props} />);
     fireEvent.keyDown(container.querySelector('.ant-input'), {

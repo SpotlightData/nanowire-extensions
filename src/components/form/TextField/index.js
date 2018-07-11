@@ -10,11 +10,11 @@ export class TextField extends PureComponent {
     }
   }
   render() {
-    const { type, placeholder, input, size, meta } = this.props;
+    const { input, meta, defaultValue, render, ...rest } = this.props;
     const error = meta.error || meta.submitError;
     return (
       <div className="field">
-        <Input {...input} placeholder={placeholder} type={type} size={size} />
+        <Input {...input} {...rest} />
         {error && <span className="field-error">{error}</span>}
       </div>
     );
