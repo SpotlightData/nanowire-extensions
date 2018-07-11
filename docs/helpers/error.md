@@ -16,7 +16,7 @@ extractBackendError(message: string): (error: Object) => (Object)
 
 ```javascript
 import { tap, map } from 'rxjs/operators';
-import { Either } from '@spotlightdata/nanowire-extensions';
+import { Either, extractBackendError } from '@spotlightdata/nanowire-extensions';
 
 
 export function userLogin(backEnd, dispatch) {
@@ -26,7 +26,7 @@ export function userLogin(backEnd, dispatch) {
       url: '/users/login',
       body,
     }).pipe(
-      map(Either.leftMap(backEndError('Failed to login')))
+      map(Either.leftMap(extractBackendError('Failed to login')))
     );
 }
 ```
