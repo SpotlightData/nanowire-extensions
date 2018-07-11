@@ -147,7 +147,9 @@ describe('components/managers/Responsive', () => {
     render(
       <ResponsiveProvider container={container}>
         <div>
-          <ResponsiveConsumer><MockChild /></ResponsiveConsumer>
+          <ResponsiveConsumer>
+            <MockChild />
+          </ResponsiveConsumer>
         </div>
       </ResponsiveProvider>
     );
