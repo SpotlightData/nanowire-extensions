@@ -36,7 +36,7 @@ export const withMappedActions = (mapFn, actions, backEndConf, createElement) =>
   const WrapperComp = props =>
     createElement(
       Component,
-      Object.assign({}, props, { actions: mapFn(actions, props, backEndConf) })
+      Object.assign({ actions: mapFn(actions, props, backEndConf) }, props)
     );
   WrapperComp.WrappedComponent = Component;
   WrapperComp.displayName = `withMappedActions(${compName})`;
