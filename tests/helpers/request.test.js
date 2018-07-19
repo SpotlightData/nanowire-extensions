@@ -2,6 +2,7 @@ import {
   queryObjectToString,
   buildUrl,
   aggregationBuilder,
+  queryUrlToObject,
 } from '@spotlightdata/nanowire-extensions';
 
 describe('helpers/request', () => {
@@ -14,13 +15,29 @@ describe('helpers/request', () => {
       expect(queryObjectToString({ test: 'value' })).toBe('test=value');
     });
 
-    it('should be able to handle objects containing multiple key', () => {
+    it('should be able to handle objects containing multiple keys', () => {
       expect(
         queryObjectToString({
           test: 'value',
           test2: 'value2',
         })
       ).toBe('test=value&test2=value2');
+    });
+  });
+  describe('queryUrlToObject', () => {
+    it('should return an empty object when empty string is passed', () => {
+      expect(queryUrlToObject('')).toEqual({});
+    });
+
+    it('should extract values from query', () => {
+      expect(queryUrlToObject('?name=test&test=name')).toEqual({
+        name: 'test',
+        test: 'name',
+      });
+    });
+
+    it('should be able to handle query without question mark', () => {
+      expect(queryUrlToObject('name=test&test2=test2')).toEqual({ name: 'test', test2: 'test2' });
     });
   });
   describe('buildUrl', () => {
