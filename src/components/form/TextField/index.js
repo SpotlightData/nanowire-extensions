@@ -22,25 +22,25 @@ export class TextField extends PureComponent {
 }
 
 TextField.propTypes = {
-  type: PropTypes.string,
-  placeholder: PropTypes.string,
-  size: PropTypes.string,
+  size: PropTypes.string.isRequired,
   input: PropTypes.shape({
     onChange: PropTypes.func,
     value: PropTypes.string,
   }).isRequired,
   meta: PropTypes.shape({
-    error: PropTypes.string,
-    submitError: PropTypes.string,
-  }).isRequired,
+    error: PropTypes.string.isRequired,
+    submitError: PropTypes.string.isRequired,
+  }),
   defaultValue: PropTypes.string,
 };
 
 TextField.defaultProps = {
-  type: '',
-  placeholder: '',
   defaultValue: undefined,
   size: 'default',
+  meta: {
+    error: undefined,
+    submitError: undefined,
+  },
 };
 
 TextField.displayName = 'TextFieldForm';
