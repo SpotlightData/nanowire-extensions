@@ -1,5 +1,5 @@
 import { clone } from 'ramda';
-import { apply } from '@spotlightdata/nanowire-extensions';
+import { apply } from '../../../helpers/apply';
 
 export function createCore(initial) {
   const filters = [];
