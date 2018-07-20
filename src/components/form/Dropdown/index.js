@@ -50,8 +50,9 @@ Dropdown.propTypes = {
     value: PropTypes.string,
   }).isRequired,
   meta: PropTypes.shape({
-    error: PropTypes.string,
-  }).isRequired,
+    error: PropTypes.string.isRequired,
+    submitError: PropTypes.string.isRequired,
+  }),
   options: PropTypes.shape({}).isRequired,
   label: PropTypes.string,
   maxWidth: PropTypes.number,
@@ -65,4 +66,8 @@ Dropdown.defaultProps = {
   defaultOption: undefined,
   label: '',
   maxWidth: 100,
+  meta: {
+    error: undefined,
+    submitError: undefined,
+  },
 };

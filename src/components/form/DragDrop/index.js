@@ -35,11 +35,15 @@ DragDrop.propTypes = {
   }).isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({})),
   meta: PropTypes.shape({
-    error: PropTypes.string,
-    submitError: PropTypes.string,
-  }).isRequired,
+    error: PropTypes.string.isRequired,
+    submitError: PropTypes.string.isRequired,
+  }),
 };
 
 DragDrop.defaultProps = {
   options: [],
+  meta: {
+    error: undefined,
+    submitError: undefined,
+  },
 };

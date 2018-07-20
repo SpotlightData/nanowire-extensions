@@ -19,6 +19,25 @@ import { queryObjectToString } from '@spotlightdata/nanowire-extensions';
 queryObjectToString({ test: 'value', test2: 'value2' }); // 'test=value&test2=value2'
 ```
 
+## queryUrlToObject
+
+### About
+
+Used to convert query string to an object
+
+### Parameters
+
+```jasvasript
+queryUrlToObject(search: string): Object
+```
+
+### Example
+
+```javascript
+import { queryUrlToObject } from '@spotlightdata/nanowire-extensions';
+queryUrlToObject('?test=value&test2=value2'); // { test: 'value', test2: 'value2' }
+```
+
 ## buildUrl
 
 ### About

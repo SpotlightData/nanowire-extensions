@@ -156,4 +156,35 @@ describe('components/managers/Responsive', () => {
 
     expect(make.mock.calls.length).toBe(1);
   });
+
+  it('should not be render blocking', done => {
+    const container = makeContainer();
+    const make = jest.fn();
+    make.mockReturnValue(null);
+
+    class MockComponent extends React.PureComponent {
+      state = { toggle: true };
+
+      componentDidMount() {
+        setTimeout(() => {
+          this.setState({ toggle: false }, () => {
+            expect(make.mock.calls.length).toBe(2);
+            done();
+          });
+        });
+      }
+
+      render() {
+        return (
+          <ResponsiveProvider container={container}>
+            <div>
+              <ResponsiveConsumer>{make}</ResponsiveConsumer>
+            </div>
+          </ResponsiveProvider>
+        );
+      }
+    }
+
+    render(<MockComponent />);
+  });
 });

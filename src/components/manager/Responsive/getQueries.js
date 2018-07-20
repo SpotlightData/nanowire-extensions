@@ -1,11 +1,11 @@
-export function getQueries(container) {
+export function getQueries(container, breakpoints) {
   return {
-    xs: container.innerWidth < 576,
-    sm: container.innerWidth >= 576,
-    md: container.innerWidth >= 768,
-    lg: container.innerWidth >= 992,
-    xl: container.innerWidth >= 1200,
-    xll: container.innerWidth >= 1600,
+    xs: container.innerWidth < breakpoints.xs,
+    sm: container.innerWidth >= breakpoints.sm,
+    md: container.innerWidth >= breakpoints.md,
+    lg: container.innerWidth >= breakpoints.lg,
+    xl: container.innerWidth >= breakpoints.xl,
+    xll: container.innerWidth >= breakpoints.xll,
     width: container.innerWidth,
     height: container.innerHeight,
   };

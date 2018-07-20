@@ -10,16 +10,27 @@ Provider component that should sit on top of your application
 
 - {ReactNode} [children] - Child components
 - {Object} [container=window] - Container that will the listeners will be attached to
+- {Object} [breakpoints=defaultBreakpoints] - Breakpoints to be used in consumers
 
 ```javascript
 ResponsiveProvider.propTypes = {
   children: PropTypes.element.isRequired,
   container: PropTypes.shape({}),
+  breakpoints: PropTypes.shape({
+    xs: PropTypes.number.isRequired,
+    sm: PropTypes.number.isRequired,
+    md: PropTypes.number.isRequired,
+    lg: PropTypes.number.isRequired,
+    xl: PropTypes.number.isRequired,
+    xll: PropTypes.number.isRequired,
+  }),
 };
 
 ResponsiveProvider.defaultProps = {
   container: window,
+  breakpoints: defaultBreakpoints,
 };
+
 
 ```
 
