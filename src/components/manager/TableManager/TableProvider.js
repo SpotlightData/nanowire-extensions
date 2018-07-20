@@ -40,7 +40,3 @@ TableProvider.propTypes = {
   children: PropTypes.node.isRequired,
   items: PropTypes.array.isRequired,
 };
-
-TableProvider.defaultProps = {
-  container: window,
-};
