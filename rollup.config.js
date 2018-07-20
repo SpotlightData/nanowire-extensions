@@ -1,27 +1,30 @@
 /* Based on https://github.com/rollup/rollup-starter-lib/tree/babel */
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import babel from 'rollup-plugin-babel';
-import pkg from './package.json';
+import resolve from "rollup-plugin-node-resolve";
+import commonjs from "rollup-plugin-commonjs";
+import babel from "rollup-plugin-babel";
+import pkg from "./package.json";
 
-const external = ['react', 'react-jss', 'antd', 'moment', 'ramda', 'shortid'];
+const external = Object.keys(pkg.peerDependencies);
 
 export default [
   {
-    input: 'src/index.js',
+    input: "src/index.js",
     external,
-    output: [{ file: pkg.main, format: 'cjs' }, { file: pkg.module, format: 'es' }],
+    output: [
+      { file: pkg.main, format: "cjs" },
+      { file: pkg.module, format: "es" }
+    ],
     plugins: [
       resolve({
-        module: true,
+        module: true
       }),
       commonjs({
-        include: 'node_modules/**',
-        ignore: external,
+        include: "node_modules/**",
+        ignore: external
       }),
       babel({
-        exclude: ['node_modules/**'],
-      }),
-    ],
-  },
+        exclude: ["node_modules/**"]
+      })
+    ]
+  }
 ];
