@@ -34,10 +34,7 @@ export function mapActionsToBackEnd(actions, props, backEndConf) {
 export const withMappedActions = (mapFn, actions, backEndConf, createElement) => Component => {
   const compName = Component.displayName || Component.name;
   const WrapperComp = props =>
-    createElement(
-      Component,
-      Object.assign({ actions: mapFn(actions, props, backEndConf) }, props)
-    );
+    createElement(Component, Object.assign({ actions: mapFn(actions, props, backEndConf) }, props));
   WrapperComp.WrappedComponent = Component;
   WrapperComp.displayName = `withMappedActions(${compName})`;
   return hoistStatics(WrapperComp, Component);
