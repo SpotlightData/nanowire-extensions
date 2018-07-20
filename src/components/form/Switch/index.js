@@ -23,8 +23,8 @@ export class Switch extends PureComponent {
 Switch.propTypes = {
   input: PropTypes.shape({}).isRequired,
   meta: PropTypes.shape({
-    error: PropTypes.string.isRequired,
-    submitError: PropTypes.string.isRequired,
+    error: PropTypes.string,
+    submitError: PropTypes.string,
   }),
 };
 

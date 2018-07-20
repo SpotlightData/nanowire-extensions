@@ -28,8 +28,8 @@ TextField.propTypes = {
     value: PropTypes.string,
   }).isRequired,
   meta: PropTypes.shape({
-    error: PropTypes.string.isRequired,
-    submitError: PropTypes.string.isRequired,
+    error: PropTypes.string,
+    submitError: PropTypes.string,
   }),
   defaultValue: PropTypes.string,
 };
