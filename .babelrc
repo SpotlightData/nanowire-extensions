@@ -7,7 +7,7 @@
           "ie": 11
         },
         "modules": false,
-        "exclude": ["transform-async-to-generator", "transform-regenerator"],
+        "exclude": ["transform-async-to-generator", "transform-regenerator"]
       }
     ],
     [
@@ -21,6 +21,16 @@
   "env": {
     "test": {
       "presets": ["@babel/preset-env"]
+    },
+    "lib": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "exclude": ["transform-async-to-generator", "transform-regenerator"]
+          }
+        ]
+      ]
     }
   }
 }

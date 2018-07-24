@@ -1,6 +1,6 @@
 {
   "name": "@spotlightdata/nanowire-extensions",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "utilities and components used in nanowire platform",
   "main": "dist/nanowire-extensions.cjs.js",
   "module": "dist/nanowire-extensions.esm.js",
@@ -11,7 +11,7 @@
   "scripts": {
     "test": "BABEL_ENV=test kcd-scripts test --config=jest.config.js --maxWorkers=4",
     "build:bundle": "rollup -c",
-    "build:lib": "npx babel src -d lib",
+    "build:lib": "BABEL_ENV=lib npx babel src -d lib",
     "build": "BABEL_ENV=build npm-run-all --parallel build:bundle build:lib",
     "dev": "rollup -c -w",
     "prepublishOnly": "yarn build",
