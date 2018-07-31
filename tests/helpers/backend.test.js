@@ -1,4 +1,5 @@
 import { configureBackEnd } from '@spotlightdata/nanowire-extensions';
+import { throwError } from 'rxjs';
 
 describe('helpers/backend', () => {
   describe('configureBackEnd', () => {
@@ -43,6 +44,16 @@ describe('helpers/backend', () => {
         method: 'get',
         responseType: 'json',
         url: '/api/test',
+      });
+    });
+
+    it('should format if request fails', () => {
+      expect.assertions(2);
+      const message = 'This is an error!';
+      const request = configureBackEnd(a => a, () => throwError(message))('token', '/api');
+      request({ method: 'get', url: '/test' }).subscribe(([err, resp]) => {
+        expect(resp).toBe(null);
+        expect(err).toBe(message);
       });
     });
   });

@@ -4,7 +4,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import pkg from './package.json';
 
-const external = Object.keys(pkg.peerDependencies).concat(['rxjs/ajax']);
+const external = Object.keys(pkg.peerDependencies).concat(['rxjs/ajax', 'rxjs/operators']);
 
 export default [
   {
