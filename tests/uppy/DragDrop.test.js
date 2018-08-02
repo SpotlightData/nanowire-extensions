@@ -3,6 +3,7 @@ import { DragDropUploader, UppyProvider } from '@spotlightdata/nanowire-extensio
 import { render, fireEvent } from 'react-testing-library';
 import Uppy from 'uppy/lib/core';
 import waitForExpect from 'wait-for-expect';
+import { makeMockFile } from '../utils';
 
 describe('uppy/DragDrop', () => {
   it('should provide a drop area', () => {
@@ -37,6 +38,19 @@ describe('uppy/DragDrop', () => {
     unmount();
     await waitForExpect(() => {
       expect(uppy.plugins.acquirer.length).toBe(0);
+    });
+  });
+
+  it('should allow to add files via uploader', async () => {
+    const uppy = Uppy({ autoProceed: false });
+    const { unmount } = render(
+      <UppyProvider uppy={uppy}>
+        <DragDropUploader onFail={() => false} />
+      </UppyProvider>
+    );
+    uppy.plugins.acquirer[0].handleDrop([makeMockFile()]);
+    await waitForExpect(() => {
+      expect(uppy.getFiles().length).toBe(1);
     });
   });
 });

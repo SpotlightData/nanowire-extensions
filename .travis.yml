@@ -16,4 +16,15 @@ cache:
 
 script:
   - yarn test
-  - yarn build
+  - yarn build || travis_terminate 1
+
+before_deploy: yarn build
+
+deploy:
+  skip_cleanup: true
+  provider: npm
+  email: $NPM_EMAIL
+  api_key: $NPM_TOKEN
+  on:
+    branch: master
+    tags: true
