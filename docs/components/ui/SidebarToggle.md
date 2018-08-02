@@ -16,6 +16,7 @@ const propTypes = {
   classes: PropTypes.shape({
     root: PropTypes.string.isRequired,
   }).isRequired,
+  className: PropTypes.string,
 };
 ```
 
