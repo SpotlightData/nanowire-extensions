@@ -22,15 +22,18 @@ export default deleteHandler => [
     dataIndex: 'size',
     sorter: propSort('size'),
     render: bytesToReadable,
+    width: 70,
   },
   {
     title: 'Last Modified',
     dataIndex: 'data.lastModified',
+    width: 120,
     render: defaultTimeFormat,
   },
   {
     title: '',
     dataIndex: 'id',
+    width: 100,
     render: id => <Button onClick={deleteHandler(id)}>Remove</Button>,
   },
 ];
