@@ -11,7 +11,13 @@ class OneDriveUploaderBare extends PureComponent {
   constructor(props) {
     super(props);
     this.id = 'uploader_' + sid.generate();
-    const { text, appId, options } = props;
+  }
+
+  componentDidMount() {
+    const { uppy, text, appId, options } = this.props;
+    if (this.getPlugin()) {
+      return;
+    }
     this.settings = Object.assign(
       {
         target: `#${this.id}`,
@@ -23,13 +29,6 @@ class OneDriveUploaderBare extends PureComponent {
       },
       options
     );
-  }
-
-  componentDidMount() {
-    const { uppy } = this.props;
-    if (this.getPlugin()) {
-      return;
-    }
     uppy.use(Uploader, this.settings);
   }
 
@@ -41,6 +40,9 @@ class OneDriveUploaderBare extends PureComponent {
   }
 
   getPlugin() {
+    if (!this.settings) {
+      return false;
+    }
     return this.props.uppy.getPlugin(getPluginId(this.settings));
   }
 
