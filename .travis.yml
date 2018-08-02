@@ -15,9 +15,8 @@ cache:
     - "node_modules"
 
 script:
-  - set -e
   - yarn test
-  - yarn build
+  - yarn build || travis_terminate 1
 
 before_deploy: yarn build
 
