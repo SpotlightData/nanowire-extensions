@@ -10,7 +10,7 @@ import { deprecationWarning } from '../../internal/warning';
 class OneDriveUploaderBare extends PureComponent {
   constructor(props) {
     super(props);
-    this.id = 'uploader_' + sid.generate();
+    this.id = 'OneDriveUploader_' + sid.generate();
   }
 
   componentDidMount() {
