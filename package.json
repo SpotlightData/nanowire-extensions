@@ -8,6 +8,9 @@
   "repository": "git@github.com:SpotlightData/nanowire-extensions.git",
   "author": "Augustinas <augustinas@spotlightdata.co.uk>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "BABEL_ENV=test kcd-scripts test --config=jest.config.js --maxWorkers=4",
     "build:bundle": "rollup -c",
