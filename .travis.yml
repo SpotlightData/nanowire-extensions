@@ -18,8 +18,6 @@ script:
   - yarn test
   - yarn build || travis_terminate 1
 
-before_deploy: yarn build
-
 deploy:
   skip_cleanup: true
   provider: npm

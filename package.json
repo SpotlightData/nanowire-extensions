@@ -17,8 +17,6 @@
     "build:lib": "BABEL_ENV=lib npx babel src -d lib",
     "build": "BABEL_ENV=build npm-run-all --parallel build:bundle build:lib",
     "dev": "rollup -c -w",
-    "prepublishOnly": "yarn build",
-    "prepare": "install-self-peers -- --ignore-scripts",
     "clean-code": "prettier --write 'src/**/*.js' 'tests/**/*.js' "
   },
   "devDependencies": {
