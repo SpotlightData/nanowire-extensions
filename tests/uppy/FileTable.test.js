@@ -5,25 +5,25 @@ import Uppy from 'uppy/lib/core';
 import waitForExpect from 'wait-for-expect';
 
 describe('uppy/FileTable', () => {
-  it('should provide a render function for submit button', done => {
+  it('should provide a render function for footer', done => {
     const uppy = Uppy({ autoProceed: false });
-    const sumbitRender = files => {
+    const footerRender = files => {
       expect(files).toEqual([]);
       done();
     };
     const { queryByText } = render(
       <UppyProvider uppy={uppy}>
-        <UppyFileTable sumbitRender={sumbitRender} />
+        <UppyFileTable footerRender={footerRender} />
       </UppyProvider>
     );
   });
 
   it('should render added uppy files', async () => {
     const uppy = Uppy({ autoProceed: false });
-    const sumbitRender = () => null;
+    const footerRender = () => null;
     const { queryByText } = render(
       <UppyProvider uppy={uppy}>
-        <UppyFileTable sumbitRender={sumbitRender} />
+        <UppyFileTable footerRender={footerRender} />
       </UppyProvider>
     );
     uppy.addFile({
@@ -54,12 +54,26 @@ describe('uppy/FileTable', () => {
     ];
     const { queryByText } = render(
       <UppyProvider uppy={uppy}>
-        <UppyFileTable sumbitRender={() => null} createColumns={createColumns} />
+        <UppyFileTable footerRender={() => null} createColumns={createColumns} />
       </UppyProvider>
     );
     fireEvent.click(queryByText('Remove'));
     await waitForExpect(() => {
       expect(uppy.getFiles().length).toBe(0);
     });
+  });
+  it('should provide a render function for the header', () => {
+    expect.assertions(2);
+    const uppy = Uppy({ autoProceed: false });
+    const headerRender = files => {
+      expect(files).toEqual([]);
+      return <h2>My Header</h2>;
+    };
+    const { queryByText } = render(
+      <UppyProvider uppy={uppy}>
+        <UppyFileTable footerRender={() => null} headerRender={headerRender} />
+      </UppyProvider>
+    );
+    expect(queryByText('My Header')).toBeInTheDocument();
   });
 });

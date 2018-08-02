@@ -4,8 +4,24 @@ import PropTypes from 'prop-types';
 import { Card, Row, Col } from 'antd';
 import { Table } from '../../components/antd/Table';
 
+import { deprecationWarning } from '../../internal/warning';
 import { withUppy } from '../withUppy';
 import createDefaultColumns from './columns';
+
+const defaultHeaderRender = files => {
+  return (
+    <Row>
+      <Col span={12}>
+        <h2>Pending Files</h2>
+      </Col>
+      <Col span={12}>
+        <span className="right-floated">
+          Total files: <b>{files.length}</b>
+        </span>
+      </Col>
+    </Row>
+  );
+};
 
 class FileTable extends PureComponent {
   state = { files: [], loaded: false };
@@ -16,6 +32,9 @@ class FileTable extends PureComponent {
     this.updateFiles();
     uppy.on('file-batch', this.updateFiles);
     uppy.on('file-removed', this.updateFiles);
+    if (this.props.sumbitRender !== undefined) {
+      deprecationWarning('sumbitRender will be removed, please use footerRender prop');
+    }
   }
 
   componentWillUnmount() {
@@ -34,29 +53,22 @@ class FileTable extends PureComponent {
 
   render() {
     const { files, loaded } = this.state;
-    const { className, sumbitRender, createColumns } = this.props;
+    const { className, sumbitRender, footerRender, createColumns, headerRender } = this.props;
     if (!loaded) {
       return null;
     }
+    const footerRenderFn = sumbitRender || footerRender;
+
     return (
       <Card className={className}>
-        <Row className="summary">
-          <Col xs={4}>
-            <h2>Pending Files</h2>
-          </Col>
-          <Col xs={2} className="stats">
-            <span>
-              Total files: <b>{files.length}</b>
-            </span>
-          </Col>
-        </Row>
+        {headerRender(files)}
         <Table
           rowKey={r => r.id}
           locale={{ emptyText: 'Please upload files' }}
           dataSource={files}
           columns={createColumns(this.handleRemove)}
         />
-        <div className="pending-footer">{sumbitRender(files)}</div>
+        {footerRenderFn(files)}
       </Card>
     );
   }
@@ -72,13 +84,18 @@ FileTable.propTypes = {
     off: PropTypes.func,
   }).isRequired,
   className: PropTypes.string,
-  sumbitRender: PropTypes.func.isRequired,
+  // 2.0 REMOVAL
+  // Only leave one function
+  sumbitRender: PropTypes.func,
+  footerRender: PropTypes.func,
+  headerRender: PropTypes.func,
   createColumns: PropTypes.func,
 };
 
 FileTable.defaultProps = {
   className: '',
   createColumns: createDefaultColumns,
+  headerRender: defaultHeaderRender,
 };
 
 export const UppyFileTable = withUppy(FileTable);
