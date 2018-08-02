@@ -10,5 +10,5 @@ module.exports = {
     // This is just here so our examples look like they would in a real project
     '@spotlightdata/nanowire-extensions': require.resolve('./src'),
   },
-  setupTestFrameworkScriptFile: require.resolve('./tests/setup-test-env.js'),
+  setupTestFrameworkScriptFile: '<rootDir>/tests/setup-test-env.js',
 };

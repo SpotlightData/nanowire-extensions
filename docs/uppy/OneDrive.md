@@ -19,7 +19,9 @@ const options = {
 };
 ```
 
-The value of `spec` inside `upload` object can be used to override default specification passed to uploader. Default settings:
+The value of `spec` inside `upload` object can be used to override default specification passed to uploader.
+
+Default settings:
 
 ```javascript
 const settings = {
@@ -65,6 +67,9 @@ const includeKeys = [
 ## Example Usage
 
 ```javascript
+import Uppy from 'uppy/lib/core';
+import { OneDriveUploader } from '@spotlightdata/nanowire-extensions';
+
 const uppy = Uppy({
   autoProceed: false,
 });
@@ -73,7 +78,7 @@ const options = {
 };
 const content(
   <UppyProvider uppy={uppy}>
-    <OneDrive text="testText" appId="myId" options={options} />
+    <OneDriveUploader text="testText" appId="myId" options={options} />
   </UppyProvider>
 );
 ```

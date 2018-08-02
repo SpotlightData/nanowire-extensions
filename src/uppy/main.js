@@ -1,5 +1,5 @@
 export * from './UppyProvider';
 export * from './withUppy';
-export * from './Onedrive';
+export * from './OneDrive';
 export * from './DragDrop';
 export * from './FileTable';

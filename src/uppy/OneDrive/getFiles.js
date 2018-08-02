@@ -8,6 +8,7 @@ export function getFiles(options) {
     // To prevent an issue where request was sent twice
     let resolved = false;
     let iFrame;
+    const targetOrigin = process.env.NODE_ENV === 'development' ? '*' : window.location.origin;
 
     function handleMessages(event) {
       const data = JSON.parse(event.data);
@@ -25,7 +26,7 @@ export function getFiles(options) {
     iFrame.src = options.source;
     iFrame.style.display = 'none';
     // Sends onedrive options
-    iFrame.onload = () => receiver.postMessage(JSON.stringify(options), '*');
+    iFrame.onload = () => iFrame.contentWindow.postMessage(JSON.stringify(options), targetOrigin);
     document.body.appendChild(iFrame);
   });
 }

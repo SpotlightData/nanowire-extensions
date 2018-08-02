@@ -16,8 +16,8 @@ const propTypes = {
     off: PropTypes.func,
   }).isRequired,
   className: PropTypes.string,
-  // The footer to be generated
-  sumbitRender: PropTypes.func.isRequired,
+  footerRender: PropTypes.func.isRequired,
+  headerRender: PropTypes.func,
   createColumns: PropTypes.func,
 };
 
@@ -37,7 +37,7 @@ const uppy = Uppy({
 });
 const content(
   <UppyProvider uppy={uppy}>
-    <UppyFileTable sumbitRender={files => null} />
+    <UppyFileTable footerRender={files => null} />
   </UppyProvider>
 );
 ```
