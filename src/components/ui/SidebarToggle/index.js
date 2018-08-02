@@ -6,13 +6,14 @@ import injectSheet from 'react-jss';
 
 import style from './style';
 
-const SidebarToggleBare = ({ onClick, open, classes }) => (
+const SidebarToggleBare = ({ onClick, open, classes, ...rest }) => (
   <Icon
     type={open ? 'menu-fold' : 'menu-unfold'}
     onClick={onClick}
     role="button"
     tabIndex={0}
     className={classes.root}
+    {...rest}
   />
 );
 
