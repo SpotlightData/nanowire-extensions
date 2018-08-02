@@ -3,22 +3,16 @@ import PropTypes from 'prop-types';
 
 import sid from 'shortid';
 
-import { Uploader } from './Uploader';
+import { Uploader, getPluginId } from './Uploader';
 import { withUppy } from '../withUppy';
+import { deprecationWarning } from '../../internal/warning';
 
-export class OneDriveBare extends PureComponent {
+class OneDriveUploaderBare extends PureComponent {
   constructor(props) {
     super(props);
     this.id = 'uploader_' + sid.generate();
-  }
-
-  componentDidMount() {
-    const { uppy, text, appId, options } = this.props;
-    if (this.getPlugin()) {
-      return;
-    }
-
-    const settings = Object.assign(
+    const { text, appId, options } = props;
+    this.settings = Object.assign(
       {
         target: `#${this.id}`,
         appId,
@@ -29,7 +23,14 @@ export class OneDriveBare extends PureComponent {
       },
       options
     );
-    uppy.use(Uploader, settings);
+  }
+
+  componentDidMount() {
+    const { uppy } = this.props;
+    if (this.getPlugin()) {
+      return;
+    }
+    uppy.use(Uploader, this.settings);
   }
 
   componentWillUnmount() {
@@ -40,7 +41,7 @@ export class OneDriveBare extends PureComponent {
   }
 
   getPlugin() {
-    return this.props.uppy.getPlugin('OneDriveUpload');
+    return this.props.uppy.getPlugin(getPluginId(this.settings));
   }
 
   render() {
@@ -48,7 +49,7 @@ export class OneDriveBare extends PureComponent {
   }
 }
 
-OneDriveBare.propTypes = {
+OneDriveUploaderBare.propTypes = {
   uppy: PropTypes.shape({
     removePlugin: PropTypes.func,
     getPlugin: PropTypes.func,
@@ -60,10 +61,15 @@ OneDriveBare.propTypes = {
   options: PropTypes.shape({}),
 };
 
-OneDriveBare.defaultProps = {
+OneDriveUploaderBare.defaultProps = {
   className: '',
   text: 'Upload OneDrive files',
   options: {},
 };
 
-export const OneDrive = withUppy(OneDriveBare);
+export const OneDriveUploader = withUppy(OneDriveUploaderBare);
+export const OneDrive = props => {
+  // 2.0 REMOVAL
+  deprecationWarning('OneDrive component will be removed, please use OneDriveUploader', []);
+  return <OneDriveUploader {...props} />;
+};

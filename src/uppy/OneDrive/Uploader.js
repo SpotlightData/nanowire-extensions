@@ -24,11 +24,15 @@ const includeKeys = [
   'lastModifiedDateTime',
 ];
 
+export const getPluginId = settings => {
+  return settings.id || 'OneDriveUploader';
+};
+
 export class Uploader extends Plugin {
   constructor(uppy, opts) {
     super(uppy, opts);
     this.type = 'acquirer';
-    this.id = this.opts.id || 'OneDriveUpload';
+    this.id = getPluginId(opts);
     this.title = 'Onedrive upload';
     this.opts = opts;
     // Uploader

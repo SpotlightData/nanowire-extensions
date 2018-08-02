@@ -1,5 +1,5 @@
 import React from 'react';
-import { UppyProvider, OneDrive } from '@spotlightdata/nanowire-extensions';
+import { UppyProvider, OneDriveUploader } from '@spotlightdata/nanowire-extensions';
 import { render, fireEvent } from 'react-testing-library';
 import Uppy from 'uppy/lib/core';
 import waitForExpect from 'wait-for-expect';
@@ -17,12 +17,12 @@ const uploaderResp = [
   },
 ];
 
-describe('uppy/OneDrive', () => {
+describe('uppy/OneDriveUploader', () => {
   it('should provide a labeled button', () => {
     const uppy = Uppy({ autoProceed: false });
     const { queryByText } = render(
       <UppyProvider uppy={uppy}>
-        <OneDrive text="testText" appId="fakeId" />
+        <OneDriveUploader text="testText" appId="fakeId" />
       </UppyProvider>
     );
     expect(queryByText('testText')).not.toBeNull();
@@ -34,10 +34,10 @@ describe('uppy/OneDrive', () => {
     });
     render(
       <UppyProvider uppy={uppy}>
-        <OneDrive text="testText" appId="fakeId" />
+        <OneDriveUploader text="testText" appId="fakeId" />
       </UppyProvider>
     );
-    expect(uppy.plugins.acquirer[0].id).toBe('OneDriveUpload');
+    expect(uppy.plugins.acquirer[0].id).toBe('OneDriveUploader');
   });
 
   it('should pass upload specifications to uploader function', async done => {
@@ -57,7 +57,7 @@ describe('uppy/OneDrive', () => {
     };
     const { queryByText } = render(
       <UppyProvider uppy={uppy}>
-        <OneDrive text="testText" appId="fakeId" options={options} />
+        <OneDriveUploader text="testText" appId="fakeId" options={options} />
       </UppyProvider>
     );
     fireEvent.click(queryByText('testText'), {});
@@ -78,7 +78,7 @@ describe('uppy/OneDrive', () => {
     };
     const { queryByText } = render(
       <UppyProvider uppy={uppy}>
-        <OneDrive text="testText" appId="fakeId" options={options} />
+        <OneDriveUploader text="testText" appId="fakeId" options={options} />
       </UppyProvider>
     );
     fireEvent.click(queryByText('testText'), {});
