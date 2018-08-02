@@ -25,11 +25,9 @@ const defaultHeaderRender = ({ files }) => {
 
 const debounce = (func, delay) => {
   let inDebounce;
-  return () => {
-    const context = this;
-    const args = arguments;
+  return (...args) => {
     clearTimeout(inDebounce);
-    inDebounce = setTimeout(() => func.apply(context, args), delay);
+    inDebounce = setTimeout(() => func(...args), delay);
   };
 };
 
