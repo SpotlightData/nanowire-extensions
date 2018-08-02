@@ -29,6 +29,7 @@
     "babel-jest": "^23.0.1",
     "jest": "^23.1.0",
     "jest-canvas-mock": "^1.0.3",
+    "jest-dom": "^1.11.0",
     "jmespath": "^0.15.0",
     "kcd-scripts": "^0.39.1",
     "npm-run-all": "^4.1.3",
