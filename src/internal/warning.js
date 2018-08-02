@@ -4,7 +4,7 @@ export function injectStrings(message, strings) {
   return strings.reduce((acc, string) => acc.replace('%s', string), message);
 }
 
-export function deprecationWarning(format, strings, logger = console.warn) {
+export function deprecationWarning(format, strings = [], logger = console.warn) {
   if (!Array.isArray(strings)) {
     throw new Error('Expected strings to be an array');
   }
