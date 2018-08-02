@@ -6,12 +6,12 @@ import sid from 'shortid';
 import { withUppy } from '../withUppy';
 import { Uploader } from './Uploader';
 
-import allowedExtensions from './allowedExtensions';
+import defaultAllowedExtensions from './allowedExtensions';
 
-class DragDropBare extends PureComponent {
+class DragDropUploaderBare extends PureComponent {
   constructor(props) {
     super(props);
-    this.id = 'drag_drop_' + sid.generate();
+    this.id = 'DragDropUploader_' + sid.generate();
   }
 
   componentDidMount() {
@@ -40,7 +40,7 @@ class DragDropBare extends PureComponent {
   }
 }
 
-DragDropBare.propTypes = {
+DragDropUploaderBare.propTypes = {
   uppy: PropTypes.shape({
     removePlugin: PropTypes.func,
     getPlugin: PropTypes.func,
@@ -48,14 +48,16 @@ DragDropBare.propTypes = {
   }).isRequired,
   className: PropTypes.string,
   onFail: PropTypes.func.isRequired,
-  options: PropTypes.shape({}),
+  options: PropTypes.shape({
+    allowedExtensions: PropTypes.arrayOf(PropTypes.string),
+  }),
 };
 
-DragDropBare.defaultProps = {
+DragDropUploaderBare.defaultProps = {
   className: '',
   options: {
-    allowedExtensions,
+    allowedExtensions: defaultAllowedExtensions,
   },
 };
 
-export const DragDropUploader = withUppy(DragDropBare);
+export const DragDropUploader = withUppy(DragDropUploaderBare);
