@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 
 import { Icon } from 'antd';
 import injectSheet from 'react-jss';
+import cn from 'classnames';
 
 import style from './style';
 
-const SidebarToggleBare = ({ onClick, open, classes, ...rest }) => (
+const SidebarToggleBare = ({ onClick, open, classes, className, ...rest }) => (
   <Icon
     type={open ? 'menu-fold' : 'menu-unfold'}
     onClick={onClick}
@@ -14,6 +15,7 @@ const SidebarToggleBare = ({ onClick, open, classes, ...rest }) => (
     tabIndex={0}
     className={classes.root}
     {...rest}
+    className={cn(classes.root, className)}
   />
 );
 
@@ -23,6 +25,11 @@ SidebarToggleBare.propTypes = {
   classes: PropTypes.shape({
     root: PropTypes.string.isRequired,
   }).isRequired,
+  className: PropTypes.string,
+};
+
+SidebarToggleBare.defaultProps = {
+  className: '',
 };
 
 SidebarToggleBare.displayName = 'SidebarToggle';
