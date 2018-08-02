@@ -12,3 +12,4 @@
 ## components/ui/SidebarToggleBare
 
 - Pass down props to `SidebarToggle` component [#b216ab](https://github.com/SpotlightData/nanowire-extensions/pull/29/commits/b216ab76e6e8ef156f4c9a78eef1488f4f085d48)
+- Add ability to override className [#4d54fb](https://github.com/SpotlightData/nanowire-extensions/pull/29/commits/4d54fb5e46d7b3c4590b560f0e2fa6067e79745d)
