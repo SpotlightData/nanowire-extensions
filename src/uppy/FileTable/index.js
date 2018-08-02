@@ -8,7 +8,7 @@ import { deprecationWarning } from '../../internal/warning';
 import { withUppy } from '../withUppy';
 import createDefaultColumns from './columns';
 
-const defaultHeaderRender = files => {
+const defaultHeaderRender = ({ files }) => {
   return (
     <Row>
       <Col span={12}>
@@ -23,23 +23,37 @@ const defaultHeaderRender = files => {
   );
 };
 
+const debounce = (func, delay) => {
+  let inDebounce;
+  return () => {
+    const context = this;
+    const args = arguments;
+    clearTimeout(inDebounce);
+    inDebounce = setTimeout(() => func.apply(context, args), delay);
+  };
+};
+
 class FileTable extends PureComponent {
-  state = { files: [], loaded: false };
+  constructor(props) {
+    super(props);
+    this.updateFilesBounced = debounce(this.updateFiles, 200);
+    this.state = { files: [], loaded: false };
+  }
 
   componentDidMount() {
     const { uppy } = this.props;
 
     this.updateFiles();
-    uppy.on('file-batch', this.updateFiles);
-    uppy.on('file-removed', this.updateFiles);
+    uppy.on('file-batch', this.updateFilesBounced);
+    uppy.on('file-removed', this.updateFilesBounced);
     if (this.props.sumbitRender !== undefined) {
       deprecationWarning('sumbitRender will be removed, please use footerRender prop');
     }
   }
 
   componentWillUnmount() {
-    this.props.uppy.off('file-batch', this.updateFiles);
-    this.props.uppy.off('file-removed', this.updateFiles);
+    this.props.uppy.off('file-batch', this.updateFilesBounced);
+    this.props.uppy.off('file-removed', this.updateFilesBounced);
   }
 
   takeFiles = () => Object.values(this.props.uppy.getState().files).slice();
@@ -49,19 +63,27 @@ class FileTable extends PureComponent {
     this.setState({ files: this.takeFiles(), loaded: true });
   };
 
+  removeAllFiles = e => {
+    if (e && typeof e.preventDefault === 'function') {
+      e.preventDefault();
+    }
+    this.state.files.map(file => this.props.uppy.removeFile(file.id));
+  };
+
   handleRemove = id => () => this.props.uppy.removeFile(id);
 
   render() {
     const { files, loaded } = this.state;
     const { className, sumbitRender, footerRender, createColumns, headerRender } = this.props;
+    const footerRenderFn = sumbitRender || footerRender;
+
     if (!loaded) {
       return null;
     }
-    const footerRenderFn = sumbitRender || footerRender;
 
     return (
       <Card className={className}>
-        {headerRender(files)}
+        {headerRender({ files, removeAllFiles: this.removeAllFiles })}
         <Table
           rowKey={r => r.id}
           locale={{ emptyText: 'Please upload files' }}
