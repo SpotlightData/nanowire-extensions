@@ -3,16 +3,9 @@ import { UppyFileTable, UppyProvider } from '@spotlightdata/nanowire-extensions'
 import { render, fireEvent } from 'react-testing-library';
 import Uppy from 'uppy/lib/core';
 import waitForExpect from 'wait-for-expect';
-import sid from 'shortid';
+import { makeMockFile } from '../utils';
 
 const mockFile = { source: 'Local', name: 'test-name', type: 'pdf', data: {}, size: 20000 };
-const makeMockFile = () => ({
-  source: 'Local',
-  name: sid.generate(),
-  type: 'pdf',
-  data: {},
-  size: 20000,
-});
 
 describe('uppy/FileTable', () => {
   it('should provide a render function for footer', done => {
