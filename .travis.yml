@@ -15,6 +15,7 @@ cache:
     - "node_modules"
 
 script:
+  - set -e
   - yarn test
   - yarn build
 
