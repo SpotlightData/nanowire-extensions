@@ -3,8 +3,7 @@ import React from 'react';
 import { Button } from 'antd';
 import shortid from 'shortid';
 import { defaultTimeFormat } from '../../helpers/time';
-import { propSort } from '../../helpers/table';
-import { bytesToReadable } from '../../helpers/shared';
+import { propSort, bytesToReadable } from '../../helpers/table';
 
 export default deleteHandler => [
   {
