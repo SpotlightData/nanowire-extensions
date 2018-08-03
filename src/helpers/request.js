@@ -1,3 +1,5 @@
+import { mergeDeepRight } from 'ramda';
+
 export function queryObjectToString(query) {
   return Object.keys(query)
     .reduce((url, key) => `${url}&${key}=${query[key]}`, '')
@@ -25,10 +27,9 @@ export function buildUrl(withBase, baseUrl, url, query = {}) {
 export function aggregationBuilder(baseConfig, baseUrl, { aggregation, ...request }) {
   const { url, ...rest } = request;
   const uri = url.includes(baseUrl) ? url.replace(baseUrl, '') : url;
-  return {
-    ...baseConfig,
+  return mergeDeepRight(baseConfig, {
     url: `${baseUrl}/aggregations`,
     method: 'post',
     body: { request: { ...rest, uri }, aggregation },
-  };
+  });
 }

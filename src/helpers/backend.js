@@ -1,6 +1,7 @@
 import { ajax } from 'rxjs/ajax';
 import { of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
+import { mergeDeepRight } from 'ramda';
 
 import { aggregationBuilder, buildUrl } from './request';
 
@@ -34,7 +35,7 @@ export function configureBackEnd(onRequest, request = ajax) {
       const fullSettings = { ...settings, url, body: data || body };
       const config = settings.aggregation
         ? aggregationBuilder(baseConfig, baseUrl, fullSettings)
-        : Object.assign(baseConfig, fullSettings);
+        : mergeDeepRight(baseConfig, fullSettings);
       return request(config).pipe(...modifiers);
     };
   };
