@@ -22,3 +22,15 @@ export function generateColumns(columns) {
     }, []);
   };
 }
+
+export function bytesToReadable(x) {
+  let l = 0;
+  let n = parseInt(x, 10) || 0;
+
+  while (n >= 1024) {
+    n /= 1024;
+    l += 1;
+  }
+  const rounded = n.toFixed(n >= 10 || l < 1 ? 0 : 1);
+  return `${rounded} ${SIZE_UNITS[l]}`;
+}
