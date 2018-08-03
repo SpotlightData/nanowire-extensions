@@ -1,3 +1,9 @@
+# 1.1.1
+
+## Helpers
+
+- Export `bytesToReadable` function from helpers [#f0d19a](https://github.com/SpotlightData/nanowire-extensions/pull/31/commits/f0d19a86e81d6a6fce9550724c55bb4bd85477e1)
+
 # 1.1.0
 
 ## Uppy
