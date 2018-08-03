@@ -56,5 +56,37 @@ describe('helpers/backend', () => {
         expect(err).toBe(message);
       });
     });
+
+    it('should allow to override headers without removing token', () => {
+      let result;
+      const mockAjax = a => {
+        result = a;
+        return {
+          pipe: (...fns) => {
+            return fns;
+          },
+        };
+      };
+      const request = configureBackEnd(a => a, mockAjax)('token', '/api');
+      request({
+        method: 'get',
+        url: '/test',
+        headers: {
+          'Content-Type': 'test',
+          Accept: 'test',
+        },
+      });
+      expect(result).toEqual({
+        body: undefined,
+        headers: {
+          Accept: 'test',
+          Authorization: 'JWT token',
+          'Content-Type': 'test',
+        },
+        method: 'get',
+        responseType: 'json',
+        url: '/api/test',
+      });
+    });
   });
 });
