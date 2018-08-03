@@ -23,6 +23,8 @@ export function generateColumns(columns) {
   };
 }
 
+export const SIZE_UNITS = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
 export function bytesToReadable(x) {
   let l = 0;
   let n = parseInt(x, 10) || 0;
