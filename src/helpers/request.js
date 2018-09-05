@@ -13,9 +13,7 @@ export function queryUrlToObject(search) {
   }
 
   return string.split('&').reduce((dict, pair) => {
-    const eqIndex = pair.indexOf('=');
-    const key = pair.slice(0, eqIndex);
-    const value = pair.slice(eqIndex + 1, pair.length);
+    const [key, value] = pair.split('=');
     return { ...dict, [decodeURI(key)]: decodeURI(value) };
   }, {});
 }
@@ -35,16 +33,3 @@ export function aggregationBuilder(baseConfig, baseUrl, { aggregation, ...reques
     body: { request: { ...rest, uri }, aggregation },
   });
 }
-
-export const buildBaseConfig = (token, extra) =>
-  Object.assign(
-    {
-      headers: {
-        Accept: 'application/json',
-        Authorization: `JWT ${token}`,
-        'Content-Type': 'application/json',
-      },
-      responseType: 'json',
-    },
-    extra
-  );
