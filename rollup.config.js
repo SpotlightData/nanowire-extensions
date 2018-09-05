@@ -4,7 +4,12 @@ import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import pkg from './package.json';
 
-const external = Object.keys(pkg.peerDependencies).concat(['rxjs/ajax', 'rxjs/operators']);
+const external = Object.keys(pkg.peerDependencies).concat([
+  'rxjs/ajax',
+  'rxjs/operators',
+  'uppy/lib/core/Plugin',
+  'uppy/lib/plugins/DragDrop',
+]);
 
 export default [
   {
@@ -18,6 +23,9 @@ export default [
       commonjs({
         include: 'node_modules/**',
         ignore: external,
+        namedExports: {
+          'node_modules/react-dom/index.js': ['findDOMNode', 'createPortal', 'render'],
+        },
       }),
       babel({
         exclude: ['node_modules/**'],
