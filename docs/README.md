@@ -9,6 +9,7 @@
     - [Popconfirm](components/antd/Popconfirm.md)
     - [Table](components/antd/Table.md)
     - [Timeline](components/antd/Timeline.md)
+    - [Collapse](components/antd/Collapse.md)
   - [Form](components/form/README.md)
     - [Checkbox](components/form/Checkbox.md)
     - [Dropdown](components/form/Dropdown.md)
