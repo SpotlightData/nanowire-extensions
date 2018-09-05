@@ -3,20 +3,7 @@ import { of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { mergeDeepRight } from 'ramda';
 
-import { aggregationBuilder, buildUrl } from './request';
-
-const buildBaseConfig = (token, extra) =>
-  Object.assign(
-    {
-      headers: {
-        Accept: 'application/json',
-        Authorization: `JWT ${token}`,
-        'Content-Type': 'application/json',
-      },
-      responseType: 'json',
-    },
-    extra
-  );
+import { aggregationBuilder, buildUrl, buildBaseConfig } from './request';
 
 const isFunction = fn => typeof fn === 'function';
 
