@@ -15,7 +15,7 @@ cache:
     - "node_modules"
 
 script:
-  - yarn test
+  - yarn packages
   - yarn build || travis_terminate 1
 
 deploy:
