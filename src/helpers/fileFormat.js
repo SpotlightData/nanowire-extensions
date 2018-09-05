@@ -18,18 +18,13 @@ export function formatOnedriveFile({ data }) {
 }
 
 export function formatLocalFile(file, user) {
-  const { _id, email, name } = user;
   return {
     name: file.name,
     source: 'FILE',
     id: file.id,
     type: withDefault(['extension'], file),
     size: file.size,
-    lastModifiedBy: {
-      _id,
-      email,
-      name,
-    },
+    lastModifiedBy: user,
     lastModified: withDefault(['data', 'lastModified'], file),
     created: withDefault(['data', 'created'], file),
   };
