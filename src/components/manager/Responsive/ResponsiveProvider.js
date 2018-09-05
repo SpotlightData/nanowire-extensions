@@ -6,6 +6,8 @@ import { getQueries } from './getQueries';
 import { ResponsiveContext } from './context';
 import { defaultBreakpoints } from './breakpoints';
 
+const fakeWindow = { innerWidth: 0, innerHeight: 0 };
+
 export class ResponsiveProvider extends PureComponent {
   constructor(props) {
     super(props);
@@ -53,6 +55,6 @@ ResponsiveProvider.propTypes = {
 };
 
 ResponsiveProvider.defaultProps = {
-  container: window,
+  container: typeof window === 'undefined' ? fakeWindow : window,
   breakpoints: defaultBreakpoints,
 };

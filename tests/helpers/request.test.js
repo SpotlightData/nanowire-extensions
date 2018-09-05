@@ -34,6 +34,9 @@ describe('helpers/request', () => {
         name: 'test',
         test: 'name',
       });
+      expect(queryUrlToObject('?sk=p=2')).toEqual({
+        sk: 'p=2',
+      });
     });
 
     it('should be able to handle query without question mark', () => {
