@@ -1,13 +1,13 @@
-import { ajax } from 'rxjs/ajax';
 import { of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { mergeDeepRight } from 'ramda';
 
+import { AjaxObservable } from '../internal/ajax';
 import { aggregationBuilder, buildUrl, buildBaseConfig } from './request';
 
 const isFunction = fn => typeof fn === 'function';
 
-export function configureBackEnd(onRequest, request = ajax) {
+export function configureBackEnd(onRequest, request = AjaxObservable.create) {
   const modifiers = [
     map(req => [null, req.response]),
     catchError(err => of([err, null])),
