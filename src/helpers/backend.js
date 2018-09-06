@@ -9,8 +9,6 @@ const isFunction = fn => typeof fn === 'function';
 
 export function configureBackEnd(onRequest, request = AjaxObservable.create) {
   const modifiers = [
-    map(req => [null, req.response]),
-    catchError(err => of([err, null])),
     isFunction(onRequest) ? tap(onRequest) : undefined,
   ].filter(p => p); // Remove the undefined entries
 
