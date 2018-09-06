@@ -32,7 +32,7 @@ export function aggregationBuilder(baseConfig, baseUrl, { aggregation, ...reques
   return mergeDeepRight(baseConfig, {
     url: `${baseUrl}/aggregations`,
     method: 'post',
-    body: { request: { ...rest, uri }, aggregation },
+    data: { request: { ...rest, uri }, aggregation },
   });
 }
 
@@ -42,7 +42,6 @@ export const buildBaseConfig = (token, extra) =>
       headers: {
         Accept: 'application/json',
         Authorization: `JWT ${token}`,
-        'Content-Type': 'application/json',
       },
       responseType: 'json',
     },

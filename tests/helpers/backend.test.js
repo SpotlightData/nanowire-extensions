@@ -1,4 +1,4 @@
-import { configureBackEnd } from '@spotlightdata/nanowire-extensions';
+import { configureBackEnd, buildBaseConfig } from '@spotlightdata/nanowire-extensions';
 import { throwError } from 'rxjs';
 
 describe('helpers/backend', () => {
@@ -39,7 +39,6 @@ describe('helpers/backend', () => {
         headers: {
           Accept: 'application/json',
           Authorization: 'JWT token',
-          'Content-Type': 'application/json',
         },
         method: 'get',
         responseType: 'json',
@@ -86,6 +85,39 @@ describe('helpers/backend', () => {
         method: 'get',
         responseType: 'json',
         url: '/api/test',
+      });
+    });
+
+    describe('Offer backwards compitability for axios settings', () => {
+      const mockAjax = a => {
+        return {
+          pipe: () => {
+            return a;
+          },
+        };
+      };
+      const request = configureBackEnd(a => a, mockAjax)('token', '/api');
+      it('should map (body, data) -> data', () => {
+        const configured = buildBaseConfig('token', {
+          url: '/api/test',
+          data: { test: 'test' },
+        });
+        expect(
+          request({
+            body: {
+              test: 'test',
+            },
+            url: '/test',
+          })
+        ).toEqual(configured);
+        expect(
+          request({
+            data: {
+              test: 'test',
+            },
+            url: '/test',
+          })
+        ).toEqual(configured);
       });
     });
   });

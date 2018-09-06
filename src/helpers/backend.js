@@ -19,7 +19,7 @@ export function configureBackEnd(onRequest, request = AjaxObservable.create) {
 
     return ({ hasBase = true, data, body, ...settings }) => {
       const url = buildUrl(hasBase, baseUrl, settings.url, settings.query);
-      const fullSettings = { ...settings, url, body: data || body };
+      const fullSettings = { ...settings, url, data: data || body };
       const config = settings.aggregation
         ? aggregationBuilder(baseConfig, baseUrl, fullSettings)
         : mergeDeepRight(baseConfig, fullSettings);
