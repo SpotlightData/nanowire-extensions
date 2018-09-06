@@ -16,7 +16,7 @@ class AjaxSubscriber extends Subscriber {
       this.cancel = cancel;
     });
     axios(Object.assign({ cancelToken }, settings))
-      .then(resp => this.next([null, resp]))
+      .then(resp => this.next([null, resp.data]))
       .catch(e => this.next([e, null]));
   }
 
@@ -24,11 +24,6 @@ class AjaxSubscriber extends Subscriber {
     this.done = true;
     const { destination } = this;
     destination.next(config);
-    // if (error) {
-    //   destination.error(error);
-    // } else {
-    //   destination.next(reponse.data);
-    // }
   }
 
   unsubscribe() {
