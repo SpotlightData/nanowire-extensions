@@ -76,15 +76,15 @@ describe('helpers/request', () => {
         url: baseUrl + '/tests',
         method: 'get',
         aggregation: '*',
-        body: {
+        data: {
           data: true,
         },
       };
       expect(aggregationBuilder(baseConfig, baseUrl, settings)).toEqual({
-        body: {
+        data: {
           aggregation: '*',
           request: {
-            body: {
+            data: {
               data: true,
             },
             method: 'get',
