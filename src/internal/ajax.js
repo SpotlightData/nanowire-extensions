@@ -20,14 +20,15 @@ class AjaxSubscriber extends Subscriber {
       .catch(e => this.next([e, null]));
   }
 
-  next([error, reponse]) {
+  next(config) {
     this.done = true;
     const { destination } = this;
-    if (error) {
-      destination.error(error);
-    } else {
-      destination.next(reponse.data);
-    }
+    destination.next(config);
+    // if (error) {
+    //   destination.error(error);
+    // } else {
+    //   destination.next(reponse.data);
+    // }
   }
 
   unsubscribe() {
