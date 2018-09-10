@@ -1,7 +1,9 @@
 import React from 'react';
 import { ChartManager } from '@spotlightdata/nanowire-extensions';
-import { render } from 'react-testing-library';
+import { render, waitForElement } from 'react-testing-library';
 import { of } from 'rxjs';
+
+import { TestObservable } from '../../utils';
 
 const identity = a => a;
 
@@ -66,5 +68,39 @@ describe('components/managers/ChartManager', () => {
     render(<ChartManager {...props} />);
     expect(handlerQuery.mock.calls[0][0]).toEqual(queryProp);
     expect(request.mock.calls[0][0]).toEqual(testQuery);
+  });
+
+  it('should not make requests cancel each other', async () => {
+    const testQuery = { test: 'test' };
+    const queryProp = { queryProp: 'test' };
+
+    const hasEnough = jest.fn().mockReturnValue(false);
+    const onUnsubscribe = jest.fn();
+    const observable = TestObservable.create({
+      onUnsubscribe,
+      generateData() {
+        return { test: 'true' };
+      },
+    });
+    const request = jest.fn().mockReturnValue(observable);
+    const handlerQuery = jest.fn().mockReturnValue(testQuery);
+    const noChart = () => null;
+
+    const props = {
+      connection,
+      specs: [{ charts: ['test'], handler: 'test' }, { charts: ['test'], handler: 'test' }],
+      chartLib: chartLib(hasEnough, handlerQuery),
+      requestBuilder: a => request,
+      initialValues: { test: 'test' },
+      queryProp: queryProp,
+      renderer: items => <div>Test</div>,
+      createChart: noChart,
+    };
+
+    const { queryByText, debug } = render(<ChartManager {...props} />);
+    await waitForElement(() => queryByText('Test'));
+    expect(request.mock.calls[0][0]).toEqual(testQuery);
+    expect(request.mock.calls[1][0]).toEqual(testQuery);
+    expect(onUnsubscribe.mock.calls.length).toBe(0);
   });
 });
