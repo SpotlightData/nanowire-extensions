@@ -19,6 +19,7 @@ const CollapsiblePanelBare = props => {
     onClick,
     duration,
     headerRender,
+    renderWhenCollapsed,
     ...rest
   } = props;
   const rootClass = cn({
@@ -48,7 +49,7 @@ const CollapsiblePanelBare = props => {
         </div>
       )}
       <AnimateHeight duration={duration} height={collapsed ? 0 : 'auto'}>
-        <div className={classes.content}>{collapsed ? null : children}</div>
+        <div className={classes.content}>{collapsed && !renderWhenCollapsed ? null : children}</div>
       </AnimateHeight>
     </div>
   );
@@ -60,7 +61,8 @@ CollapsiblePanelBare.propTypes = {
   extraContent: node,
   header: node,
   duration: number,
-  headerRender: func,
+  headerRenderheaderRender: func,
+  renderWhenCollapsed: bool,
 };
 
 CollapsiblePanelBare.defaultProps = {
@@ -68,6 +70,7 @@ CollapsiblePanelBare.defaultProps = {
   extraContent: null,
   duration: 400,
   headerRender: null,
+  renderWhenCollapsed: true,
 };
 
 CollapsiblePanelBare.displayName = 'CollapsiblePanelBare';
