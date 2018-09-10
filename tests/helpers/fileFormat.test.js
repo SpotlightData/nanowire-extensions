@@ -6,7 +6,7 @@ const mockFile = {
   extension: 'png',
   size: 12,
   data: {
-    lastModified: Date.now(),
+    modified: Date.now(),
     created: Date.now(),
   },
 };
@@ -22,8 +22,8 @@ describe('helpers/fileFormat', () => {
         trash2: 'trash2',
       };
       const file = formatLocalFile(mockFile, user);
-      expect(file.lastModified.trash1).toBeUndefined();
-      expect(file.lastModified.trash2).toBeUndefined();
+      expect(file.task.modified.trash1).toBeUndefined();
+      expect(file.task.modified.trash2).toBeUndefined();
     });
   });
 });
