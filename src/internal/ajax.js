@@ -1,6 +1,5 @@
-import { Observable, Subscriber, of } from 'rxjs';
+import { Observable, Subscriber } from 'rxjs';
 import axios from 'axios';
-import { map, catchError } from 'rxjs/operators';
 
 const { CancelToken } = axios;
 
