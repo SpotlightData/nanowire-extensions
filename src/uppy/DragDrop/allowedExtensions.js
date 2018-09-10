@@ -29,4 +29,5 @@ export default [
   'png',
   'jpg',
   'gif',
+  'jepg',
 ];

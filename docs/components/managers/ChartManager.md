@@ -39,12 +39,14 @@ const propTypes = {
   queryProp: PropTypes.shape({}),
   requestBuilder: PropTypes.func.isRequired,
   renderer: PropTypes.func,
+  createChart: PropTypes.func,
 };
 
 const defaultProps = {
   initialValues: {},
   queryProp: {},
   renderer: undefined,
+  createChart: defaultCreateChart,
 };
 ```
 

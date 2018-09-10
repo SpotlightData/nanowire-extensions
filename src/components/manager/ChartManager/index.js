@@ -7,7 +7,7 @@ import { of, from } from 'rxjs';
 import { mergeAll, switchMap } from 'rxjs/operators';
 
 import { placeHolderSub, identity } from '../../../shared/constants';
-import { createChart, buildIndexTable } from './utils';
+import { createChart as defaultCreateChart, buildIndexTable } from './utils';
 
 export class ChartManager extends PureComponent {
   state = { charts: {} };
@@ -58,7 +58,7 @@ export class ChartManager extends PureComponent {
   }
 
   generateCharts() {
-    const { specs, initialValues, queryProp, chartLib } = this.props;
+    const { specs, initialValues, queryProp, chartLib, createChart } = this.props;
     return specs.map((spec, specI) => {
       const Parent = propOr(React.Fragment, 'Parent', spec);
       const pProps = propOr({}, 'parentProps', spec);
@@ -70,10 +70,17 @@ export class ChartManager extends PureComponent {
       const index = this.getPlacement(specI);
 
       function makeChart(data) {
-        const cleanData = handler.transform(data);
+        if (!data) {
+          return of([]);
+        }
+        let cleanData = data;
+        if (typeof handler.transform === 'function') {
+          cleanData = handler.transform(data);
+        }
         if (!cleanData) {
           return of([]);
         }
+
         const charts = spec.charts.map((chartName, chartI) => {
           const schema = chartLib.schemas[chartName];
           const tailor = tailors[chartName] || identity;
@@ -139,10 +146,12 @@ ChartManager.propTypes = {
   queryProp: PropTypes.shape({}),
   requestBuilder: PropTypes.func.isRequired,
   renderer: PropTypes.func,
+  createChart: PropTypes.func,
 };
 
 ChartManager.defaultProps = {
   initialValues: {},
   queryProp: {},
   renderer: undefined,
+  createChart: defaultCreateChart,
 };
