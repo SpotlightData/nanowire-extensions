@@ -24,19 +24,24 @@ class AjaxSubscriber extends Subscriber {
   }
 
   unsubscribe() {
+    if (this.closed) {
+      return;
+    }
     if (this.cancel) {
       this.cancel();
     }
+    this.isStopped = true;
     super.unsubscribe();
   }
 }
 
 export class AjaxObservable extends Observable {
-  static create(settings) {
-    return new AjaxObservable(settings, axios);
-  }
   static createWith(settings, runner) {
     return new AjaxObservable(settings, runner);
+  }
+
+  static create(settings) {
+    return AjaxObservable.createWith(settings, ajax);
   }
 
   constructor(settings, runner) {
