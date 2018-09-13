@@ -8,14 +8,18 @@ export class Dropdown extends Component {
   componentDidMount() {
     const { input, defaultOption } = this.props;
     if (defaultOption) {
-      input.onChange(defaultOption.key);
+      input.onChange(this.access(defaultOption));
     }
   }
 
   handleRequestClose = req => {
     const { input, options } = this.props;
-    input.onChange(req.key);
+    input.onChange(this.access(req));
   };
+
+  access(obj) {
+    return obj[this.props.accessor];
+  }
 
   render() {
     const { options, input, label, meta, maxWidth } = this.props;
@@ -60,6 +64,7 @@ Dropdown.propTypes = {
     key: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
   }),
+  accessor: PropTypes.string,
 };
 
 Dropdown.defaultProps = {
@@ -70,4 +75,5 @@ Dropdown.defaultProps = {
     error: undefined,
     submitError: undefined,
   },
+  accessor: 'key',
 };
