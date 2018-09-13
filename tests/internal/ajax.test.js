@@ -1,3 +1,5 @@
+import { combineLatest, from } from 'rxjs';
+import { mergeMap, merge } from 'rxjs/operators';
 import { AjaxObservable } from '@internal';
 
 describe('internal/ajax', () => {
@@ -29,6 +31,34 @@ describe('internal/ajax', () => {
       ajax.subscribe(() => false).unsubscribe();
       expect(cancel.mock.calls.length).toBe(1);
       expect(subscriber.mock.calls.length).toBe(0);
+    });
+
+    it('should call complete function', () => {
+      expect.assertions(1);
+      const data = { test: 'test' };
+      const runner = () => new Promise(res => res({ data }));
+      runner.CancelToken = class CancelToken {
+        constructor() {}
+      };
+      const ajax = AjaxObservable.createWith({}, runner);
+      combineLatest(ajax).subscribe(([error, resp]) => {
+        expect(resp).toEqual(data);
+      });
+    });
+
+    it('should work inside concurrent mergeMap ', () => {
+      expect.assertions(4);
+      const data = { test: 'test' };
+      const runner = () => new Promise(res => res({ data }));
+      runner.CancelToken = class CancelToken {
+        constructor() {}
+      };
+      const makeAjax = () => AjaxObservable.createWith({}, runner);
+      from(Array.from({ length: 4 }))
+        .pipe(mergeMap(makeAjax, 2))
+        .subscribe(([error, resp]) => {
+          expect(resp).toEqual(data);
+        });
     });
   });
 });
