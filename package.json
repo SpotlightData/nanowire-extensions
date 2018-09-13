@@ -13,9 +13,9 @@
   },
   "scripts": {
     "test": "BABEL_ENV=test kcd-scripts test --config=jest.config.js --maxWorkers=4",
-    "build": "node builder.js build",
-    "tag-build": "node builder.js tag",
-    "start": "node builder.js start",
+    "build": "DEBUG=@atecake/builder:* node builder.js build",
+    "tag-build": "DEBUG=@atecake/builder:* node builder.js tag",
+    "start": "DEBUG=@atecake/builder:* node builder.js start",
     "clean-code": "prettier --write 'src/**/*.js' 'tests/**/*.js' ",
     "packages": "yarn install && bash peer.sh"
   },
