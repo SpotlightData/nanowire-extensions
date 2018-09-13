@@ -15,14 +15,13 @@ class AjaxSubscriber extends Subscriber {
       this.cancel = cancel;
     });
     axios(Object.assign({ cancelToken }, settings))
-      .then(resp => this.next([null, resp.data]))
-      .catch(e => this.next([e, null]));
+      .then(resp => this.pass([null, resp.data]))
+      .catch(e => this.pass([e, null]));
   }
 
-  next(config) {
-    this.done = true;
-    const { destination } = this;
-    destination.next(config);
+  pass(response) {
+    this.next(response);
+    this.complete();
   }
 
   unsubscribe() {
