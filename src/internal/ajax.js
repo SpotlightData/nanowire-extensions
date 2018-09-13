@@ -4,17 +4,17 @@ import axios from 'axios';
 const { CancelToken } = axios;
 
 class AjaxSubscriber extends Subscriber {
-  constructor(destination, settings) {
+  constructor(destination, settings, runner) {
     super(destination);
-    this.send(settings);
+    this.send(settings, runner);
   }
 
-  send(settings) {
+  send(settings, runner) {
     const cancelToken = new CancelToken(cancel => {
       // An executor function receives a cancel function as a parameter
       this.cancel = cancel;
     });
-    axios(Object.assign({ cancelToken }, settings))
+    runner(Object.assign({ cancelToken }, settings))
       .then(resp => this.pass([null, resp.data]))
       .catch(e => this.pass([e, null]));
   }
@@ -34,15 +34,19 @@ class AjaxSubscriber extends Subscriber {
 
 export class AjaxObservable extends Observable {
   static create(settings) {
-    return new AjaxObservable(settings);
+    return new AjaxObservable(settings, axios);
+  }
+  static createWith(settings, runner) {
+    return new AjaxObservable(settings, runner);
   }
 
-  constructor(settings) {
+  constructor(settings, runner) {
     super();
     this.settings = settings;
+    this.runner = runner;
   }
 
   _subscribe(subscriber) {
-    return new AjaxSubscriber(subscriber, this.settings);
+    return new AjaxSubscriber(subscriber, this.settings, this.runner);
   }
 }
