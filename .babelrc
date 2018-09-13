@@ -1,36 +1,3 @@
 {
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "ie": 11
-        },
-        "modules": false,
-        "exclude": ["transform-async-to-generator", "transform-regenerator"]
-      }
-    ],
-    [
-      "@babel/preset-stage-1",
-      {
-        "decoratorsLegacy": true
-      }
-    ],
-    "@babel/preset-react"
-  ],
-  "env": {
-    "test": {
-      "presets": ["@babel/preset-env"]
-    },
-    "lib": {
-      "presets": [
-        [
-          "@babel/preset-env",
-          {
-            "exclude": ["transform-async-to-generator", "transform-regenerator"]
-          }
-        ]
-      ]
-    }
-  }
+  "presets": ["@babel/preset-env"]
 }
