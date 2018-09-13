@@ -1,8 +1,6 @@
 import { Observable, Subscriber } from 'rxjs';
 import axios from 'axios';
 
-const { CancelToken } = axios;
-
 class AjaxSubscriber extends Subscriber {
   constructor(destination, settings, runner) {
     super(destination);
@@ -10,6 +8,7 @@ class AjaxSubscriber extends Subscriber {
   }
 
   send(settings, runner) {
+    const { CancelToken } = runner;
     const cancelToken = new CancelToken(cancel => {
       // An executor function receives a cancel function as a parameter
       this.cancel = cancel;
