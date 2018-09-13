@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - "8.9"
+  - '8.9'
 
 sudo: false
 
@@ -12,7 +12,8 @@ before_install:
 cache:
   yarn: true
   directories:
-    - "node_modules"
+    - 'node_modules'
+    - $HOME/.npm
 
 script:
   - yarn packages
