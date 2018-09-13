@@ -1,14 +1,18 @@
 import { propOr, curry, append } from 'ramda';
+import { keyToAccessor } from '../internal/functions';
 
 function stringSort(a, b) {
   return a.localeCompare(b);
 }
 
-export const propSort = curry((key, a, b) => {
-  const aVal = propOr('', key, a);
-  const bVal = propOr('', key, b);
-  return typeof aVal === 'string' ? stringSort(aVal, bVal) : aVal - bVal;
-});
+export function propSort(key) {
+  const accessor = keyToAccessor(key);
+  return (a, b) => {
+    const aVal = accessor(a);
+    const bVal = accessor(b);
+    return typeof aVal === 'string' ? stringSort(aVal, bVal) : aVal - bVal;
+  };
+}
 
 export function generateColumns(columns) {
   return isExpanded => {
