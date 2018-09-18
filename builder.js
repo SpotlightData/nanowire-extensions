@@ -14,24 +14,6 @@ const pkg = require('./package.json');
 
 start([
   configure(),
-  customise(config => {
-    const [env, react] = config.build.babel.presets;
-    const newEnv = [
-      '@babel/preset-env',
-      Object.assign({}, env[1], {
-        targets: {
-          ie: 11,
-        },
-      }),
-    ];
-    return {
-      build: {
-        babel: {
-          presets: [newEnv, react],
-        },
-      },
-    };
-  }),
   when('build', [
     bundle({ files: { input: 'src/index.js', output: pkg.main } }),
     bundle({
