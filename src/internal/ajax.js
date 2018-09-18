@@ -41,7 +41,7 @@ export class AjaxObservable extends Observable {
   }
 
   static create(settings) {
-    return AjaxObservable.createWith(settings, ajax);
+    return AjaxObservable.createWith(settings, axios);
   }
 
   constructor(settings, runner) {
