@@ -9,6 +9,7 @@ module.exports = {
   moduleNameMapper: {
     // This is just here so our examples look like they would in a real project
     '@spotlightdata/nanowire-extensions': require.resolve('./src'),
+    '@internal': require.resolve('./src/internal/main'),
   },
   setupTestFrameworkScriptFile: '<rootDir>/tests/setup-test-env.js',
 };

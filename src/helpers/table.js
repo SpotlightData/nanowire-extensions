@@ -1,14 +1,18 @@
-import { propOr, curry, append } from 'ramda';
+import * as R from 'ramda';
+import { keyToAccessor } from '../internal/functions';
 
 function stringSort(a, b) {
   return a.localeCompare(b);
 }
 
-export const propSort = curry((key, a, b) => {
-  const aVal = propOr('', key, a);
-  const bVal = propOr('', key, b);
-  return typeof aVal === 'string' ? stringSort(aVal, bVal) : aVal - bVal;
-});
+export function propSort(key) {
+  const accessor = keyToAccessor(key);
+  return (a, b) => {
+    const aVal = accessor(a);
+    const bVal = accessor(b);
+    return typeof aVal === 'string' ? stringSort(aVal, bVal) : aVal - bVal;
+  };
+}
 
 export function generateColumns(columns) {
   return isExpanded => {
@@ -18,21 +22,25 @@ export function generateColumns(columns) {
         return items;
       }
       const { expandedOnly, ...rest } = entry;
-      return append(rest, items);
+      return R.append(rest, items);
     }, []);
   };
 }
 
 export const SIZE_UNITS = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
-export function bytesToReadable(x) {
-  let l = 0;
-  let n = parseInt(x, 10) || 0;
+export function bytesToReadableBare(units) {
+  return x => {
+    let l = 0;
+    let n = parseInt(x, 10) || 0;
 
-  while (n >= 1024) {
-    n /= 1024;
-    l += 1;
-  }
-  const rounded = n.toFixed(n >= 10 || l < 1 ? 0 : 1);
-  return `${rounded} ${SIZE_UNITS[l]}`;
+    while (n >= 1024) {
+      n /= 1024;
+      l += 1;
+    }
+    const rounded = n.toFixed(n >= 10 || l < 1 ? 0 : 1);
+    return `${rounded} ${units[l]}`;
+  };
 }
+
+export const bytesToReadable = bytesToReadableBare(SIZE_UNITS);

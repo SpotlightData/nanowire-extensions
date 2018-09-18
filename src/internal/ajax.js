@@ -1,49 +1,56 @@
 import { Observable, Subscriber } from 'rxjs';
 import axios from 'axios';
 
-const { CancelToken } = axios;
-
 class AjaxSubscriber extends Subscriber {
-  constructor(destination, settings) {
+  constructor(destination, settings, runner) {
     super(destination);
-    this.send(settings);
+    this.send(settings, runner);
   }
 
-  send(settings) {
+  send(settings, runner) {
+    const { CancelToken } = runner;
     const cancelToken = new CancelToken(cancel => {
       // An executor function receives a cancel function as a parameter
       this.cancel = cancel;
     });
-    axios(Object.assign({ cancelToken }, settings))
-      .then(resp => this.next([null, resp.data]))
-      .catch(e => this.next([e, null]));
+    runner(Object.assign({ cancelToken }, settings))
+      .then(resp => this.pass([null, resp.data]))
+      .catch(e => this.pass([e, null]));
   }
 
-  next(config) {
-    this.done = true;
-    const { destination } = this;
-    destination.next(config);
+  pass(response) {
+    this.next(response);
+    this.complete();
   }
 
   unsubscribe() {
+    if (this.closed) {
+      return;
+    }
     if (this.cancel) {
       this.cancel();
     }
+    this.isStopped = true;
     super.unsubscribe();
   }
 }
 
 export class AjaxObservable extends Observable {
-  static create(settings) {
-    return new AjaxObservable(settings);
+  static createWith(settings, runner) {
+    return new AjaxObservable(settings, runner);
   }
 
-  constructor(settings) {
+  static create(settings) {
+    return AjaxObservable.createWith(settings, ajax);
+  }
+
+  constructor(settings, runner) {
     super();
     this.settings = settings;
+    this.runner = runner;
   }
 
   _subscribe(subscriber) {
-    return new AjaxSubscriber(subscriber, this.settings);
+    return new AjaxSubscriber(subscriber, this.settings, this.runner);
   }
 }

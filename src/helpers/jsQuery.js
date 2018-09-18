@@ -1,5 +1,5 @@
 import jmespath from 'jmespath';
-import { flatten } from './shared';
+import { flatten } from '../internal/array';
 
 function queryToString(query) {
   if (typeof query === 'string') {

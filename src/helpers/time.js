@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { keyToAccessor } from '../internal/functions';
 
 export const defaultFormat = 'Do MMM YYYY';
 export const detailedFormat = 'Do MMM YYYY h:mm:ss a';
@@ -13,12 +14,12 @@ export function defaultTimeFormat(date) {
 
 const value = time => moment(time).valueOf();
 
-export function timeSort(keyAccess) {
-  const accessor = typeof keyAccess === 'function' ? keyAccess : obj => obj[keyAccess];
-
+export function timeSort(key) {
+  const accessor = keyToAccessor(key);
+  const convert = n => value(accessor(n));
   return (a, b) => {
-    const timeA = value(accessor(a));
-    const timeB = value(accessor(b));
+    const timeA = conver(a);
+    const timeB = convert(b);
     if (timeA === timeB) {
       return 0;
     }
