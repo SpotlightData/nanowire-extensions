@@ -12,8 +12,9 @@ export const extractErrorText = (error, response) => {
   return error.message || JSON.stringify(data);
 };
 
-export const extractBackendError = message => error => {
-  const { response } = error;
+export const extractBackendError = message => errorData => {
+  const error = errorData || {};
+  const response = pathOr({}, ['response'], error);
   return {
     message,
     description: extractErrorText(error, response),
