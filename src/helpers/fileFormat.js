@@ -35,7 +35,7 @@ export function formatLocalFile(file, user) {
   const { _id, email, name } = user;
   // IE 11 does not supply lastModified
   const date = R.pipe(
-    pathOr(new Date(), ['data', 'lastModified']),
+    R.pathOr(new Date(), ['data', 'lastModified']),
     parseDate
   )(file);
 
