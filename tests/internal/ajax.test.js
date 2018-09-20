@@ -1,6 +1,6 @@
 import { combineLatest, from } from 'rxjs';
 import { mergeMap, merge } from 'rxjs/operators';
-import { AjaxObservable } from '@internal';
+import { AjaxObservable } from '$internal';
 
 describe('internal/ajax', () => {
   describe('AjaxObservable', () => {
