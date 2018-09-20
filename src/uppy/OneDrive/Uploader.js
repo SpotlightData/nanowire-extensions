@@ -76,7 +76,7 @@ export class Uploader extends Plugin {
       console.warn(error);
       notification.error({
         message: 'Failed OneDrive upload',
-        description: 'Could not retrieve data from OneDrive,
+        description: 'Could not retrieve data from OneDrive',
       });
     } else if (resp) {
       this.uploadFiles(resp.value);
