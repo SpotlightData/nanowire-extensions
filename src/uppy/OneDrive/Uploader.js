@@ -73,9 +73,10 @@ export class Uploader extends Plugin {
     };
     const [error, resp] = await this.settings.uploader(settings);
     if (error) {
-      notification.open({
-        message: 'Failed one drive upload',
-        description: JSON.stringify(error),
+      console.warn(error);
+      notification.error({
+        message: 'Failed OneDrive upload',
+        description: 'Could not retrieve data from OneDrive,
       });
     } else if (resp) {
       this.uploadFiles(resp.value);
