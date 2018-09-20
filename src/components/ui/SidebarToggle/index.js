@@ -13,9 +13,8 @@ const SidebarToggleBare = ({ onClick, open, classes, className, ...rest }) => (
     onClick={onClick}
     role="button"
     tabIndex={0}
-    className={classes.root}
-    {...rest}
     className={cn(classes.root, className)}
+    {...rest}
   />
 );
 
