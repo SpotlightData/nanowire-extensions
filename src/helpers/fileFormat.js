@@ -1,6 +1,6 @@
-import { pathOr, pipe } from 'ramda';
+import * as R from 'ramda';
 
-const withDefault = pathOr('unknown');
+const withDefault = R.pathOr('unknown');
 
 export function formatOnedriveFile({ data }) {
   const { id, email, displayName } = data.createdBy.user;
@@ -34,8 +34,8 @@ const parseDate = Date.parse.bind(Date);
 export function formatLocalFile(file, user) {
   const { _id, email, name } = user;
   // IE 11 does not supply lastModified
-  const date = pipe(
-    pathOr(new Date(), ['data', 'lastModified'])
+  const date = R.pipe(
+    pathOr(new Date(), ['data', 'lastModified']),
     parseDate
   )(file);
 
