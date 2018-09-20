@@ -1,8 +1,34 @@
 import * as R from 'ramda';
 import { keyToAccessor } from '../internal/functions';
+import { Icon } from 'antd';
 
 function stringSort(a, b) {
   return a.localeCompare(b);
+}
+
+export const iconProps = {
+  enabled: {
+    type: 'check-circle',
+    style: { color: 'green' },
+  },
+  disabled: {
+    type: 'close-circle',
+    style: { color: 'red' },
+  },
+};
+
+export const statusToValue = status => (status === 'enabled' ? 1 : 0);
+
+export function statusSort(key) {
+  const accessor = keyToAccessor(key);
+  const convert = val => statusToValue(accessor(val));
+  return (a, b) => {
+    return convert(a) - convert(b);
+  };
+}
+
+export function statusRender(type) {
+  return <Icon {...iconProps[type]} />;
 }
 
 export function propSort(key) {

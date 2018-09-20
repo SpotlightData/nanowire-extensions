@@ -3,18 +3,22 @@ import PropTypes from 'prop-types';
 
 import { Spin } from 'antd';
 
-export const Loading = ({ className }) => (
-  <div className={className}>
-    <Spin size="large" />
-  </div>
+const defaultStyle = {
+	pointerEvents: 'none',
+};
+
+export const Loading = ({ className, style = defaultStyle }) => (
+	<div className={className} style={style}>
+		<Spin size="large" />
+	</div>
 );
 
 Loading.propTypes = {
-  className: PropTypes.string,
+	className: PropTypes.string,
 };
 
 Loading.defaultProps = {
-  className: 'loading-spinner',
+	className: 'loading-spinner',
 };
 
 Loading.displayName = 'Loading';

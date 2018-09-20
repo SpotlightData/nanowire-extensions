@@ -1,5 +1,5 @@
 import jmespath from 'jmespath';
-import { flatten } from '../internal/array';
+import * as R from 'ramda';
 
 function queryToString(query) {
   if (typeof query === 'string') {
@@ -19,7 +19,7 @@ function buildBaseJsQuery(items) {
   if (typeof items === 'string') {
     return items;
   }
-  return flatten(items)
+  return R.flatten(items)
     .map(queryToString)
     .join('');
 }

@@ -18,7 +18,7 @@ export function timeSort(key) {
   const accessor = keyToAccessor(key);
   const convert = n => value(accessor(n));
   return (a, b) => {
-    const timeA = conver(a);
+    const timeA = convert(a);
     const timeB = convert(b);
     if (timeA === timeB) {
       return 0;
