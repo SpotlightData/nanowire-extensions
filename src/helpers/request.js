@@ -37,7 +37,7 @@ export function aggregationBuilder(baseConfig, baseUrl, { aggregation, ...reques
 }
 
 export const buildBaseConfig = (token, extra) =>
-  Object.assign(
+  mergeDeepRight(
     {
       headers: {
         Accept: 'application/json',

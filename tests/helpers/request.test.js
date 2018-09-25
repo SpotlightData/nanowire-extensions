@@ -3,6 +3,7 @@ import {
   buildUrl,
   aggregationBuilder,
   queryUrlToObject,
+  buildBaseConfig,
 } from '@spotlightdata/nanowire-extensions';
 
 describe('helpers/request', () => {
@@ -100,6 +101,12 @@ describe('helpers/request', () => {
         responseType: 'json',
         url: '/api/aggregations',
       });
+    });
+  });
+  describe('buildBaseConfig', () => {
+    it('should maintain token', () => {
+      const object = buildBaseConfig('token', { headers: { Cache: 'none' } });
+      expect(object.headers.Authorization).toBe('JWT token');
     });
   });
 });
