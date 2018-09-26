@@ -24,6 +24,13 @@ describe('helpers/request', () => {
         })
       ).toBe('test=value&test2=value2');
     });
+    it('should encode values and keys', () => {
+      expect(
+        queryObjectToString({
+          'test10%': '10%',
+        })
+      ).toBe('test10%25=10%25');
+    });
   });
   describe('queryUrlToObject', () => {
     it('should return an empty object when empty string is passed', () => {

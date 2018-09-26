@@ -2,7 +2,7 @@ import { mergeDeepRight } from 'ramda';
 
 export function queryObjectToString(query) {
   return Object.keys(query)
-    .reduce((url, key) => `${url}&${key}=${query[key]}`, '')
+    .reduce((url, key) => `${url}&${encodeURI(key)}=${encodeURI(query[key])}`, '')
     .slice(1); // Removing the first & symbol
 }
 
