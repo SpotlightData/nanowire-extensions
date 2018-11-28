@@ -134,7 +134,7 @@ ChartManager.propTypes = {
       handler: PropTypes.string.isRequired,
       charts: PropTypes.arrayOf(PropTypes.string).isRequired,
       listeners: PropTypes.shape({}),
-      Parent: PropTypes.node,
+      Parent: PropTypes.func,
       parentProps: PropTypes.shape({}),
     })
   ).isRequired,
