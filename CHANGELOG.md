@@ -1,3 +1,9 @@
+
+# 1.2.15
+
+- Export `createChart` method [#7ca4dc4](https://github.com/SpotlightData/nanowire-extensions/commit/7ca4dc49d23dbdc7fc73380db604cc3b871b43c2)
+- Fix ChartManager `spec.Parent` proptype. [#cf80cb](https://github.com/SpotlightData/nanowire-extensions/commit/cf80cb9d91b6a0e7f07886e6c9f2c4be9236871e)
+
 # 1.1.1
 
 ## Helpers
