@@ -1,9 +1,9 @@
-import React, { PureComponent, Children } from 'react';
+import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 
 import { ResponsiveContext } from './context';
 
-export class ResponsiveConsumer extends PureComponent {
+export class ResponsiveConsumer extends Component {
   renderChild = queries => {
     const { children, render, ...rest } = this.props;
     if (typeof children === 'function') {

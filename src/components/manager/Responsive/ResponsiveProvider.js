@@ -1,5 +1,5 @@
-import React, { PureComponent, Children } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, Children } from 'react';
+import { element, shape, number } from 'prop-types';
 
 import throttle from 'lodash.throttle';
 import { getQueries } from './getQueries';
@@ -8,7 +8,7 @@ import { defaultBreakpoints } from './breakpoints';
 
 const fakeWindow = { innerWidth: 0, innerHeight: 0 };
 
-export class ResponsiveProvider extends PureComponent {
+export class ResponsiveProvider extends Component {
   constructor(props) {
     super(props);
     this.state = this.calculate(props);
@@ -42,19 +42,21 @@ export class ResponsiveProvider extends PureComponent {
 }
 
 ResponsiveProvider.propTypes = {
-  children: PropTypes.element.isRequired,
-  container: PropTypes.shape({}),
-  breakpoints: PropTypes.shape({
-    xs: PropTypes.number.isRequired,
-    sm: PropTypes.number.isRequired,
-    md: PropTypes.number.isRequired,
-    lg: PropTypes.number.isRequired,
-    xl: PropTypes.number.isRequired,
-    xll: PropTypes.number.isRequired,
+  children: element.isRequired,
+  container: shape({}),
+  breakpoints: shape({
+    xs: number.isRequired,
+    sm: number.isRequired,
+    md: number.isRequired,
+    lg: number.isRequired,
+    xl: number.isRequired,
+    xll: number.isRequired,
   }),
+  throttle: number,
 };
 
 ResponsiveProvider.defaultProps = {
   container: typeof window === 'undefined' ? fakeWindow : window,
   breakpoints: defaultBreakpoints,
+  throttle: 400,
 };
