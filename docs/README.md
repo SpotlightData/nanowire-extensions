@@ -25,6 +25,7 @@
     - [Loading](components/ui/Loading.md)
     - [ProgressBar](components/ui/ProgressBar.md)
     - [SidebarToggle](components/ui/SidebarToggle.md)
+    - [ValidateSaved](components/ui/ValidateSaved.md)
   - [HOC](components/hoc.md)
 - [Helpers](helpers/README.md)
   - [apply](helpers/apply.md)
