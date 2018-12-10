@@ -3,7 +3,8 @@ import { func, shape, string } from 'prop-types';
 
 import { Link } from 'react-router-dom';
 
-import { placeHolderSub, queryUrlToObject } from '../../../helpers/main';
+import { queryUrlToObject } from '../../../helpers/main';
+import { placeHolderSub } from '../../../shared/constants';
 
 import { Breadcrumb } from 'antd';
 import sid from 'shortid';
