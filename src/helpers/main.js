@@ -8,3 +8,8 @@ export * from './backend';
 export * from './fileFormat';
 export * from './error';
 export * from './table';
+export * from './history';
+export * from './array';
+export * from './object';
+export * from './string';
+export * from './number';

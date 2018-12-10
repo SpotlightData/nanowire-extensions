@@ -1,7 +1,13 @@
+# 1.3.0
+
+- Add `SimpleProgressBar` component [#5a0c60](https://github.com/SpotlightData/nanowire-extensions/pull/72/commits/5a0c6079a57f5462c8017d2635afeb44d6fc9b1e)
+- Add a lot of helpers functions [#72](https://github.com/SpotlightData/nanowire-extensions/pull/72)
+- Add `BreadcrumbManager` component [#7447769](https://github.com/SpotlightData/nanowire-extensions/pull/72/commits/7447769a5eb1c3d729a880c9cc056d8b936c9935)
+
 # 1.2.16
 
 - Add `ElasticWidget` component [#026ca19](https://github.com/SpotlightData/nanowire-extensions/pull/71/commits/026ca191b826e4c15998ed834a8fa1a8d29eead8)
-- Add `ValidateSaved` component [#e526623] (https://github.com/SpotlightData/nanowire-extensions/pull/71/commits/e52662328a045cfac510bbd9dfd15a49167210e2)
+- Add `ValidateSaved` component [#e526623](https://github.com/SpotlightData/nanowire-extensions/pull/71/commits/e52662328a045cfac510bbd9dfd15a49167210e2)
 - Fix `ResponsiveConsumer` render blocking and proptypes [#622c455](https://github.com/SpotlightData/nanowire-extensions/pull/71/commits/622c455845aa3393de5ea0953a0bc80621e18762)
 - Add back `yarn test` to travis ci
 
