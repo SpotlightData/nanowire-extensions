@@ -1,8 +1,6 @@
 # 1.3.0
 
-- add `object` helpers
-- Add `array` helpers
-- Add `history` helpers [#e7284e](https://github.com/SpotlightData/nanowire-extensions/pull/72/commits/e7284e15118ee79ef0d1a8fba3d24299d3e7796f)
+- Add a lot of helpers functions [#72](https://github.com/SpotlightData/nanowire-extensions/pull/72)
 - Add `BreadcrumbManager` component [#7447769](https://github.com/SpotlightData/nanowire-extensions/pull/72/commits/7447769a5eb1c3d729a880c9cc056d8b936c9935)
 
 # 1.2.16
