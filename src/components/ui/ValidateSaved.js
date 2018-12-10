@@ -30,7 +30,7 @@ export class ValidateSaved extends PureComponent {
 
     const { saved, validate, format } = this.props;
     if (!saved) {
-      return this.done(false);
+      return this.done(false, saved);
     }
     const data = format(saved);
     const isValid = await validate(data);
