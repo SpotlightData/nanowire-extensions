@@ -21,6 +21,7 @@
     - [ChartManager](components/managers/ChartManager.md)
     - [Responsive](components/managers/Responsive.md)
     - [TableManager](components/managers/TableManager.md)
+    - [ElasticWidget](components/managers/ElasticWidget.md)
   - [UI](components/ui/README.md)
     - [Loading](components/ui/Loading.md)
     - [ProgressBar](components/ui/ProgressBar.md)
