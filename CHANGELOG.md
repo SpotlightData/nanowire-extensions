@@ -1,6 +1,6 @@
 # 1.3.0
 
-- Add `SimpleProgressBar` component 
+- Add `SimpleProgressBar` component [#5a0c60](https://github.com/SpotlightData/nanowire-extensions/pull/72/commits/5a0c6079a57f5462c8017d2635afeb44d6fc9b1e)
 - Add a lot of helpers functions [#72](https://github.com/SpotlightData/nanowire-extensions/pull/72)
 - Add `BreadcrumbManager` component [#7447769](https://github.com/SpotlightData/nanowire-extensions/pull/72/commits/7447769a5eb1c3d729a880c9cc056d8b936c9935)
 
