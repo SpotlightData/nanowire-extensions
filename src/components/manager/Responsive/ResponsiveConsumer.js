@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import { ResponsiveContext } from './context';
 
-export class ResponsiveConsumer extends Component {
-  renderChild = queries => {
-    const { children, render, ...rest } = this.props;
+export const ResponsiveConsumer = props => {
+  const renderChild = queries => {
+    const { children, render, ...rest } = props;
     if (typeof children === 'function') {
       return children({ ...queries, ...rest });
     }
@@ -14,11 +14,8 @@ export class ResponsiveConsumer extends Component {
     }
     return children;
   };
-
-  render() {
-    return <ResponsiveContext.Consumer>{this.renderChild}</ResponsiveContext.Consumer>;
-  }
-}
+  return <ResponsiveContext.Consumer>{renderChild}</ResponsiveContext.Consumer>;
+};
 
 ResponsiveConsumer.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),

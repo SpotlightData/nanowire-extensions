@@ -1,3 +1,8 @@
+# 1.2.16
+
+- Add `ValidateSaved` component
+- Fix `ResponsiveConsumer` render blocking and proptypes
+- Add back `yarn test` to travis ci
 
 # 1.2.15
 
