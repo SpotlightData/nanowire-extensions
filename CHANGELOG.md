@@ -1,3 +1,7 @@
+# 1.3.0
+
+- Add `BreadcrumbManager` component
+
 # 1.2.16
 
 - Add `ElasticWidget` component [#026ca19](https://github.com/SpotlightData/nanowire-extensions/pull/71/commits/026ca191b826e4c15998ed834a8fa1a8d29eead8)
