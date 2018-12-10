@@ -1,12 +1,14 @@
 import React from 'react';
+import ReactDom from 'react-dom';
 import { ResponsiveConsumer, ResponsiveProvider } from '@spotlightdata/nanowire-extensions';
 import { render, fireEvent } from 'react-testing-library';
 
-const makeContainer = () => ({
+const makeContainer = (spec = {}) => ({
   addEventListener: () => false,
   removeEventListener: () => false,
   innerHeight: 1,
   innerWidth: 1,
+  ...spec,
 });
 
 describe('components/managers/Responsive', () => {
@@ -58,49 +60,53 @@ describe('components/managers/Responsive', () => {
       xs: false,
     });
   });
-  it('should re-render when container resizes', () => {
-    const container = makeContainer();
-    let callListener;
-    container.addEventListener = (name, fn) => {
-      callListener = fn;
-    };
-    container.innerWidth = 600;
-    container.innerHeight = 600;
-    const make = jest.fn();
-    make.mockReturnValue(null);
+  it('should re-render when container resizes', done => {
+    expect.assertions(2);
+    let count = 0;
+    let container = makeContainer({
+      addEventListener: (name, fn) => {
+        container.innerHeight = 200;
+        container.innerWidth = 200;
+        setTimeout(fn, 0);
+      },
+      innerHeight: 600,
+      innerWidth: 600,
+    });
 
     render(
-      <ResponsiveProvider container={container}>
-        <div>
-          <ResponsiveConsumer>{make}</ResponsiveConsumer>
-        </div>
+      <ResponsiveProvider getContainer={() => container} throttle={0} renderOnMount={false}>
+        <ResponsiveConsumer>
+          {spec => {
+            if (count === 0) {
+              expect(spec).toEqual({
+                height: 600,
+                lg: false,
+                md: false,
+                sm: true,
+                width: 600,
+                xl: false,
+                xll: false,
+                xs: false,
+              });
+            } else {
+              expect(spec).toEqual({
+                height: 200,
+                lg: false,
+                md: false,
+                sm: false,
+                width: 200,
+                xl: false,
+                xll: false,
+                xs: true,
+              });
+              done();
+            }
+            count += 1;
+            return null;
+          }}
+        </ResponsiveConsumer>
       </ResponsiveProvider>
     );
-    container.innerWidth = 200;
-    container.innerHeight = 200;
-    callListener();
-
-    expect(make.mock.calls.length).toBe(2);
-    expect(make.mock.calls[0][0]).toEqual({
-      height: 600,
-      lg: false,
-      md: false,
-      sm: true,
-      width: 600,
-      xl: false,
-      xll: false,
-      xs: false,
-    });
-    expect(make.mock.calls[1][0]).toEqual({
-      height: 200,
-      lg: false,
-      md: false,
-      sm: false,
-      width: 200,
-      xl: false,
-      xll: false,
-      xs: true,
-    });
   });
 
   it('should call render function if it is supplied', () => {

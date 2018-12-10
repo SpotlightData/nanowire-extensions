@@ -1,5 +1,5 @@
-import React, { PureComponent, Children } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { element, shape, number, func, bool } from 'prop-types';
 
 import throttle from 'lodash.throttle';
 import { getQueries } from './getQueries';
@@ -8,11 +8,14 @@ import { defaultBreakpoints } from './breakpoints';
 
 const fakeWindow = { innerWidth: 0, innerHeight: 0 };
 
-export class ResponsiveProvider extends PureComponent {
+const getContainer = ({ getContainer, container }) =>
+  typeof getContainer === 'function' ? getContainer() : container;
+
+export class ResponsiveProvider extends Component {
   constructor(props) {
     super(props);
     this.state = this.calculate(props);
-    this.listen = throttle(this.updateSizes, props.throttle);
+    this.listener = throttle(this.updateSizes, props.throttle);
   }
 
   updateSizes = () => {
@@ -20,41 +23,48 @@ export class ResponsiveProvider extends PureComponent {
   };
 
   calculate(props) {
-    return getQueries(props.container, props.breakpoints);
+    return getQueries(getContainer(props), props.breakpoints);
   }
 
   componentDidMount() {
-    this.props.container.addEventListener('resize', this.listen);
-    this.updateSizes();
+    if (this.props.runOnMount) {
+      this.updateSizes();
+    }
+    getContainer(this.props).addEventListener('resize', this.listener);
   }
 
   componentWillUnmount() {
-    this.props.container.removeEventListener('resize', this.listen);
+    getContainer(this.props).removeEventListener('resize', this.listener);
   }
 
   render() {
     return (
       <ResponsiveContext.Provider value={this.state}>
-        {Children.only(this.props.children)}
+        {this.props.children}
       </ResponsiveContext.Provider>
     );
   }
 }
 
 ResponsiveProvider.propTypes = {
-  children: PropTypes.element.isRequired,
-  container: PropTypes.shape({}),
-  breakpoints: PropTypes.shape({
-    xs: PropTypes.number.isRequired,
-    sm: PropTypes.number.isRequired,
-    md: PropTypes.number.isRequired,
-    lg: PropTypes.number.isRequired,
-    xl: PropTypes.number.isRequired,
-    xll: PropTypes.number.isRequired,
+  children: element.isRequired,
+  container: shape({}),
+  getContainer: func,
+  breakpoints: shape({
+    xs: number.isRequired,
+    sm: number.isRequired,
+    md: number.isRequired,
+    lg: number.isRequired,
+    xl: number.isRequired,
+    xll: number.isRequired,
   }),
+  runOnMount: bool,
+  throttle: number,
 };
 
 ResponsiveProvider.defaultProps = {
   container: typeof window === 'undefined' ? fakeWindow : window,
   breakpoints: defaultBreakpoints,
+  throttle: 400,
+  runOnMount: false,
 };

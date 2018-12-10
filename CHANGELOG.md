@@ -1,3 +1,9 @@
+# 1.2.16
+
+- Add `ElasticWidget` component [#026ca19](https://github.com/SpotlightData/nanowire-extensions/pull/71/commits/026ca191b826e4c15998ed834a8fa1a8d29eead8)
+- Add `ValidateSaved` component [#e526623] (https://github.com/SpotlightData/nanowire-extensions/pull/71/commits/e52662328a045cfac510bbd9dfd15a49167210e2)
+- Fix `ResponsiveConsumer` render blocking and proptypes [#622c455](https://github.com/SpotlightData/nanowire-extensions/pull/71/commits/622c455845aa3393de5ea0953a0bc80621e18762)
+- Add back `yarn test` to travis ci
 
 # 1.2.15
 

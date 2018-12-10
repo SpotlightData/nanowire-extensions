@@ -17,6 +17,7 @@ cache:
 
 script:
   - yarn packages
+  - yarn test
   - yarn build || travis_terminate 1
 
 deploy:
