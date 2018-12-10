@@ -39,6 +39,7 @@
   - [table](helpers/table.md)
   - [time](helpers/time.md)
   - [error](helpers/error.md)
+  - [history](helpers/history.md)
 - [Redux](redux/README.md)
   - [makeActionType](redux/makeActionType.md)
   - [reducers](redux/reducers.md)

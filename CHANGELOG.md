@@ -1,6 +1,7 @@
 # 1.3.0
 
 - Add `BreadcrumbManager` component [#7447769](https://github.com/SpotlightData/nanowire-extensions/pull/72/commits/7447769a5eb1c3d729a880c9cc056d8b936c9935)
+- Add `history` helpers
 
 # 1.2.16
 
