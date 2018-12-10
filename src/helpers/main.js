@@ -10,3 +10,4 @@ export * from './error';
 export * from './table';
 export * from './history';
 export * from './array';
+export * from './object';
