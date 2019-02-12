@@ -1,3 +1,7 @@
+# 1.3.2
+
+- Add tests for and update `updatedQuery` function [#3664093](https://github.com/SpotlightData/nanowire-extensions/pull/78/commits/3664093f5315827a4b7b4e869c3aa9ece0100f0b)
+
 # 1.3.0
 
 - Add `SimpleProgressBar` component [#5a0c60](https://github.com/SpotlightData/nanowire-extensions/pull/72/commits/5a0c6079a57f5462c8017d2635afeb44d6fc9b1e)
