@@ -7,3 +7,4 @@ export * from './file';
 export * from './functions';
 export * from './time';
 export * from './table';
+export * from './request';
