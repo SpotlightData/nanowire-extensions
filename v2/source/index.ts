@@ -1,1 +1,3 @@
-export const test = 'test';
+export * from './components';
+export * from './helpers';
+export * from './interfaces';
