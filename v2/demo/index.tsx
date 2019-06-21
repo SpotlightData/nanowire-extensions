@@ -1,6 +1,7 @@
+import * as React from 'react';
 import { render } from 'react-dom';
-import { SimpleProgressBar } from '../source';
+import { Progress } from './Progress';
 
 const MOUNT_NODE = document.getElementById('root');
 
-render(<SimpleProgressBar />, MOUNT_NODE);
+render(<Progress />, MOUNT_NODE);
