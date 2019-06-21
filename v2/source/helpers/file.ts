@@ -1,5 +1,6 @@
 import * as R from 'ramda';
 import { UserMeta } from '../interfaces';
+import { FILE_SIZE_UNITS } from '../constants';
 
 const orUnknown = R.pathOr('unknown');
 
@@ -61,3 +62,19 @@ export function formatLocalFileMeta(user: UserMeta, file) {
     },
   };
 }
+
+export function bytesToReadableBare(units: string[]) {
+  return (x: string | number) => {
+    let l = 0;
+    let n = typeof x === 'string' ? parseInt(x, 10) : x;
+
+    while (n >= 1024) {
+      n /= 1024;
+      l += 1;
+    }
+    const rounded = n.toFixed(n >= 10 || l < 1 ? 0 : 1);
+    return `${rounded} ${units[l]}`;
+  };
+}
+
+export const bytesToReadable = bytesToReadableBare(FILE_SIZE_UNITS);
