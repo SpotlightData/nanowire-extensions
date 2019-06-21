@@ -1,5 +1,5 @@
 import * as React from 'react';
-import injectSheet from 'react-jss';
+import injectSheet, { DynamicCSSRule, CSSProperties } from 'react-jss';
 
 export interface SimpleProgressBarClasses {
   container: string;
@@ -25,7 +25,7 @@ const styles = {
     display: 'flex',
     overflow: 'hidden',
   },
-  success(props: SimpleProgressBarBareProps) {
+  success: (props: SimpleProgressBarBareProps) => {
     const passed = (props.success / props.total) * 100;
     return { backgroundColor: '#52c41a', width: `${passed}%` };
   },
@@ -45,6 +45,6 @@ const SimpleProgressBarBare: React.FC<SimpleProgressBarProps> = ({ classes }) =>
 };
 
 // @ts-ignore
-export const SimpleProgressBar = injectSheet<string, object, SimpleProgressBarProps>(styles)(
+export const SimpleProgressBar = injectSheet<string, object, SimpleProgressBarBareProps>(styles)(
   SimpleProgressBarBare
 );
