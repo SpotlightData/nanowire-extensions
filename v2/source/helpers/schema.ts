@@ -1,8 +1,8 @@
-import { ObjectSchema, ValidateOptions } from 'yup';
+import { ValidateOptions, Schema } from 'yup';
 
 export type ValidateSchemaResp = null | { [path: string]: string };
-export function validateSchema<T extends Object>(
-  schema: ObjectSchema<T>,
+export function validateSchema<T>(
+  schema: Schema<T>,
   data: T,
   options?: ValidateOptions
 ): ValidateSchemaResp {
