@@ -8,6 +8,14 @@ export class Result<E, V> {
 
   static EMPTY = null;
 
+  static fromValue<V>(value: V) {
+    return new Result(Result.EMPTY, value);
+  }
+
+  static fromError<E>(error: E) {
+    return new Result(error, Result.EMPTY);
+  }
+
   static fromArr<E, V>(items: [E | Empty, V | Empty]) {
     return new Result(items[0], items[1]);
   }
