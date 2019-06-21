@@ -8,3 +8,5 @@ export * from './functions';
 export * from './time';
 export * from './table';
 export * from './request';
+export * from './breakpoints';
+export * from './object';
