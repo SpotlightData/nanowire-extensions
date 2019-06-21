@@ -1,9 +1,12 @@
 import * as R from 'ramda';
+import { UserMeta } from '../interfaces';
 
 const orUnknown = R.pathOr('unknown');
 
-export function formatOnedriveFileMeta({ data }) {
-  const { id, email, displayName } = data.createdBy.user;
+export function formatOnedriveFileMeta(_user: UserMeta, { data }) {
+  let { id, email, displayName } = data.createdBy.user;
+  /** Sometimes OneDrive might not give email, we should send empty value in that case*/
+  email = email || '';
   const task = {
     name: data.name,
     type: orUnknown(['file', 'mimeType'], data),
@@ -29,14 +32,12 @@ export function formatOnedriveFileMeta({ data }) {
   };
 }
 
-const parseDate = Date.parse.bind(Date);
-
-export function formatLocalFileMeta(file, user) {
+export function formatLocalFileMeta(user: UserMeta, file) {
   const { _id, email, name } = user;
   // IE 11 does not supply lastModified
   const date = R.pipe(
     R.pathOr(new Date(), ['data', 'lastModified']),
-    parseDate
+    Date.parse.bind(Date)
   )(file);
 
   const task = {
