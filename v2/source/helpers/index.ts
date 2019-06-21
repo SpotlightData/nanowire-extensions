@@ -10,3 +10,4 @@ export * from './table';
 export * from './request';
 export * from './breakpoints';
 export * from './object';
+export * from './history';
