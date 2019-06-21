@@ -1,4 +1,12 @@
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosRequestConfig } from 'axios';
+import { Dictionary } from './shared';
+
+export interface BackEndOptions extends AxiosRequestConfig {
+  hasBase?: boolean;
+  body?: any;
+  aggregation?: string;
+  query: Dictionary<string>;
+}
 
 export interface RequestError extends AxiosError {}
 

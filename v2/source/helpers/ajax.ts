@@ -1,15 +1,16 @@
 import { Observable, Subscriber } from 'rxjs';
-import axios, { AxiosRequestConfig, CancelTokenStatic } from 'axios';
+import axios, { AxiosRequestConfig, CancelTokenStatic, AxiosError } from 'axios';
 
 export type AjaxResponse = Promise<{ data: any }>;
 export type AjaxConfig = AxiosRequestConfig;
+export type AjaxData = [AxiosError, null] | [null, any];
 
 export interface AjaxRunner {
   (config: AxiosRequestConfig): AjaxResponse;
   CancelToken: CancelTokenStatic;
 }
 
-class AjaxSubscriber extends Subscriber<[null, any] | [any, null]> {
+class AjaxSubscriber extends Subscriber<AjaxData> {
   cancel: () => void;
 
   constructor(destination: Subscriber<any>, settings: AjaxConfig, runner: AjaxRunner) {
@@ -28,7 +29,7 @@ class AjaxSubscriber extends Subscriber<[null, any] | [any, null]> {
       .catch(e => this.pass([e, null]));
   }
 
-  pass(response: [null, any] | [any, null]) {
+  pass(response: AjaxData) {
     this.next(response);
     this.complete();
   }

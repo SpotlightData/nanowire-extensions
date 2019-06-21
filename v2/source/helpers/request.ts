@@ -1,5 +1,6 @@
 import * as R from 'ramda';
 import { Dictionary } from '../interfaces';
+import { AxiosRequestConfig } from 'axios';
 
 export function queryObjectToString(query: Dictionary<string>) {
   return Object.keys(query)
@@ -28,7 +29,11 @@ export function buildUrl(url: string, baseUrl: string, query: Dictionary<string>
 }
 
 // TODO add better types here
-export function aggregationBuilder<T>(baseConfig: T, baseUrl: string, { aggregation, ...request }) {
+export function aggregationBuilder<T>(
+  baseConfig: T,
+  baseUrl: string,
+  { aggregation, ...request }: AxiosRequestConfig & { aggregation?: string }
+) {
   const { url, ...rest } = request;
   const uri = url.includes(baseUrl) ? url.replace(baseUrl, '') : url;
   return R.mergeDeepRight(baseConfig, {
