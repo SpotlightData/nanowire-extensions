@@ -1,6 +1,13 @@
 import * as React from 'react';
 import { Form, Field } from 'react-final-form';
-import { Checkbox, TextField, Switch } from '../source';
+import { Checkbox, TextField, Switch, Dropdown } from '../source';
+
+export const options = {
+  FILE: { text: 'Local files' },
+  ONEDRIVE: { text: 'One drive' },
+  TWITTER: { text: 'Twitter scraping' },
+  DATABASE: { text: 'Database', disabled: true },
+};
 
 export class FormDemo extends React.PureComponent {
   render() {
@@ -13,6 +20,10 @@ export class FormDemo extends React.PureComponent {
               <Field name="checkbox" render={p => <Checkbox {...p} label="Toggle" />} />
               <Field name="text" render={p => <TextField {...p} />} />
               <Field name="switch" render={p => <Switch {...p} />} />
+              <Field
+                name="switch"
+                render={p => <Dropdown {...p} options={options} label="Options" />}
+              />
             </React.Fragment>
           );
         }}
