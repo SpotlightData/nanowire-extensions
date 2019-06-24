@@ -68,10 +68,12 @@
   "peerDependencies": {
     "antd": "^3.6.3",
     "axios": "^0.18.0",
+    "final-form": "^4.16.1",
     "moment": "^2.22.2",
     "prop-types": "^15.6.2",
     "ramda": "^0.25.0",
     "react": "16.8.6",
+    "react-final-form": "^6.3.0",
     "react-jss": "^8.5.1",
     "react-router-dom": "4.3.1",
     "rxjs": "^6.2.1",
