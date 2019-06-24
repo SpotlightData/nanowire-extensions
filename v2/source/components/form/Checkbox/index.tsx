@@ -3,6 +3,7 @@ import * as React from 'react';
 import { FieldRenderProps } from 'react-final-form';
 import { Checkbox as CheckboxInput } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+import { FieldWrapper } from '../FieldWrapper';
 
 export interface CheckboxProps extends FieldRenderProps<boolean, HTMLInputElement> {
   defaultValue?: boolean;
@@ -24,9 +25,11 @@ export class Checkbox extends React.Component<CheckboxProps> {
   render() {
     const { onChange, ...rest } = this.props.input;
     return (
-      <CheckboxInput {...rest} onChange={this.onChange}>
-        {this.props.label}
-      </CheckboxInput>
+      <FieldWrapper>
+        <CheckboxInput {...rest} onChange={this.onChange}>
+          {this.props.label}
+        </CheckboxInput>
+      </FieldWrapper>
     );
   }
 }

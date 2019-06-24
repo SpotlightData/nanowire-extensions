@@ -6,7 +6,7 @@ export interface FieldErrorProps<T> {
 }
 
 export function FieldError<T>({ meta }: FieldErrorProps<T>): React.ReactElement {
-  const error = meta.error || meta.submitError;
+  const error = meta ? meta.error || meta.submitError : null;
   if (!error) {
     return null;
   }
