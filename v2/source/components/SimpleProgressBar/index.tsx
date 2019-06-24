@@ -1,5 +1,5 @@
 import * as React from 'react';
-import injectSheet, { DynamicCSSRule, CSSProperties } from 'react-jss';
+import injectSheet from 'react-jss';
 
 export interface SimpleProgressBarClasses {
   container: string;
