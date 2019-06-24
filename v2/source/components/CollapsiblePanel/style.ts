@@ -1,12 +1,14 @@
 import { CollapsiblePanelBareProps } from './interface';
 
-export const height = 46;
-
 export interface CollapsiblePanelClasses {
   root: string;
   header: string;
   arrow: string;
   content: string;
+}
+
+export function calcCollapsiblePanelMargin(height: number) {
+  return `calc((${height}px - 1em - ${height / 2}px) / 2)`;
 }
 
 export const collapsiblePanelStyle = {
@@ -17,26 +19,26 @@ export const collapsiblePanelStyle = {
       borderTop: 'none',
     },
     '&.collapsed': {
-      height,
+      height: (props: CollapsiblePanelBareProps) => props.height,
     },
   },
-  header: (props: CollapsiblePanelBareProps) => ({
+  header: {
     width: '100%',
     padding: '0.5em',
     fontSize: '15px',
-    height,
+    height: (props: CollapsiblePanelBareProps) => props.height,
     '& > div': {
       '&:first-child': {
         float: 'left',
         cursor: 'pointer',
         userSelect: 'none',
-        marginTop: `calc((${props.height}px - 1em - 22px) / 2)`,
+        marginTop: (props: CollapsiblePanelBareProps) => calcCollapsiblePanelMargin(props.height),
       },
       '&:last-child': {
         float: 'right',
       },
     },
-  }),
+  },
   arrow: {
     border: 'solid rgba(0,0,0,.85)',
     borderWidth: '0 1px 1px 0',
