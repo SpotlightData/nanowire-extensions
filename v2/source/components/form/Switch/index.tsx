@@ -14,7 +14,10 @@ export interface SwitchProps extends FieldRenderProps<string, HTMLInputElement> 
 export class Switch extends React.Component<SwitchProps> {
   componentWillMount() {
     const { input } = this.props;
-    input.onChange(String(input.value) === 'true');
+    // Need to delay, otherwise it doesn't get updated
+    setTimeout(() => {
+      input.onChange(String(input.value) === 'true');
+    }, 0);
   }
 
   render() {

@@ -12,15 +12,17 @@ export interface DropdownEntry {
   disabled?: boolean;
 }
 
-export interface DropdownProps extends FieldRenderProps<string, HTMLTextAreaElement> {
-  defaultOption?: string;
+export interface DropdownProps<T extends Dictionary<DropdownEntry>>
+  extends FieldRenderProps<string, HTMLTextAreaElement> {
+  defaultOption?: keyof T;
   maxWidth?: number;
-  options: Dictionary<DropdownEntry>;
-  accessor: string;
+  options: T;
   label: string;
 }
 
-export class Dropdown extends React.Component<DropdownProps> {
+export class Dropdown<T extends Dictionary<DropdownEntry>> extends React.Component<
+  DropdownProps<T>
+> {
   static defaultProps = {
     accessor: 'key',
     maxWidth: 100,
@@ -29,7 +31,10 @@ export class Dropdown extends React.Component<DropdownProps> {
   componentDidMount() {
     const { input, defaultOption, options } = this.props;
     if (defaultOption) {
-      input.onChange(options[defaultOption]);
+      // Need to delay, otherwise it doesn't get updated
+      setTimeout(() => {
+        input.onChange(defaultOption);
+      }, 0);
     }
   }
 

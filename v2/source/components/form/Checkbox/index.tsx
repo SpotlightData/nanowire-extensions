@@ -17,7 +17,10 @@ export class Checkbox extends React.Component<CheckboxProps> {
   componentWillMount() {
     const { defaultValue, input } = this.props;
     if (defaultValue) {
-      input.onChange(defaultValue);
+      // Need to delay, otherwise it doesn't get updated
+      setTimeout(() => {
+        input.onChange(defaultValue);
+      }, 0);
     }
   }
 

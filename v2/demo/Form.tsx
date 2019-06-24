@@ -20,9 +20,15 @@ export class FormDemo extends React.PureComponent {
               <Field name="checkbox" render={p => <Checkbox {...p} label="Toggle" />} />
               <Field name="text" render={p => <TextField {...p} />} />
               <Field name="switch" render={p => <Switch {...p} />} />
-              <Field
+              {/* <Field
                 name="switch"
                 render={p => <Dropdown {...p} options={options} label="Options" />}
+              /> */}
+              <Field
+                name="switch-def"
+                render={p => (
+                  <Dropdown {...p} options={options} label="Options" defaultOption="FILE" />
+                )}
               />
             </React.Fragment>
           );

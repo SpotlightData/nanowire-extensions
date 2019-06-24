@@ -19,7 +19,10 @@ export class TextField extends React.Component<TextFieldProps> {
   componentWillMount() {
     const { defaultValue, input } = this.props;
     if (defaultValue) {
-      input.onChange(defaultValue);
+      // Need to delay, otherwise it doesn't get updated
+      setTimeout(() => {
+        input.onChange(defaultValue);
+      }, 0);
     }
   }
   render() {
