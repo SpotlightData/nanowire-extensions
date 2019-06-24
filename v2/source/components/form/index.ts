@@ -3,3 +3,4 @@ export * from './FieldWrapper';
 export * from './Checkbox';
 export * from './TextArea';
 export * from './TextField';
+export * from './Switch';

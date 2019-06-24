@@ -11,6 +11,9 @@ export interface CheckboxProps extends FieldRenderProps<boolean, HTMLInputElemen
 }
 
 export class Checkbox extends React.Component<CheckboxProps> {
+  static defaultProps = {
+    defaultValue: false,
+  };
   componentWillMount() {
     const { defaultValue, input } = this.props;
     if (defaultValue) {
@@ -33,8 +36,3 @@ export class Checkbox extends React.Component<CheckboxProps> {
     );
   }
 }
-
-// @ts-ignore
-Checkbox.defaultProps = {
-  defaultValue: false,
-};
