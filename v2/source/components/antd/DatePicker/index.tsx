@@ -3,7 +3,7 @@ import * as React from 'react';
 import moment from 'moment';
 import { DatePicker as AntDatePicker } from 'antd';
 
-import { defaultFormat } from '../../helpers/time';
+import { defaultFormat } from '../../../helpers/time';
 import { RangePickerProps } from 'antd/lib/date-picker/interface';
 
 const { RangePicker } = AntDatePicker;
