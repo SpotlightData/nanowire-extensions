@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CollapsiblePanel, calcCollapsiblePanelMargin } from '../source';
+import { CollapsiblePanel } from '../source';
 import { Switch } from 'antd';
 
 interface CollapsibleProps {}
