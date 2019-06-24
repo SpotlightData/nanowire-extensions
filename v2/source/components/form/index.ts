@@ -4,3 +4,4 @@ export * from './Checkbox';
 export * from './TextArea';
 export * from './TextField';
 export * from './Switch';
+export * from './Dropdown';
