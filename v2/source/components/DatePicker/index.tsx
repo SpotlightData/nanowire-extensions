@@ -16,7 +16,7 @@ export interface DatePickerProps extends RangePickerProps {
 }
 
 export class DatePicker extends React.Component<DatePickerProps> {
-  handleChange = (value, _) => {
+  handleChange = (value, _): void => {
     this.props.onFinished({ min: value[0].valueOf(), max: value[1].valueOf() });
   };
 
