@@ -1,6 +1,6 @@
 {
   "name": "@spotlightdata/nanowire-extensions",
-  "version": "1.3.2",
+  "version": "2.0.0-alpha.1",
   "description": "utilities and components used in nanowire platform",
   "main": "dist/nanowire-extensions.cjs.js",
   "module": "dist/nanowire-extensions.esm.js",
