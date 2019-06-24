@@ -6,5 +6,6 @@ export * from './DatePicker';
 export * from './JobState';
 export * from './Popconfirm';
 export * from './Timeline';
+export * from './CollapsiblePanel';
 
 export * from './strictComponent';
