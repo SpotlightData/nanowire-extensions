@@ -24,6 +24,7 @@ const CollapsiblePanelBare: React.FC<CollapsiblePanelProps> = props => {
     duration,
     headerRender,
     renderWhenCollapsed,
+    height,
     ...rest
   } = props;
   const rootClass = cn({
@@ -72,3 +73,4 @@ CollapsiblePanelBare.displayName = 'CollapsiblePanelBare';
 
 // @ts-ignore Seems to be react-jss bug, which messes up types on classes that take component props
 export const CollapsiblePanel = injectSheets(collapsiblePanelStyle)(CollapsiblePanelBare);
+export { calcCollapsiblePanelMargin } from './style';
