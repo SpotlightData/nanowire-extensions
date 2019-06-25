@@ -13,7 +13,7 @@ export interface ScrollListFieldSingleProps<T>
   height: number;
 }
 
-export function ScrollListFieldSingle<T>(props: ScrollListFieldSingleProps<T>): React.ReactNode {
+export function ScrollListFieldSingle<T>(props: ScrollListFieldSingleProps<T>): React.ReactElement {
   const { input, meta, items, height, accessor } = props;
 
   const onClick = (id: string, _item: T) => input.onChange(id);
