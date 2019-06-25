@@ -19,6 +19,8 @@ script:
   - yarn packages
   - yarn test
   - yarn build
+  - yarn build:v2:lib
+  - yarn build:v2:bundle
 
 deploy:
   skip_cleanup: true
