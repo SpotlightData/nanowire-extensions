@@ -5,6 +5,7 @@ import { Collapsible } from './Collapsible';
 import { FormDemo } from './Form';
 
 import 'antd/dist/antd.css';
+import { Loading } from '../source';
 
 const MOUNT_NODE = document.getElementById('root');
 
@@ -17,6 +18,7 @@ render(
     {entry(<Progress />)}
     {entry(<Collapsible />)}
     {entry(<FormDemo />)}
+    {entry(<Loading />)}
   </React.Fragment>,
   MOUNT_NODE
 );
