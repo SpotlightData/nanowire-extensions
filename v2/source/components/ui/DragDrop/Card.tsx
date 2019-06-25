@@ -30,13 +30,17 @@ export interface CardBareClasses {
   icon: string;
 }
 
-export interface CardBareProps {
-  classes: CardBareClasses;
-  isDragging: boolean;
+export interface CardProps {
+  moveCard(dragIndex: number, hoverIndex: number): void;
   data: DragDropData;
   id: string;
   index: number;
   onRemove: (index: number) => void;
+}
+
+export interface CardBareProps extends CardProps {
+  classes: CardBareClasses;
+  isDragging: boolean;
   connectDropTarget: ConnectDropTarget;
   connectDragSource: ConnectDragSource;
 }
