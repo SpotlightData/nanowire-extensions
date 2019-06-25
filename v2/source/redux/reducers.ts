@@ -40,7 +40,7 @@ function createReducer<S, A extends AnyAction>(
   initialState: S
 ): Reducer<S, A> {
   return (state: S | undefined, action: A): S => {
-    let safeState = state || initialState;
+    let safeState = (state || initialState) as S;
     // Not falsy
     if (safeState) {
       // Do a shallow copy, so we can modify fields
