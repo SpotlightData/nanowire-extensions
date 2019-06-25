@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as R from 'ramda';
 import { Timeline as AntTimeline } from 'antd';
-import { Dictionary } from 'v2/source/interfaces';
+import { Dictionary } from '../../../interfaces';
 
 export interface TimelineProps<T> {
   accessor: string | ((item: T) => string);
