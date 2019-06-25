@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as R from 'ramda';
 
 import { DragDrop, DragDropData } from '../../ui/DragDrop';
 import { FieldRenderProps } from 'react-final-form';
@@ -14,8 +15,10 @@ export const DragDropField: React.FC<DragDropFieldProps> = props => {
   const store = typeof input.value === 'string' ? [] : input.value;
 
   const onRemove = (index: number) => {
-    store.splice(index, 1);
-    input.onChange(store);
+    R.pipe(
+      R.remove(index, 1),
+      input.onChange
+    )(store);
   };
 
   return (
