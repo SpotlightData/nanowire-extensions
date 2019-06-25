@@ -1,6 +1,6 @@
 import * as R from 'ramda';
 import { Dictionary } from '../interfaces';
-import { Reducer, Action, AnyAction, ReducersMapObject } from 'redux';
+import { Reducer, AnyAction, ReducersMapObject } from 'redux';
 
 export interface ReducerCases<S> extends Dictionary<Reducer<S, AnyAction>> {}
 
@@ -41,6 +41,12 @@ function createReducer<S, A extends AnyAction>(
 ): Reducer<S, A> {
   return (state: S | undefined, action: A): S => {
     let safeState = state || initialState;
+    // Not falsy
+    if (safeState) {
+      // Do a shallow copy, so we can modify fields
+      safeState = Object.assign({}, safeState);
+    }
+
     if (cases[action.type] === undefined) {
       return safeState;
     }
