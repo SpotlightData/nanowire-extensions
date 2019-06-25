@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "jsx": "react",
+    "target": "ES5",
+    "lib": ["es6", "dom", "es2017"],
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "outDir": "./v2/lib"
+  },
+  "include": ["v2/source"]
+}

@@ -3,4 +3,7 @@ node_modules/
 # Output
 dist
 lib
+.cache/
 
+# Logs
+yarn-error.log
