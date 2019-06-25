@@ -6,3 +6,4 @@ export * from './TextField';
 export * from './Switch';
 export * from './Dropdown';
 export * from './ScrollListField';
+export * from './DragDropField';
