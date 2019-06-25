@@ -5,16 +5,13 @@ import { FieldRenderProps } from 'react-final-form';
 import { FieldWrapper } from '../FieldWrapper';
 import { FieldError } from '../FieldError';
 
-export interface DragDropFieldProps extends FieldRenderProps<DragDropData[], null> {
-  options: DragDropData[];
-}
+export interface DragDropFieldProps extends FieldRenderProps<DragDropData[], null> {}
 
 export const DragDropField: React.FC<DragDropFieldProps> = props => {
-  const { input, meta, options } = props;
+  const { input, meta } = props;
 
   // By default react-final-form will suply empty string
-  const optionsSafe = Array.isArray(options) ? options : [];
-  const store = typeof input.value === 'string' ? optionsSafe : input.value;
+  const store = typeof input.value === 'string' ? [] : input.value;
 
   const onRemove = (index: number) => {
     store.splice(index, 1);
