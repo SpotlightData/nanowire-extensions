@@ -10,7 +10,10 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "baseUrl": ".",
-    "outDir": "./v2/lib"
+    "outDir": "./v2/lib",
+    "paths": {
+      "*": ["./node_modules/@types/*"]
+    }
   },
   "include": ["v2/source"]
 }
