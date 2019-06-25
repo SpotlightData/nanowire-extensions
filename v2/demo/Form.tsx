@@ -1,6 +1,13 @@
 import * as React from 'react';
 import { Form, Field } from 'react-final-form';
-import { Checkbox, TextField, Switch, Dropdown, ScrollListFieldSingle } from '../source';
+import {
+  Checkbox,
+  TextField,
+  Switch,
+  Dropdown,
+  ScrollListFieldSingle,
+  ScrollListFieldMulti,
+} from '../source';
 
 export const options = {
   FILE: { text: 'Local files' },
@@ -34,6 +41,18 @@ export class FormDemo extends React.PureComponent {
                 name="scroll-single"
                 render={p => (
                   <ScrollListFieldSingle
+                    {...p}
+                    items={options}
+                    accessor={a => a.text}
+                    height={100}
+                  />
+                )}
+              />
+              <div style={{ margin: '2em 0' }} />
+              <Field
+                name="scroll-multi"
+                render={p => (
+                  <ScrollListFieldMulti
                     {...p}
                     items={options}
                     accessor={a => a.text}
