@@ -20,7 +20,6 @@ export function ScrollListFieldSingle<T>(
 
   const onClick = (id: string, _item: T) => input.onChange(id);
   const isActive = (id: string) => id === input.value;
-
   return (
     <FieldWrapper>
       <ScrollList
