@@ -54,7 +54,6 @@ class CardBare extends React.PureComponent<CardBareProps> {
       id,
       classes,
     } = this.props;
-    console.log(this.props);
     const opacity = isDragging ? 0 : 1;
 
     return connectDragSource(
