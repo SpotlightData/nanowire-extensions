@@ -5,6 +5,7 @@
   "main": "dist/nanowire-extensions.cjs.js",
   "module": "dist/nanowire-extensions.esm.js",
   "browser": "dist/nanowire-extensions.umd.js",
+  "typings": "v2/lib/index.d.ts",
   "repository": "git@github.com:SpotlightData/nanowire-extensions.git",
   "author": "Augustinas <augustinas@spotlightdata.co.uk>",
   "license": "MIT",
