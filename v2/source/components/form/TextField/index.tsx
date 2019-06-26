@@ -5,9 +5,8 @@ import { FieldError } from '../FieldError';
 import { InputProps } from 'antd/lib/input';
 import { FieldWrapper } from '../FieldWrapper';
 
-export interface TextFieldProps extends FieldRenderProps<string, HTMLInputElement> {
+export interface TextFieldProps extends FieldRenderProps<string, HTMLInputElement>, InputProps {
   defaultValue?: string;
-  size: InputProps['size'];
 }
 
 export class TextField extends React.Component<TextFieldProps> {
