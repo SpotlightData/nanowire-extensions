@@ -1,8 +1,11 @@
 import * as R from 'ramda';
 import { Dictionary } from '../interfaces';
-import { Reducer, AnyAction, ReducersMapObject } from 'redux';
+import { AnyAction, ReducersMapObject, Action } from 'redux';
 
-export interface ReducerCases<S> extends Dictionary<Reducer<S, AnyAction>> {}
+// Usefull when we pass initial value
+export type SafeReducer<S = any, A extends Action = AnyAction> = (state: S, action: A) => S;
+// Should always pass initial state
+export interface ReducerCases<S> extends Dictionary<SafeReducer<S, AnyAction>> {}
 
 export interface ReducerSpec<S> {
   initialState?: S;
@@ -20,7 +23,7 @@ export function flattenReducers<S, A extends AnyAction>(
 ): ReducersMapObject<S, A> {
   return R.reduce(
     (dict, entry) => {
-      const [key, handler]: [string, Reducer] = entry;
+      const [key, handler]: [string, SafeReducer] = entry;
       // Normally we'd use Object.assign, but here we don't care about overrides
       dict[key] = handler;
       return dict;
@@ -38,7 +41,7 @@ export function flattenReducers<S, A extends AnyAction>(
 function createReducer<S, A extends AnyAction>(
   cases: ReducerCases<S>,
   initialState: S
-): Reducer<S, A> {
+): SafeReducer<S, A> {
   return (state: S | undefined, action: A): S | undefined => {
     let safeState = (state || initialState) as S;
     // Not falsy
@@ -61,6 +64,6 @@ function createReducer<S, A extends AnyAction>(
  */
 export function applyReducer<S, A extends AnyAction>(
   reducer: ReducerSpec<S>
-): [string, Reducer<S, A>] {
+): [string, SafeReducer<S, A>] {
   return [reducer.key, createReducer<S, A>(reducer.cases, reducer.initialState)];
 }
