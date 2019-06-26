@@ -20,7 +20,7 @@ export function flattenReducers<S, A extends AnyAction>(
 ): ReducersMapObject<S, A> {
   return R.reduce(
     (dict, entry) => {
-      const [key, handler] = entry;
+      const [key, handler]: [string, Reducer] = entry;
       // Normally we'd use Object.assign, but here we don't care about overrides
       dict[key] = handler;
       return dict;
@@ -39,7 +39,7 @@ function createReducer<S, A extends AnyAction>(
   cases: ReducerCases<S>,
   initialState: S
 ): Reducer<S, A> {
-  return (state: S | undefined, action: A): S => {
+  return (state: S | undefined, action: A): S | undefined => {
     let safeState = (state || initialState) as S;
     // Not falsy
     if (safeState) {
