@@ -10,6 +10,7 @@ import injectSheet from 'react-jss';
 
 import { sidebarStyle, SidebarClasses } from './style';
 import { ClickParam } from 'antd/lib/menu';
+import { SidebarMenu } from '../../interfaces';
 
 interface SideBareProps {
   isMobile: boolean;
@@ -17,7 +18,7 @@ interface SideBareProps {
   history: History;
   open: boolean;
   classes: SidebarClasses;
-  menu: Array<{ name: string; icon: string; link: string }>;
+  menu: SidebarMenu;
   logo: React.ReactNode;
   expandedWidth: number;
   collapsedWidth?: number;
