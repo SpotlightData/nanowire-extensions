@@ -5,7 +5,7 @@ import { render, fireEvent, prettyDOM } from 'react-testing-library';
 const getCalendarCell = (side, container) =>
   container.parentNode
     .getElementsByClassName(`ant-calendar-range-${side}`)[0]
-    .getElementsByClassName('ant-calendar-cell ant-calendar-in-range-cell')[0];
+    .getElementsByClassName('ant-calendar-cell')[0];
 
 describe('components/antd/DatePicker', () => {
   it('should render', () => {
@@ -31,8 +31,8 @@ describe('components/antd/DatePicker', () => {
     const left = getCalendarCell('left', container);
     const right = getCalendarCell('right', container);
     // Chooses the dates
-    fireEvent(left, new MouseEvent('click', { bubbles: true, cancelable: true }));
-    fireEvent(right, new MouseEvent('click', { bubbles: true, cancelable: true }));
+    fireEvent.click(left, { bubbles: true, cancelable: true });
+    fireEvent.click(right, { bubbles: true, cancelable: true });
     expect(onFinished).toHaveBeenCalled();
   });
 });
