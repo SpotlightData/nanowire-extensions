@@ -1,18 +1,18 @@
 import * as yup from 'yup';
 import { validateSchema } from './schema';
 
-type RouteSpec = {
+export interface RouteSpec {
   path: string;
   component: string;
   children: Array<RouteSpec>;
   isDefault: boolean;
-};
+}
 
-export type FlatRouteSpec = {
+export interface FlatRouteSpec {
   path: string | boolean;
   component: string;
   key: string;
-};
+}
 
 const routeScheme = yup
   .array()
