@@ -14,3 +14,4 @@ export * from './history';
 export * from './ajax';
 export * from './backend';
 export * from './css';
+export * from './routes';
