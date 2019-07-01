@@ -12,7 +12,7 @@ import { sidebarStyle, SidebarClasses } from './style';
 import { ClickParam } from 'antd/lib/menu';
 import { SidebarMenu } from '../../interfaces';
 
-interface SideBareProps {
+export interface SideBareProps {
   isMobile: boolean;
   toggle(state: boolean): void;
   history: History;
