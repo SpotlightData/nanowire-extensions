@@ -11,11 +11,11 @@ import injectSheet from 'react-jss';
 import { sidebarStyle, SidebarClasses } from './style';
 import { ClickParam } from 'antd/lib/menu';
 import { SidebarMenu } from '../../interfaces';
+import { RouteChildrenProps } from 'react-router';
 
-export interface SideBareProps {
+export interface SideBareProps extends RouteChildrenProps {
   isMobile: boolean;
   toggle(state: boolean): void;
-  history: History;
   open: boolean;
   classes: SidebarClasses;
   menu: SidebarMenu;
@@ -118,6 +118,7 @@ class SidebarBare extends React.Component<SideBareProps, any> {
     );
   }
 }
+
 export const Sidebar = R.pipe(
   injectSheet(sidebarStyle),
   withRouter
