@@ -25,6 +25,9 @@
     "watch:v2": "tsc -w",
     "demo:v2": "parcel ./v2/demo/index.html"
   },
+  "resolutions": {
+    "@types/react": "16.8.22"
+  },
   "devDependencies": {
     "@atecake/builder": "0.0.7",
     "@babel/cli": "^7.0.0-beta.54",
@@ -42,7 +45,6 @@
     "@types/classnames": "^2.2.8",
     "@types/history": "^4.7.2",
     "@types/ramda": "^0.26.9",
-    "@types/react": "16.8.22",
     "@types/react-jss": "^8.6.3",
     "@types/react-router-dom": "^4.3.4",
     "@types/yup": "^0.26.17",
@@ -86,6 +88,7 @@
     "uppy": "0.25.5"
   },
   "dependencies": {
+    "@types/react": "^16.8.22",
     "hoist-non-react-statics": "^2.5.5",
     "lodash.throttle": "^4.1.1",
     "preact": "^8.2.9",
