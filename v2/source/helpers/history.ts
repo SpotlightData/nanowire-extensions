@@ -17,7 +17,7 @@ export function getQuery(context: RouterContext) {
   )(context);
 }
 
-function updateQuery(context: RouterContext, updates: SPairs, removes: string[]) {
+function updateQuery(context: RouterContext, updates: SPairs, removes: string[]): RouterContext {
   const updated = R.reduce(
     (acc, entry) => {
       acc[entry[0]] = entry[1];
@@ -28,6 +28,7 @@ function updateQuery(context: RouterContext, updates: SPairs, removes: string[])
   );
   const filtered = filterObject(updated, (key, _value) => !removes.includes(key));
   context.location.search = queryObjectToString(filtered);
+  return context;
 }
 
 /**
@@ -41,10 +42,10 @@ export function updatedQuery(
   name: string | SPairs,
   value: string | string[],
   remove?: string[]
-) {
+): RouterContext {
   if (Array.isArray(name)) {
-    updateQuery(context, name, (value as string[]) || []);
+    return updateQuery(context, name, (value as string[]) || []);
   } else {
-    updateQuery(context, [[name, value as string]], remove || []);
+    return updateQuery(context, [[name, value as string]], remove || []);
   }
 }
