@@ -14,18 +14,20 @@ import { SidebarMenu } from '../../interfaces';
 import { apply } from '../../helpers';
 import { RouteChildrenProps } from 'react-router';
 
-export interface SideBareProps extends RouteChildrenProps<{}> {
+export interface SidebarProps {
   isMobile: boolean;
   toggle(state: boolean): void;
   open: boolean;
-  classes: SidebarClasses;
   menu: SidebarMenu;
   logo: React.ReactNode;
   expandedWidth: number;
   collapsedWidth?: number;
 }
+export interface SidebarBareProps extends RouteChildrenProps<{}>, SidebarProps {
+  classes: SidebarClasses;
+}
 
-class SidebarBare extends React.Component<SideBareProps, any> {
+class SidebarBare extends React.Component<SidebarBareProps, any> {
   static defaultProps = {
     collapsedWidth: 64,
   };
@@ -41,7 +43,7 @@ class SidebarBare extends React.Component<SideBareProps, any> {
     isMobile: boolean,
     isOpen: boolean,
     className: string,
-    toggle: SideBareProps['toggle']
+    toggle: SidebarBareProps['toggle']
   ) {
     if (isMobile && isOpen) {
       return (
@@ -119,5 +121,7 @@ class SidebarBare extends React.Component<SideBareProps, any> {
     );
   }
 }
-
-export const Sidebar = apply(injectSheet(sidebarStyle), withRouter)(SidebarBare);
+// @ts-ignore
+export const Sidebar: React.FC<SidebarProps> = apply(injectSheet(sidebarStyle), withRouter)(
+  SidebarBare
+);
