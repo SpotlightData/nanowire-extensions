@@ -29,10 +29,10 @@ export class Checkbox extends React.Component<CheckboxProps> {
   };
 
   render() {
-    const { onChange, ...rest } = this.props.input;
+    const { onChange, value, ...rest } = this.props.input;
     return (
       <FieldWrapper>
-        <CheckboxInput {...rest} onChange={this.onChange}>
+        <CheckboxInput {...rest} checked={value} onChange={this.onChange}>
           {this.props.label}
         </CheckboxInput>
       </FieldWrapper>
