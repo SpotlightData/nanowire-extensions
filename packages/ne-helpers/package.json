@@ -1,0 +1,11 @@
+{
+  "name": "@spotlightdata/ne-helpers",
+  "description": "Helper functions for nanowire extensions",
+  "license": "MIT",
+  "dependencies": {
+    "ramda": "0.26.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.6.3"
+  }
+}

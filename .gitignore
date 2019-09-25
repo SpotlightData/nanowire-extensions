@@ -4,7 +4,8 @@ node_modules/
 dist
 lib
 .cache/
+old/
 
 # Logs
 yarn-error.log
-old/
+lerna-debug.log
