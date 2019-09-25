@@ -3,12 +3,6 @@
   "private": true,
   "devDependencies": {
     "lerna": "^3.16.4",
-    "rollup": "^1.15.6",
-    "rollup-plugin-auto-external": "^2.0.0",
-    "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^5.0.3",
-    "rollup-plugin-typescript": "^1.0.1",
     "typescript": "^3.6.3"
   },
   "workspaces": [

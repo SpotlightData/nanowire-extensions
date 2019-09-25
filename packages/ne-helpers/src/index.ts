@@ -5,3 +5,4 @@ export * from './schema';
 export * from './object';
 export * from './string';
 export * from './request';
+export * from './history';

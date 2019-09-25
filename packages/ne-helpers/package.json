@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "Helper functions for nanowire extensions",
   "license": "MIT",
   "main": "dist/index.js",
@@ -15,12 +15,16 @@
     "ramda": "0.26.0"
   },
   "devDependencies": {
+    "@types/history": "^4.7.3",
+    "@types/ramda": "^0.26.22",
     "@types/yup": "^0.26.24",
+    "history": "^4.10.1",
     "moment": "^2.24.0",
     "ts-essentials": "^3.0.2",
     "yup": "^0.27.0"
   },
   "peerDependencies": {
+    "history": "^4.10.1",
     "moment": "^2.24.0",
     "yup": "^0.27.0"
   }
