@@ -45,3 +45,11 @@ export const takeChunckOf = (
   const third = string.slice(end, string.length);
   return [first, second, third];
 };
+
+export function safeStringEncode(str: string): string {
+  return encodeURI(str).replace(/\&/g, ';;;');
+}
+
+export function safeStringDecode(str: string): string {
+  return decodeURI(str).replace(/\;;;/g, '&');
+}
