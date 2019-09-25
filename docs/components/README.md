@@ -1,3 +1,0 @@
-# Components
-
-All `react` components
