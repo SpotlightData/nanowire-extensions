@@ -15,10 +15,11 @@
     "build": "tsc"
   },
   "dependencies": {
+    "@spotlightdata/ne-helpers": "1.0.0-alpha.1",
     "classnames": "^2.2.6",
     "ramda": "0.26.0",
     "react-animate-height": "^2.0.15",
-    "@spotlightdata/ne-helpers": "1.0.0-alpha.1"
+    "react-dnd": "^9.4.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.9",
