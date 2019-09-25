@@ -9,3 +9,4 @@ export * from './history';
 export * from './table';
 export * from './routes';
 export * from './text-search';
+export * from './color';
