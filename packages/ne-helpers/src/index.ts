@@ -6,3 +6,4 @@ export * from './object';
 export * from './string';
 export * from './request';
 export * from './history';
+export * from './table';
