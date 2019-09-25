@@ -1,5 +1,8 @@
 {
   "name": "@spotlightdata/ne-helpers",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "1.0.0",
   "description": "Helper functions for nanowire extensions",
   "license": "MIT",
@@ -12,6 +15,13 @@
     "ramda": "0.26.0"
   },
   "devDependencies": {
-    "ts-essentials": "^3.0.2"
+    "@types/yup": "^0.26.24",
+    "moment": "^2.24.0",
+    "ts-essentials": "^3.0.2",
+    "yup": "^0.27.0"
+  },
+  "peerDependencies": {
+    "moment": "^2.24.0",
+    "yup": "^0.27.0"
   }
 }
