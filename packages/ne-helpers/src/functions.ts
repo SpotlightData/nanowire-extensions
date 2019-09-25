@@ -11,6 +11,15 @@ export function keyToAccessor<E, R>(key: AccessorKey): (entry: E) => R {
   return key;
 }
 
+export function withSignal<T>(handler: (signal: string, node: T) => void) {
+  return (signal: string, node: T | null): void => {
+    if (node === null) {
+      return;
+    }
+    handler(signal, node);
+  };
+}
+
 export function throttle<T extends (...args: any[]) => any>(
   func: T,
   wait: number,
