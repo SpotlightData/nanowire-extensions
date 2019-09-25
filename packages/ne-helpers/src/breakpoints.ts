@@ -35,3 +35,12 @@ export function siblingBreakpoints(breakpoints: BreakpointMap): [BreakpointMap, 
   )({});
   return [breakpoints, sibling];
 }
+
+export const breakpoints: BreakpointMap = {
+  xs: 478,
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+  xxl: 1600,
+};
