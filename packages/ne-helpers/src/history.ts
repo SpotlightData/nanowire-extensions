@@ -11,7 +11,7 @@ export function getQuery(context: History): Dictionary<string> {
 }
 
 // Allows to create new location to be pushed using history.push
-function updateQuery(context: History, updates: Pair[], removes: string[]): History {
+export function updateQuery(context: History, updates: Pair[], removes: string[]): History {
   const search = R.pipe(
     getQuery,
     R.toPairs,
