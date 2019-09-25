@@ -1,5 +1,6 @@
 {
   "name": "@spotlightdata/ne-helpers",
+  "version": "1.0.0",
   "description": "Helper functions for nanowire extensions",
   "license": "MIT",
   "dependencies": {
