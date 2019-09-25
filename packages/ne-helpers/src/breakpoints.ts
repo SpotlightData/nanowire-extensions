@@ -23,9 +23,9 @@ const setBpIfExists = (bpts: BreakpointMap) => (name: Breakpoint) => (
  * Assumes that sibling should help fill in the rest of the row
  * @param breakpoints Antd breakpoint map
  */
-export function siblingBreakpoints(breakpoints: BreakpointMap): BreakpointMap {
+export function siblingBreakpoints(breakpoints: BreakpointMap): [BreakpointMap, BreakpointMap] {
   const set = setBpIfExists(breakpoints);
-  return R.pipe(
+  const sibling = R.pipe(
     set('xs'),
     set('sm'),
     set('md'),
@@ -33,4 +33,5 @@ export function siblingBreakpoints(breakpoints: BreakpointMap): BreakpointMap {
     set('xl'),
     set('xxl')
   )({});
+  return [breakpoints, sibling];
 }
