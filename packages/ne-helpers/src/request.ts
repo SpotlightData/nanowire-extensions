@@ -1,4 +1,5 @@
 import * as R from 'ramda';
+import { Dictionary } from 'ts-essentials';
 
 export function queryObjectToString(query: Dictionary<string>) {
   return Object.keys(query)
