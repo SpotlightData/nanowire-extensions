@@ -15,21 +15,23 @@ const gqlFetch = (uri: RequestInfo, options?: RequestInit) => {
   return fetch(uri, options);
 };
 
-export const apolloClient = new ApolloClient({
-  link: new HttpLink({
-    fetch: gqlFetch,
-    uri: '/graphql',
-  }),
-  // This is what enables cancelation
-  queryDeduplication: false,
-  cache: new InMemoryCache(),
-  defaultOptions: {
-    query: {
-      errorPolicy: 'all',
-      fetchPolicy: 'no-cache',
+export function createApolloClient() {
+  return new ApolloClient({
+    link: new HttpLink({
+      fetch: gqlFetch,
+      uri: '/graphql',
+    }),
+    // This is what enables cancelation
+    queryDeduplication: false,
+    cache: new InMemoryCache(),
+    defaultOptions: {
+      query: {
+        errorPolicy: 'all',
+        fetchPolicy: 'no-cache',
+      },
+      watchQuery: {
+        notifyOnNetworkStatusChange: true,
+      },
     },
-    watchQuery: {
-      notifyOnNetworkStatusChange: true,
-    },
-  },
-});
+  });
+}
