@@ -30,3 +30,4 @@ export * from './Sidebar';
 export * from './LoadingBox';
 export * from './NotFound';
 export * from './Popover';
+export * from './TagAutocomplete';
