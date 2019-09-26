@@ -28,3 +28,4 @@ export * from './DatePickerField';
 export * from './Footer';
 export * from './Sidebar';
 export * from './LoadingBox';
+export * from './NotFound';
