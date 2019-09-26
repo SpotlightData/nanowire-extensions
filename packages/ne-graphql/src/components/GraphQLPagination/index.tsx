@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Pagination } from 'antd';
 
-interface GraphPaginationProps {
+interface GraphQLPaginationProps {
   totalCount: number;
   offset: number;
   first: number;
   onChange(offset: number): void;
 }
 
-export const GraphPagination: React.FC<GraphPaginationProps> = ({
+export const GraphQLPagination: React.FC<GraphQLPaginationProps> = ({
   totalCount,
   offset,
   first,

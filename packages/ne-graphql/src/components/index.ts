@@ -1,1 +1,2 @@
-export * from './GraphPagination';
+export * from './GraphQLPagination';
+export * from './GraphQLErrorDisplay';
