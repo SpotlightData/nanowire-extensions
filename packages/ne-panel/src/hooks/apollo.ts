@@ -2,11 +2,11 @@ import { useApolloClient } from 'react-apollo';
 import { useAbortRegister, useCancelRegister } from '@spotlightdata/ne-components';
 import { GraphQLLoadErrors } from '@spotlightdata/ne-graphql';
 import { DocumentNode } from 'graphql';
-import { QueryBaseOptions } from 'apollo-client';
+import { QueryBaseOptions, OperationVariables } from 'apollo-client';
+import { MutationBaseOptions, MutationOptions } from 'apollo-client/core/watchQueryOptions';
 
 export interface CancelableClientInput<D, V> {
   variables: V;
-  overrides?: QueryBaseOptions<V>;
   cancelId?: string;
   onData(data: D): void;
   onFail(errors: GraphQLLoadErrors): void;
@@ -25,7 +25,10 @@ export function useCancelableApolloClient() {
     onData,
     onFail,
     mutation,
-  }: CancelableClientInput<D, V> & { mutation: DocumentNode }): Unsubscribe {
+  }: CancelableClientInput<D, V> & {
+    mutation: DocumentNode;
+    overrides?: Omit<MutationOptions<any, V>, 'mutation'>;
+  }): Unsubscribe {
     const controller = new AbortController();
     const cancel = () => controller.abort();
 
@@ -56,12 +59,15 @@ export function useCancelableApolloClient() {
     cancelId,
     onData,
     onFail,
-  }: CancelableClientInput<D, V> & { query: DocumentNode }): Unsubscribe {
+  }: CancelableClientInput<D, V> & {
+    query: DocumentNode;
+    overrides?: Omit<QueryBaseOptions<V>, 'query'>;
+  }): Unsubscribe {
     const $query = client
       .watchQuery<D, V>({
         query,
         variables,
-        ...overrides,
+        ...(overrides || {}),
       })
       .subscribe(({ data }) => onData(data), e => onFail([e]));
     const cancel = () => $query.unsubscribe();
