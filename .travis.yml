@@ -10,6 +10,11 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$PATH"
 before_script:
   - yarn run lerna run prepublish
+
+install:
+  - yarn install
+  - yarn bootstrap
+
 script:
   - yarn test
   - yarn build
