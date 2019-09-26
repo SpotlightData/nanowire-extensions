@@ -6,7 +6,7 @@ import { QueryBaseOptions } from 'apollo-client';
 
 export interface CancelableClientInput<D, V> {
   variables: V;
-  overrides: QueryBaseOptions<V>;
+  overrides?: QueryBaseOptions<V>;
   cancelId?: string;
   onData(data: D): void;
   onFail(errors: GraphQLLoadErrors): void;
@@ -42,7 +42,7 @@ export function useCancelableApolloClient() {
             signal: controller.signal,
           },
         },
-        ...overrides,
+        ...(overrides || {}),
       })
       .then(({ data }) => onData(data))
       .catch(e => onFail([e]));
