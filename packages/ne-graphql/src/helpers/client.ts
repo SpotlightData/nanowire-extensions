@@ -11,7 +11,7 @@ const gqlFetch = (uri: RequestInfo, options?: RequestInit) => {
     Pragma: 'no-cache',
     Expires: 'Sat, 01 Jan 2000 00:00:00 GMT',
     'If-Modified-Since': '0',
-  });
+  }) as HeadersInit;
   return fetch(uri, options);
 };
 
