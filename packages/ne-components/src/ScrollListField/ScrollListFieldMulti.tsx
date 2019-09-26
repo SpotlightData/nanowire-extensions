@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as R from 'ramda';
-import { ScrollList } from '../../ui';
 
+import { Dictionary } from 'ts-essentials';
 import { FieldRenderProps } from 'react-final-form';
 import { FieldError } from '../FieldError';
 import { FieldWrapper } from '../FieldWrapper';
-import { Dictionary } from '../../../interfaces';
+import { ScrollList } from '../ScrollList';
 
 export interface ScrollListFieldMultiProps<T>
   extends FieldRenderProps<string[], HTMLTextAreaElement> {

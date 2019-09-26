@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { ScrollList } from '../../ui';
 
+import { Dictionary } from 'ts-essentials';
 import { FieldRenderProps } from 'react-final-form';
 import { FieldError } from '../FieldError';
 import { FieldWrapper } from '../FieldWrapper';
-import { Dictionary } from '../../../interfaces';
+import { ScrollList } from '../ScrollList';
 
 export interface ScrollListFieldSingleProps<T>
   extends FieldRenderProps<string, HTMLTextAreaElement> {
