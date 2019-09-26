@@ -122,7 +122,7 @@ class SidebarBare extends React.Component<SidebarBareProps, any> {
   }
 }
 
-export const Sidebar: React.FC<SidebarProps> = R.pipe(
+export const Sidebar: React.ComponentType<SidebarProps> = R.pipe(
   injectSheet(sidebarStyle),
   // @ts-ignore
   withRouter
