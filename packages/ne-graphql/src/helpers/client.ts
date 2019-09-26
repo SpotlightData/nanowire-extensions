@@ -2,7 +2,7 @@ import fetch from 'isomorphic-unfetch';
 import * as R from 'ramda';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { InMemoryCache NormalizedCacheObject } from 'apollo-cache-inmemory';
 
 const gqlFetch = (uri: RequestInfo, options?: RequestInit) => {
   options.headers = R.mergeRight(options.headers, {
@@ -15,7 +15,7 @@ const gqlFetch = (uri: RequestInfo, options?: RequestInit) => {
   return fetch(uri, options);
 };
 
-export function createApolloClient() {
+export function createApolloClient(): ApolloClient<NormalizedCacheObject> {
   return new ApolloClient({
     link: new HttpLink({
       fetch: gqlFetch,
