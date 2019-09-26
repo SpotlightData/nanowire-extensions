@@ -12,8 +12,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "tsc",
-    "prepublish": "yarn build"
+    "build": "tsc"
   },
   "dependencies": {
     "@spotlightdata/ne-helpers": "^3.0.0-alpha.6",
