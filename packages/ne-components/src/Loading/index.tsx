@@ -26,5 +26,4 @@ export const LoadingBare: React.FC<LoadingBareProps> = ({ className, classes }) 
 };
 
 LoadingBare.displayName = 'Loading';
-// @ts-ignore
-export const Loading = injectSheet(style)(LoadingBare);
+export const Loading = React.memo(injectSheet(style)(LoadingBare));
