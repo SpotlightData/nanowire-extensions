@@ -12,8 +12,7 @@
     "dist/"
   ],
   "scripts": {
-    "build": "tsc",
-    "prepublish": "yarn build"
+    "build": "tsc"
   },
   "dependencies": {
     "ramda": "0.26.0"
