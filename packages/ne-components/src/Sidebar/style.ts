@@ -1,10 +1,12 @@
-import { transition } from '../../helpers';
-
-export type SidebarClasses = {
+export interface SidebarClasses extends Record<string, string> {
   root: string;
   collapsed: string;
   fixed: string;
   closeButton: string;
+}
+
+const transition = {
+  css: `all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1)`,
 };
 
 export const sidebarStyle = {
@@ -16,14 +18,14 @@ export const sidebarStyle = {
           fontSize: '18px',
           marginRight: '30px',
           color: 'inherit',
-          ...transition(),
+          ...transition,
         },
         '& > a': {
           fontWeight: '300',
           display: 'block',
           textDecoration: 'none',
           color: 'inherit',
-          ...transition(),
+          ...transition,
         },
       },
     },
