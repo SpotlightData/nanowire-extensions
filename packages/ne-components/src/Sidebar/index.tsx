@@ -10,15 +10,15 @@ import injectSheet from 'react-jss';
 
 import { sidebarStyle, SidebarClasses } from './style';
 import { ClickParam } from 'antd/lib/menu';
-import { SidebarMenu } from '../../interfaces';
-import { apply } from '../../helpers';
 import { RouteChildrenProps } from 'react-router';
+
+export type SidebarMenuItem = { name: string; icon: string; link: string };
 
 export interface SidebarProps {
   isMobile: boolean;
   toggle(state: boolean): void;
   open: boolean;
-  menu: SidebarMenu;
+  menu: SidebarMenuItem[];
   logo: React.ReactNode;
   expandedWidth: number;
   collapsedWidth?: number;
@@ -121,7 +121,9 @@ class SidebarBare extends React.Component<SidebarBareProps, any> {
     );
   }
 }
-// @ts-ignore
-export const Sidebar: React.FC<SidebarProps> = apply(injectSheet(sidebarStyle), withRouter)(
-  SidebarBare
-);
+
+export const Sidebar: React.FC<SidebarProps> = R.pipe(
+  injectSheet(sidebarStyle),
+  // @ts-ignore
+  withRouter
+)(SidebarBare);
