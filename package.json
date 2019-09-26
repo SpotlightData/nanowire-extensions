@@ -4,6 +4,7 @@
   "scripts": {
     "test": "exit 0",
     "lerna": "lerna",
+    "build": "lerna run build",
     "bootstrap": "lerna bootstrap",
     "dev": "lerna run build --stream --parallel",
     "prepublish": "lerna run prepublish",
