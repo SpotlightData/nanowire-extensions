@@ -1,5 +1,5 @@
 {
-  "name": "@spotlightdata/ne-helpers",
+  "name": "@spotlightdata/ne-graphql",
   "publishConfig": {
     "access": "public"
   },
@@ -15,20 +15,20 @@
     "build": "tsc"
   },
   "dependencies": {
-    "ramda": "0.26.0"
+    "apollo-cache-inmemory": "^1.6.3",
+    "apollo-client": "^2.6.4",
+    "apollo-link-http": "^1.5.16",
+    "graphql": "^14.5.8",
+    "isomorphic-unfetch": "^3.0.0"
   },
   "devDependencies": {
-    "@types/history": "^4.7.3",
-    "@types/ramda": "^0.26.22",
-    "@types/yup": "^0.26.24",
-    "history": "^4.10.1",
-    "moment": "^2.24.0",
-    "ts-essentials": "^3.0.2",
-    "yup": "^0.27.0"
+    "ramda": "^0.26.1",
+    "react": "^16.9.0",
+    "react-jss": "^10.0.0"
   },
   "peerDependencies": {
-    "history": "^4.10.1",
-    "moment": "^2.24.0",
-    "yup": "^0.27.0"
+    "ramda": "^0.26.1",
+    "react": "^16.9.0",
+    "react-jss": "^10.0.0"
   }
 }
