@@ -1,5 +1,10 @@
 import { Style } from 'jss';
 
+export interface NotFoundClasses extends Record<string, string> {
+  root: string;
+  body: string;
+}
+
 export const notFoundStyle: Style = {
   root: {
     height: 'calc(100% - 56px)',
