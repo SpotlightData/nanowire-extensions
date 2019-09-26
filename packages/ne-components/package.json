@@ -25,12 +25,16 @@
     "@types/classnames": "^2.2.9",
     "@types/history": "^4.7.3",
     "@types/ramda": "^0.26.22",
+    "@types/react-router": "^5.1.0",
+    "@types/react-router-dom": "^5.1.0",
     "@types/yup": "^0.26.24",
     "antd": "^3.23.4",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-final-form": "^6.3.0",
     "react-jss": "^10.0.0",
+    "react-router": "^5.1.0",
+    "react-router-dom": "^5.1.0",
     "ts-essentials": "^3.0.2",
     "yup": "^0.27.0"
   },
@@ -41,6 +45,8 @@
     "react-dom": "^16.9.0",
     "react-final-form": "^6.3.0",
     "react-jss": "^10.0.0",
+    "react-router": "^5.1.0",
+    "react-router-dom": "^5.1.0",
     "yup": "^0.27.0"
   }
 }
