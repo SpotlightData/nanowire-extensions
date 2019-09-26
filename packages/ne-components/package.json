@@ -15,7 +15,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@spotlightdata/ne-helpers": "1.0.0-alpha.1",
+    "@spotlightdata/ne-helpers": "^1.0.0-alpha.1",
     "@use-it/event-listener": "^0.1.3",
     "classnames": "^2.2.6",
     "ramda": "0.26.0",
