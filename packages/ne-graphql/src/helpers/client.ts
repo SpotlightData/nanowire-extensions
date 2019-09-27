@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-unfetch';
+import 'isomorphic-unfetch';
 import * as R from 'ramda';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
