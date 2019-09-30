@@ -22,6 +22,7 @@
     "classnames": "^2.2.6",
     "ramda": "^0.26.1",
     "shortid": "^2.2.15",
+    "use-deep-compare-effect": "^1.2.0",
     "vega": "^5.7.0",
     "vega-typings": "^0.10.0"
   },
@@ -32,8 +33,8 @@
     "@types/react-router": "^5.1.0",
     "@types/react-router-dom": "^5.1.0",
     "@types/yup": "^0.26.24",
-    "antd": "^3.23.4",
-    "react": "^16.9.0",
+    "antd": "^3.23.5",
+    "react": "^16.10.1",
     "react-apollo": "^3.1.1",
     "react-dom": "^16.9.0",
     "react-final-form": "^6.3.0",
@@ -45,9 +46,9 @@
     "yup": "^0.27.0"
   },
   "peerDependencies": {
-    "antd": "^3.23.4",
+    "antd": "^3.23.5",
     "moment": "^2.24.0",
-    "react": "^16.9.0",
+    "react": "^16.10.1",
     "react-apollo": "^3.1.1",
     "react-dom": "^16.9.0",
     "react-final-form": "^6.3.0",
