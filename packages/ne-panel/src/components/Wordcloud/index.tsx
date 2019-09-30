@@ -65,7 +65,7 @@ function useController<D, V>({
   return { words: mode };
 }
 
-export function WordcloudBare<D, V>(props: WordcloudProps<D, V>): React.ReactElement {
+export function Wordcloud<D, V>(props: WordcloudProps<D, V>): React.ReactElement {
   const { onSelect } = props;
   const { words } = useController(props);
 
