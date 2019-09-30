@@ -26,3 +26,10 @@ export function timeSort<T>(key: AccessorKey) {
     return timeA > timeB ? 1 : -1;
   };
 }
+
+export function nYearsAgoFrom(date: Date, years: number): Date {
+  return new Date(new Date().setFullYear(date.getFullYear() - years));
+}
+export function yearAgo(): Date {
+  return nYearsAgoFrom(new Date(), 1);
+}

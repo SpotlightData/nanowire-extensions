@@ -22,6 +22,7 @@ export * from './TextArea';
 export * from './TextField';
 export * from './Switch';
 export * from './Dropdown';
+export * from './DropdownField';
 export * from './ScrollListField';
 export * from './DragDropField';
 export * from './DatePickerField';
