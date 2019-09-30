@@ -11,7 +11,7 @@ import ContainerDimensions from 'react-container-dimensions';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import { createWordCloundSchema } from '../../charts';
 import { DocumentNode } from 'graphql';
-import { useCancelableApolloClient } from '@spotlightdata/ne-panel';
+import { useCancelableApolloClient } from '../../hooks';
 
 interface WordCloudValue {
   count: number;
