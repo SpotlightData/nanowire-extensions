@@ -42,7 +42,9 @@
     "react-jss": "^10.0.0",
     "react-router": "^5.1.0",
     "react-router-dom": "^5.1.0",
+    "react-vega": "^7.0.1",
     "ts-essentials": "^3.0.2",
+    "vega": "^5.7.0",
     "yup": "^0.27.0"
   },
   "peerDependencies": {
@@ -55,6 +57,8 @@
     "react-jss": "^10.0.0",
     "react-router": "^5.1.0",
     "react-router-dom": "^5.1.0",
+    "react-vega": "^7.0.1",
+    "vega": "^5.7.0",
     "yup": "^0.27.0"
   }
 }
