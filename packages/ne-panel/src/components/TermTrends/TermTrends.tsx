@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { GraphQLLoadUpdateMode, GraphQLErrorDisplay } from '@spotlightdata/ne-graphql';
 import { useCancelableApolloClient } from '../../hooks';
-import { DatePicker, Loading, LoadingBox } from '@spotlightdata/ne-components';
+import { DatePicker, Loading, LoadingBox, Dropdown } from '@spotlightdata/ne-components';
 import { DocumentNode } from 'graphql';
 import { LineChartValue } from '../../charts';
 import { TermTrendsFilters, TermResult } from './interface';
 import { fillKeywordGaps } from './utils';
-import { Row, Menu, Dropdown, Button, Icon } from 'antd';
+import { Row, Menu, Button, Icon } from 'antd';
 // @ts-ignore
 import useDeepCompareEffect from 'use-deep-compare-effect';
 
@@ -139,21 +139,13 @@ export function TermTrends<D>(props: TermTrendsProps<D>): React.ReactElement {
   let spacingPicker: React.ReactNode = null;
   const withSpacing = props.withSpacing !== undefined ? props.withDate : true;
   if (withSpacing) {
-    // @ts-ignore
-    const options = spacingOptions;
-    const menu = (
-      <Menu onClick={({ key }) => setSpacing(key as Spacing)}>
-        {Object.keys(options).map(key => (
-          <Menu.Item key={key}>{options[key as Spacing].text}</Menu.Item>
-        ))}
-      </Menu>
-    );
     spacingPicker = (
-      <Dropdown trigger={['click']} overlay={menu}>
-        <Button className="ant-dropdown-link">
-          {options[spacing].text} <Icon type="down" />
-        </Button>
-      </Dropdown>
+      <Dropdown
+        options={spacingOptions}
+        value={spacing}
+        onChange={key => setSpacing(key as Spacing)}
+        label="Choose Spacing"
+      />
     );
   }
 
