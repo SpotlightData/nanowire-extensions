@@ -24,6 +24,7 @@ interface WordcloudProps<D, V> {
   query: DocumentNode;
   transform: (data: D) => WordCloudValue[];
   onSelect(term: string | undefined): void;
+  render(values: WordCloudValue[], width: number, height: number): React.ReactNode;
 }
 
 type WordcloudLoadMode =
@@ -88,26 +89,7 @@ export function Wordcloud<D, V>(props: WordcloudProps<D, V>): React.ReactElement
       {words.state === 'updating' && <Loading />}
       <ContainerDimensions>
         {({ width }) => {
-          return (
-            <Vega
-              onNewView={() => {
-                // @ts-ignore
-                vega.setRandom(vega.randomLCG(0));
-              }}
-              onBeforeParse={spec => {
-                // @ts-ignore
-                vega.setRandom(vega.randomLCG(0));
-                return spec;
-              }}
-              spec={createWordCloundSchema({
-                width,
-                height: 300,
-                values: words.data,
-              })}
-              data={{ table: words.data }}
-              signalListeners={{ select: handleSelect }}
-            />
-          );
+          return props.render(words.data, width, 300);
         }}
       </ContainerDimensions>
     </div>
