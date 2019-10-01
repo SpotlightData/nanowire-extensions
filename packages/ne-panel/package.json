@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "3.0.0-alpha.20",
+  "version": "3.0.0-alpha.21",
   "description": "Components and helpers shared between panels",
   "license": "MIT",
   "main": "dist/index.js",
@@ -15,9 +15,9 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@spotlightdata/ne-components": "^3.0.0-alpha.20",
-    "@spotlightdata/ne-graphql": "^3.0.0-alpha.20",
-    "@spotlightdata/ne-helpers": "^3.0.0-alpha.20",
+    "@spotlightdata/ne-components": "^3.0.0-alpha.21",
+    "@spotlightdata/ne-graphql": "^3.0.0-alpha.21",
+    "@spotlightdata/ne-helpers": "^3.0.0-alpha.21",
     "@use-it/event-listener": "^0.1.3",
     "classnames": "^2.2.6",
     "ramda": "^0.26.1",
