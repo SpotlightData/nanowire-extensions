@@ -130,6 +130,14 @@ const MarkedTextRender: React.FC<{ data: MarkedRow }> = ({ data }) => {
 export function SearchMarkerDisplay<D, V>(props: SearchMarkerDisplayProps<D, V>) {
   const { makePath } = props;
   const { markers, position, changePosition } = useController(props);
+  const containerRef = React.useRef<HTMLDivElement>();
+
+  React.useEffect(() => {
+    if (!containerRef.current) {
+      return;
+    }
+    containerRef.current.scrollTop = 0;
+  }, [position.offset]);
 
   if (!(markers.state === 'loaded' || markers.state === 'updating')) {
     return <LoadingBox />;
@@ -139,7 +147,7 @@ export function SearchMarkerDisplay<D, V>(props: SearchMarkerDisplayProps<D, V>)
   return (
     <div style={{ padding: '1em' }}>
       {markers.state === 'updating' && <Loading />}
-      <div style={{ overflowY: 'scroll', height: 300 }}>
+      <div style={{ overflowY: 'scroll', height: 300 }} ref={containerRef}>
         {Object.entries(data.rows).map(([key, value]) => {
           return (
             <div key={key}>
