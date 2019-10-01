@@ -75,6 +75,11 @@ export function Wordcloud<D, V>(props: WordcloudProps<D, V>): React.ReactElement
     onSelect(node.text);
   });
 
+  React.useEffect(() => {
+    // @ts-ignore
+    vega.setRandom(vega.randomLCG(0));
+  }, [words.state]);
+
   if (!(words.state === 'loaded' || words.state === 'updating')) {
     return <LoadingBox />;
   }
