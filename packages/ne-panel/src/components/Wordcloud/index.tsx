@@ -85,6 +85,10 @@ export function Wordcloud<D, V>(props: WordcloudProps<D, V>): React.ReactElement
         {({ width }) => {
           return (
             <Vega
+              onNewView={() => {
+                // @ts-ignore
+                vega.setRandom(vega.randomLCG(0));
+              }}
               onBeforeParse={spec => {
                 // @ts-ignore
                 vega.setRandom(vega.randomLCG(0));
