@@ -58,6 +58,8 @@ function useController<D, V>({
       variables,
       onFail,
       onData(data) {
+        // @ts-ignore
+        vega.setRandom(vega.randomLCG(0));
         setMode({ state: 'loaded', data: transform(data) });
       },
     });
@@ -81,10 +83,13 @@ export function Wordcloud<D, V>(props: WordcloudProps<D, V>): React.ReactElement
       {words.state === 'updating' && <Loading />}
       <ContainerDimensions>
         {({ width }) => {
-          // @ts-ignore
-          vega.setRandom(vega.randomLCG(0));
           return (
             <Vega
+              onBeforeParse={spec => {
+                // @ts-ignore
+                vega.setRandom(vega.randomLCG(0));
+                return spec;
+              }}
               spec={createWordCloundSchema({
                 width,
                 height: 300,
