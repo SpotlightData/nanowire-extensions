@@ -1,7 +1,6 @@
 import * as R from 'ramda';
 import { History } from 'history';
 import { queryObjectToString, queryUrlToObject } from './request';
-import { filterObject } from './object';
 import { Dictionary } from 'ts-essentials';
 
 type Pair = [string, string];
