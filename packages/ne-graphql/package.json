@@ -12,7 +12,8 @@
     "dist/"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "exit 0"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.6.3",

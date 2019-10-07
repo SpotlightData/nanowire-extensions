@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "test": "exit 0",
+    "test": "lerna run test",
     "lerna": "lerna",
     "build": "lerna run build",
     "bootstrap": "lerna bootstrap",
