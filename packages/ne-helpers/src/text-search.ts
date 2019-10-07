@@ -29,12 +29,12 @@ export interface TextMarkerDataItem {
 export interface TextSearch<T = undefined> {
   color: string;
   search: string;
-  meta: T;
+  meta?: T;
 }
 
 export interface MarkedOccurence<M = undefined> extends Occurrence {
   color: string | null;
-  meta: M;
+  meta?: M;
 }
 
 export interface MarkedRow<T = undefined> {
