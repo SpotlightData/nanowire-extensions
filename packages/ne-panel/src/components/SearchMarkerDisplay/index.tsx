@@ -7,7 +7,7 @@ import {
   GraphQLLoadUpdateMode,
   GraphQLPagination,
 } from '@spotlightdata/ne-graphql';
-import { siblingBreakpoints } from '@spotlightdata/ne-helpers';
+import { siblingBreakpoints, MarkedOccurence } from '@spotlightdata/ne-helpers';
 
 import { LoadingBox, Loading } from '@spotlightdata/ne-components';
 
@@ -39,8 +39,10 @@ interface Pagination {
   offset: number;
 }
 
+type TaggedRow = MarkedRow<MarkedOccurence<undefined>>;
+
 type SearchMarkerLoadMode = GraphQLLoadUpdateMode<{
-  rows: Dictionary<MarkedRow[]>;
+  rows: Dictionary<TaggedRow[]>;
   totalCount: number;
 }>;
 
@@ -77,8 +79,16 @@ function useController<D, V>({
         ({ data }) => {
           const { values, totalCount } = transform(data);
 
-          const marked = createMarkedTextRows([{ color: 'red', search }], values, false, false);
-          const grouped = R.groupBy(R.prop('id'), trimMarkedRows(marked, wordPadding || 10));
+          const marked = createMarkedTextRows<undefined>(
+            [{ color: 'red', search }],
+            values,
+            false,
+            false
+          );
+          const grouped = R.groupBy(
+            R.prop('id'),
+            trimMarkedRows<undefined>(marked, wordPadding || 10)
+          );
           setMode({
             state: 'loaded',
             data: { rows: grouped, totalCount },
@@ -110,7 +120,7 @@ const [sourceBpts, textBpts] = siblingBreakpoints({
   xl: 3,
 });
 
-const MarkedTextRender: React.FC<{ data: MarkedRow }> = ({ data }) => {
+const MarkedTextRender: React.FC<{ data: TaggedRow }> = ({ data }) => {
   return (
     <Row type="flex">
       <Col {...sourceBpts}>
