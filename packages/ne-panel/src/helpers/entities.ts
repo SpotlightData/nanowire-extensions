@@ -1,4 +1,5 @@
 import { getSecondaryHighlightColor } from '@spotlightdata/ne-helpers';
+import { Dictionary } from 'ts-essentials';
 
 export const entityTypes = [
   {
@@ -75,7 +76,7 @@ export const entityTypes = [
   },
 ];
 
-export const entityColors = entityTypes.reduce((dict, entry, i) => {
+export const entityColors: Dictionary<string> = entityTypes.reduce((dict, entry, i) => {
   dict[entry.key] = getSecondaryHighlightColor(i);
   return dict;
 }, {});
