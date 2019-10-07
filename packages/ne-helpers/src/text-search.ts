@@ -37,7 +37,7 @@ export interface MarkedOccurence<M = undefined> extends Occurrence {
   meta: M;
 }
 
-export interface MarkedRow<T> {
+export interface MarkedRow<T = undefined> {
   id: string;
   source: string;
   occurrences: MarkedText<MarkedOccurence<T>>[];
