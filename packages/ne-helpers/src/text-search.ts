@@ -26,19 +26,21 @@ export interface TextMarkerDataItem {
   entries: TextMarkerEntry[];
 }
 
-export interface TextSearch {
+export interface TextSearch<T = undefined> {
   color: string;
   search: string;
+  meta: T;
 }
 
-export interface MarkedOccurence extends Occurrence {
+export interface MarkedOccurence<M = undefined> extends Occurrence {
   color: string | null;
+  meta: M;
 }
 
-export interface MarkedRow {
+export interface MarkedRow<T> {
   id: string;
   source: string;
-  occurrences: MarkedText<MarkedOccurence>[];
+  occurrences: MarkedText<MarkedOccurence<T>>[];
 }
 
 export function findOccurrences<T extends Occurrence>(
@@ -94,7 +96,7 @@ export function doesOccurenceOverlap(item: Occurrence, items: Occurrence[]): boo
   Removes occurences from second list if they interfere with items in first list  
   ATM it's O(n^2) but can be improved
  */
-export const withoutOverlaps = (first: Occurrence[], second: Occurrence[]): Occurrence[] => {
+export function withoutOverlaps<T extends Occurrence>(first: T[], second: T[]): T[] {
   if (first.length === 0) {
     return second;
   }
@@ -102,7 +104,7 @@ export const withoutOverlaps = (first: Occurrence[], second: Occurrence[]): Occu
     return !doesOccurenceOverlap(occ, first);
   }, second);
   return filtered;
-};
+}
 
 export function markText<T extends Occurrence>(
   text: string,
@@ -144,36 +146,39 @@ export function markText<T extends Occurrence>(
 }
 
 // Runs all searches on a single entry
-export function searchEntry<T>(
-  search: TextSearch[],
+export function searchEntry<M>(
+  search: TextSearch<M>[],
   caseSensitive: boolean,
   entry: TextMarkerEntry,
-  unmarked: T,
+  unmarked: MarkedOccurence<M>,
   partialMatch: boolean
-): MarkedText<T>[] {
-  const occs = search.reduce((occs, s) => {
-    const found = findOccurrences(
-      { value: s.search, caseSensitive },
-      entry.text,
-      partialMatch,
-      (occ: Occurrence): MarkedOccurence => {
-        return { ...occ, color: s.color };
-      }
-    );
-    const filtered = withoutOverlaps(occs, found);
-    occs.push(...filtered);
-    return occs;
-  }, []);
+): MarkedText<MarkedOccurence<M>>[] {
+  const occs = search.reduce(
+    (occs, s) => {
+      const found = findOccurrences<MarkedOccurence<M>>(
+        { value: s.search, caseSensitive },
+        entry.text,
+        partialMatch,
+        (occ: Occurrence): MarkedOccurence<M> => {
+          return { ...occ, color: s.color, meta: s.meta };
+        }
+      );
+      const filtered = withoutOverlaps(occs, found);
+      occs.push(...filtered);
+      return occs;
+    },
+    [] as MarkedOccurence<M>[]
+  );
   return markText(entry.text, occs, unmarked);
 }
 
-export function createMarkedTextRows(
-  search: TextSearch[],
+export function createMarkedTextRows<T>(
+  search: TextSearch<T>[],
   items: TextMarkerDataItem[],
   caseSensitive: boolean = true,
   partialMatch: boolean = true
-): MarkedRow[] {
-  const unmarked = { start: 0, end: 0, color: null };
+): MarkedRow<T>[] {
+  const unmarked = { start: 0, end: 0, color: null, meta: undefined };
   const entries = items.reduce((list, item) => {
     // Collect all marks for a single entry
     // Will go trough all sources and mark each search on every one
