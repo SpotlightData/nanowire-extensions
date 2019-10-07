@@ -1,11 +1,11 @@
 import * as R from 'ramda';
 import { MarkedOccurence, MarkedText, MarkedRow } from './text-search';
 
-export function paddingAfterMark(
+export function paddingAfterMark<T>(
   index: number,
-  items: MarkedText<MarkedOccurence>[],
+  items: MarkedText<MarkedOccurence<T>>[],
   padding: number
-): MarkedText<MarkedOccurence> {
+): MarkedText<MarkedOccurence<T>> {
   /*
    Tries to find enough words to pad the marked occurence
    Return nested array as it makes reversing words back easier
@@ -24,16 +24,21 @@ export function paddingAfterMark(
   const text = collect(index + 1, []).join(' ');
   const center = items[index];
   return {
-    text: text,
-    meta: { color: null, start: center.meta.end, end: center.meta.end + text.length },
+    text,
+    meta: {
+      color: null,
+      start: center.meta.end,
+      end: center.meta.end + text.length,
+      meta: center.meta.meta,
+    },
   };
 }
 
-export function paddingBeforeMark(
+export function paddingBeforeMark<T>(
   index: number,
-  items: MarkedText<MarkedOccurence>[],
+  items: MarkedText<MarkedOccurence<T>>[],
   padding: number
-): MarkedText<MarkedOccurence> {
+): MarkedText<MarkedOccurence<T>> {
   /*
    Tries to find enough words to pad the marked occurence
    Return nested array as it makes reversing words back easier
@@ -53,8 +58,13 @@ export function paddingBeforeMark(
   const text = collect(index - 1, []).join(' ');
   const center = items[index];
   return {
-    text: text,
-    meta: { color: null, start: center.meta.start - text.length, end: center.meta.start },
+    text,
+    meta: {
+      color: null,
+      start: center.meta.start - text.length,
+      end: center.meta.start,
+      meta: center.meta.meta,
+    },
   };
 }
 
@@ -64,11 +74,11 @@ export function paddingBeforeMark(
  * @param items - Occurences to use for expanding marked text
  * @param wordPadding - How many words will be shown at each side of marked instance
  */
-export function paddMark(
+export function paddMark<T>(
   index: number,
-  items: MarkedText<MarkedOccurence>[],
+  items: MarkedText<MarkedOccurence<T>>[],
   wordPadding: number
-): MarkedText<MarkedOccurence>[] {
+): MarkedText<MarkedOccurence<T>>[] {
   return [
     paddingBeforeMark(index, items, wordPadding),
     items[index],
@@ -80,12 +90,19 @@ export function paddMark(
  * Will first remove rows that don't have anything marked,
  * Then will split rows
  */
-export function trimMarkedRows(rows: MarkedRow[], wordPadding: number = 5): MarkedRow[] {
-  return R.pipe<MarkedRow[], MarkedRow[], MarkedRow[]>(
-    R.filter((row: MarkedRow) => {
+export function trimMarkedRows<T>(
+  rows: MarkedRow<MarkedOccurence<T>>[],
+  wordPadding: number = 5
+): MarkedRow<MarkedOccurence<T>>[] {
+  return R.pipe<
+    MarkedRow<MarkedOccurence<T>>[],
+    MarkedRow<MarkedOccurence<T>>[],
+    MarkedRow<MarkedOccurence<T>>[]
+  >(
+    R.filter((row: MarkedRow<MarkedOccurence<T>>) => {
       return !R.all(R.pathEq(['meta', 'color'], null), row.occurrences);
     }),
-    R.reduce<MarkedRow, MarkedRow[]>((acc, row) => {
+    R.reduce<MarkedRow<MarkedOccurence<T>>, MarkedRow<MarkedOccurence<T>>[]>((acc, row) => {
       /*
         Use this to prefix column name so we don't have duplicates
         For example BRIEF_TITLE (1), BRIEF_TITLE (2) etc
