@@ -177,7 +177,7 @@ export function createMarkedTextRows<T>(
   items: TextMarkerDataItem[],
   caseSensitive: boolean = true,
   partialMatch: boolean = true
-): MarkedRow<T>[] {
+): MarkedRow<MarkedOccurence<T>>[] {
   const unmarked = { start: 0, end: 0, color: null, meta: undefined };
   const entries = items.reduce((list, item) => {
     // Collect all marks for a single entry
