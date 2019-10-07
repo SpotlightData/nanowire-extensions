@@ -9,14 +9,26 @@ export const capitalizeString = (str: string) =>
 export const pretifyString = (str: string) =>
   capitalizeString(str.replace(/_/gm, ' ').toLocaleLowerCase());
 
+export const isLetter = (char: string) => {
+  if (typeof char !== 'string' || char.length !== 1) {
+    throw new TypeError(`Expected string of length1, received: ${typeof char}`);
+  }
+  return /\w/.test(char);
+};
+
 export function isFullMatch(text: string, search: string, from: number) {
+  // Verify that the match starts the word
+  if (from - 1 >= 0 && isLetter(text[from - 1])) {
+    return false;
+  }
+
   // Check whether at the end match the term ends
   const location = from + search.length;
   // If last character of search is space, it should still be a full match
   if (location >= text.length || /\s/.test(search[search.length - 1])) {
     return true;
   }
-  return !/\w/.test(text[location]);
+  return !isLetter(text[location]);
 }
 
 export function searchTextIn(
