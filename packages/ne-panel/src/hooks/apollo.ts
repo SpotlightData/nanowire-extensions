@@ -3,18 +3,37 @@ import { useAbortRegister, useCancelRegister } from '@spotlightdata/ne-component
 import { GraphQLLoadErrors } from '@spotlightdata/ne-graphql';
 import { DocumentNode } from 'graphql';
 import { QueryBaseOptions, OperationVariables } from 'apollo-client';
-import { MutationBaseOptions, MutationOptions } from 'apollo-client/core/watchQueryOptions';
+import {
+  MutationBaseOptions,
+  MutationOptions,
+  QueryOptions,
+} from 'apollo-client/core/watchQueryOptions';
 
 export interface CancelableClientInput<D, V> {
-  variables: V;
+  variables?: V;
   cancelId?: string;
   onData(data: D): void;
   onFail(errors: GraphQLLoadErrors): void;
 }
 
+export interface CancelableMutateInput<D, V> extends CancelableClientInput<D, V> {
+  mutation: DocumentNode;
+  overrides?: Omit<MutationOptions<any, V>, 'mutation'>;
+}
+
+export interface CancelableQueryInput<D, V> extends CancelableClientInput<D, V> {
+  query: DocumentNode;
+  overrides?: Omit<QueryOptions<V>, 'query'>;
+}
+
 type Unsubscribe = () => void;
 
-export function useCancelableApolloClient() {
+interface CancelableApolloClient {
+  mutate: <D, V>(input: CancelableMutateInput<D, V>) => Unsubscribe;
+  query: <D, V>(input: CancelableQueryInput<D, V>) => Unsubscribe;
+}
+
+export function useCancelableApolloClient(): CancelableApolloClient {
   const client = useApolloClient();
   const registerCancel = useCancelRegister();
 
@@ -25,10 +44,7 @@ export function useCancelableApolloClient() {
     onData,
     onFail,
     mutation,
-  }: CancelableClientInput<D, V> & {
-    mutation: DocumentNode;
-    overrides?: Omit<MutationOptions<any, V>, 'mutation'>;
-  }): Unsubscribe {
+  }: CancelableMutateInput<D, V>): Unsubscribe {
     const controller = new AbortController();
     const cancel = () => controller.abort();
 
@@ -59,10 +75,7 @@ export function useCancelableApolloClient() {
     cancelId,
     onData,
     onFail,
-  }: CancelableClientInput<D, V> & {
-    query: DocumentNode;
-    overrides?: Omit<QueryBaseOptions<V>, 'query'>;
-  }): Unsubscribe {
+  }: CancelableQueryInput<D, V>): Unsubscribe {
     const $query = client
       .watchQuery<D, V>({
         query,
