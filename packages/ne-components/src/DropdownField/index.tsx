@@ -5,11 +5,9 @@ import { FieldRenderProps } from 'react-final-form';
 import { FieldWrapper } from '../FieldWrapper';
 import { DropdownProps, Dropdown } from '../Dropdown';
 
-export interface DropdownFieldProps extends FieldRenderProps<string, HTMLTextAreaElement> {
-  maxWidth?: number;
-  options: DropdownProps['options'];
-  label: string;
-}
+export interface DropdownFieldProps
+  extends FieldRenderProps<string, HTMLTextAreaElement>,
+    Omit<DropdownProps, 'onChange' | 'value'> {}
 
 export const DropdownField: React.FC<DropdownFieldProps> = ({ input, meta, ...rest }) => {
   return (
