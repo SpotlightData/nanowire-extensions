@@ -1,27 +1,23 @@
-export function copyToClipboard(str: string) {
-  console.log(str);
-  const el = document.createElement('textarea'); // Create a <textarea> element
-  // @ts-ignore
-  el.value = str; // Set its value to the string that you want copied
-  el.setAttribute('readonly', ''); // Make it readonly to be tamper-proof
-  el.style.position = 'absolute';
-  el.style.left = '-9999px'; // Move outside the screen to make it invisible
-  document.body.appendChild(el); // Append the <textarea> element to the HTML document
+function fallbackCopyTextToClipboard(text: string) {
+  var textArea = document.createElement('textarea');
+  textArea.value = text;
+  textArea.style.position = 'fixed'; //avoid scrolling to bottom
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
 
-  const selection = document.getSelection();
-
-  if (selection !== null) {
-    const selected =
-      selection.rangeCount > 0 // Check if there is any content selected previously
-        ? selection.getRangeAt(0) // Store selection if found
-        : false; // Mark as false to know no selection existed before
-    el.select(); // Select the <textarea> content
-    document.execCommand('copy'); // Copy - only works as a result of a user action (e.g. click events)
-    document.body.removeChild(el); // Remove the <textarea> element
-    if (selected) {
-      // If a selection existed before copying
-      selection.removeAllRanges(); // Unselect everything on the HTML document
-      selection.addRange(selected); // Restore the original selection
-    }
+  try {
+    document.execCommand('copy');
+  } catch (err) {
+    console.warn('Failed to copy the text');
   }
+  document.body.removeChild(textArea);
+}
+
+export function copyToClipboard(text: string): Promise<any> {
+  if (!navigator || !navigator.clipboard) {
+    fallbackCopyTextToClipboard(text);
+    return Promise.resolve();
+  }
+  return navigator.clipboard.writeText(text);
 }
