@@ -15,11 +15,11 @@ export type AnyGraphQLLoadMode<T> = GraphQLLoadUpdateMode<T> | GraphQLLoadMode<T
 
 export type GraphQLErrorHandler = (errors: GraphQLLoadErrors) => void;
 
-export interface GraphQLPagination {
+export interface GraphQLPaginationI {
   first: number;
   offset: number;
 }
 
-export interface GraphQLPaginationData extends GraphQLPagination {
+export interface GraphQLPaginationDataI extends GraphQLPaginationI {
   totalCount: number;
 }

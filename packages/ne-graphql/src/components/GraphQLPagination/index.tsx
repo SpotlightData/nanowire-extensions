@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { Pagination } from 'antd';
+import { GraphQLPaginationDataI } from '../../interfaces';
 
-interface GraphQLPaginationProps {
-  totalCount: number;
-  offset: number;
-  first: number;
-  onChange(offset: number): void;
+interface GraphQLPaginationProps extends GraphQLPaginationDataI {
+  onChange(config: GraphQLPaginationDataI): void;
 }
 
 export const GraphQLPagination: React.FC<GraphQLPaginationProps> = ({
@@ -21,7 +19,7 @@ export const GraphQLPagination: React.FC<GraphQLPaginationProps> = ({
       current={(offset + first) / first}
       onChange={page => {
         const newOffset = (page - 1) * first;
-        onChange(newOffset);
+        onChange({ first, offset: newOffset, totalCount });
       }}
     />
   );
