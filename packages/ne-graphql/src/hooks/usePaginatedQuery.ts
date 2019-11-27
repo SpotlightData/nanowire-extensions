@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as R from 'ramda';
-import { useCancelableApolloClient } from '@spotlightdata/ne-panel';
+import { useCancelableApolloClient } from './useCancelableApolloClient';
 import { DocumentNode } from 'graphql';
 import { GraphQLPaginationDataI, GraphQLLoadUpdateMode } from '../interfaces';
 
