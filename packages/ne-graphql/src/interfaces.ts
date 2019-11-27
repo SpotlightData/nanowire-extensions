@@ -14,3 +14,12 @@ export type GraphQLLoadUpdateMode<T> = GraphQLLoadMode<T> | { state: 'updating';
 export type AnyGraphQLLoadMode<T> = GraphQLLoadUpdateMode<T> | GraphQLLoadMode<T>;
 
 export type GraphQLErrorHandler = (errors: GraphQLLoadErrors) => void;
+
+export interface GraphQLPagination {
+  first: number;
+  offset: number;
+}
+
+export interface GraphQLPaginationData extends GraphQLPagination {
+  totalCount: number;
+}
