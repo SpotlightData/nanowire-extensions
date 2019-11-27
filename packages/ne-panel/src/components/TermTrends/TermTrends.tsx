@@ -1,6 +1,9 @@
 import * as React from 'react';
-import { GraphQLLoadUpdateMode, GraphQLErrorDisplay } from '@spotlightdata/ne-graphql';
-import { useCancelableApolloClient } from '../../hooks';
+import {
+  GraphQLLoadUpdateMode,
+  GraphQLErrorDisplay,
+  useCancelableApolloClient,
+} from '@spotlightdata/ne-graphql';
 import { DatePicker, Loading, LoadingBox, Dropdown } from '@spotlightdata/ne-components';
 import { DocumentNode } from 'graphql';
 import { LineChartValue } from '../../charts';
