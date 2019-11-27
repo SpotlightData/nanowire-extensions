@@ -1,97 +1,53 @@
 import * as React from 'react';
 import * as vega from 'vega';
-import { GraphQLLoadMode, GraphQLErrorHandler } from '@spotlightdata/ne-graphql';
-import { Loading, LoadingBox } from '@spotlightdata/ne-components';
-import { withSignal } from '@spotlightdata/ne-helpers';
 
-import { Vega } from '../../components';
-
-import ContainerDimensions from 'react-container-dimensions';
-// @ts-ignore
-import useDeepCompareEffect from 'use-deep-compare-effect';
+import { Vega } from '../Vega';
 import { createWordCloundSchema } from '../../charts';
-import { DocumentNode } from 'graphql';
-import { useCancelableApolloClient } from '../../hooks';
+import { Row } from 'antd';
+import ContainerDimensions from 'react-container-dimensions';
+import { VegaProps } from 'react-vega/lib/Vega';
 
-interface WordCloudValue {
-  count: number;
+interface Word {
   text: string;
+  value: number;
 }
 
-interface WordcloudProps<D, V> {
-  onFail: GraphQLErrorHandler;
-  variables: V;
-  query: DocumentNode;
-  transform: (data: D) => WordCloudValue[];
-  onSelect(term: string | undefined): void;
-  render(values: WordCloudValue[], width: number, height: number): React.ReactNode;
+export type WordcloudPassDownProps = Omit<VegaProps, 'spec'>;
+
+export interface WordcloudProps extends WordcloudPassDownProps {
+  words: Word[];
+  height?: number;
+  width?: number;
 }
 
-type WordcloudLoadMode =
-  | GraphQLLoadMode<WordCloudValue[]>
-  | { state: 'updating'; data: WordCloudValue[] };
+const vIfZero = (v1: number, v2: number) => (v1 === 0 ? v2 : v1);
 
-function useController<D, V>({
-  onFail,
-  onSelect,
-  variables,
-  query,
-  transform,
-}: WordcloudProps<D, V>) {
-  const client = useCancelableApolloClient();
-  const [mode, setMode] = React.useState<WordcloudLoadMode>({ state: 'loading' });
-
-  useDeepCompareEffect(() => {
-    // Reset keyword
-    onSelect(undefined);
-    if (mode.state === 'loaded') {
-      return setMode({ state: 'updating', data: mode.data });
-    }
-    setMode({ state: 'loading' });
-  }, [variables]);
-
-  React.useEffect(() => {
-    if (!(mode.state === 'loading' || mode.state === 'updating')) {
-      return;
-    }
-    return client.query<D, V>({
-      query,
-      variables,
-      onFail,
-      onData(data) {
-        // @ts-ignore
-        vega.setRandom(vega.randomLCG(0));
-        setMode({ state: 'loaded', data: transform(data) });
-      },
-    });
-  }, [mode.state]);
-  return { words: mode };
-}
-
-export function Wordcloud<D, V>(props: WordcloudProps<D, V>): React.ReactElement {
-  const { onSelect } = props;
-  const { words } = useController(props);
-
-  const handleSelect = withSignal((signal: string, node: WordCloudValue) => {
-    onSelect(node.text);
-  });
-
-  React.useEffect(() => {
-    // @ts-ignore
-    vega.setRandom(vega.randomLCG(0));
-  }, [words.state]);
-
-  if (!(words.state === 'loaded' || words.state === 'updating')) {
-    return <LoadingBox />;
-  }
+export const Wordcloud: React.FC<WordcloudProps> = ({
+  height: defaultHeight = 300,
+  width: defaultWidth = 300,
+  words,
+  ...rest
+}) => {
   return (
-    <div>
-      {words.state === 'updating' && <Loading />}
+    <Row type="flex" style={{ height: defaultHeight }}>
       <ContainerDimensions>
-        {({ width }) => {
-          return props.render(words.data, width, 300);
+        {({ width: w, height: h }) => {
+          const height = vIfZero(h, defaultHeight);
+          const width = vIfZero(w, defaultWidth);
+          // @ts-ignore
+          vega.setRandom(vega.randomLCG(0));
+          return (
+            <Vega
+              {...rest}
+              spec={createWordCloundSchema({
+                width,
+                height,
+                values: words.map(n => ({ text: n.text, count: n.value })),
+              })}
+            />
+          );
         }}
       </ContainerDimensions>
-    </div>
+    </Row>
   );
-}
+};
