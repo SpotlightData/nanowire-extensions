@@ -6,6 +6,7 @@ import {
   GraphQLErrorHandler,
   GraphQLLoadUpdateMode,
   GraphQLPagination,
+  GraphQLPaginationDataI,
 } from '@spotlightdata/ne-graphql';
 import { siblingBreakpoints, MarkedOccurence } from '@spotlightdata/ne-helpers';
 
@@ -100,8 +101,8 @@ function useController<D, V>({
   }, [mode.state]);
 
   const changePosition = React.useCallback(
-    (offset: number) => {
-      setPosition({ ...position, offset });
+    (position: GraphQLPaginationDataI) => {
+      setPosition(position);
       if (mode.state === 'loaded') {
         return setMode({ state: 'updating', data: mode.data });
       }
