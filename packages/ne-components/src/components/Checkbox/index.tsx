@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FieldRenderProps } from 'react-final-form';
 import { Checkbox as CheckboxInput } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import { FieldWrapper } from '../FieldWrapper';
+import { FieldWrapper } from './FieldWrapper';
 
 export interface CheckboxProps extends FieldRenderProps<boolean, HTMLInputElement> {
   defaultValue?: boolean;

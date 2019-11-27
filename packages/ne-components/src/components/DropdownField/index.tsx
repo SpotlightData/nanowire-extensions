@@ -2,8 +2,8 @@ import React from 'react';
 
 import { FieldError } from '../FieldError';
 import { FieldRenderProps } from 'react-final-form';
-import { FieldWrapper } from '../FieldWrapper';
-import { DropdownProps, Dropdown } from '../Dropdown';
+import { FieldWrapper } from './FieldWrapper';
+import { DropdownProps, Dropdown } from './Dropdown';
 
 export interface DropdownFieldProps
   extends FieldRenderProps<string, HTMLTextAreaElement>,
