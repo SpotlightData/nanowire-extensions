@@ -1,5 +1,5 @@
 import * as R from 'ramda';
-import { History } from 'history';
+import { History, Location } from 'history';
 import { queryObjectToString, queryUrlToObject } from './request';
 import { Dictionary } from 'ts-essentials';
 import { safeStringEncode, safeStringDecode } from './string';
@@ -10,10 +10,14 @@ export function getQuery(context: History): Dictionary<string> {
   return queryUrlToObject(context.location.search);
 }
 
-// Allows to create new location to be pushed using history.push
-export function updateQuery(context: History, updates: Pair[], removes: string[] = []): History {
+export function updateLocation(
+  context: Location,
+  updates: Pair[],
+  removes: string[] = []
+): Location {
   const search = R.pipe(
-    getQuery,
+    R.prop('search'),
+    queryUrlToObject,
     R.toPairs,
     R.concat(updates),
     R.uniqBy((p: Pair) => p[0]),
@@ -22,7 +26,13 @@ export function updateQuery(context: History, updates: Pair[], removes: string[]
     queryObjectToString
   )(context);
 
-  context.location.search = search;
+  location.search = search;
+  return context;
+}
+
+// Allows to create new location to be pushed using history.push
+export function updateQuery(context: History, updates: Pair[], removes: string[] = []): History {
+  context.location = updateLocation(context.location, updates, removes);
   return context;
 }
 
