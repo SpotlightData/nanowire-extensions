@@ -134,3 +134,19 @@ export const longestStringLen = R.pipe(
   R.map<string, number>(R.prop('length')),
   R.reduce<number, number>(R.max, 0 as number)
 );
+
+export type SearchString = string | null;
+
+export const searchToParts = R.ifElse(R.isNil, R.always([]), R.split(/\s*\&\s*/)) as (
+  string: SearchString
+) => string[];
+
+export const partsToSearch = R.pipe<string[], string[], string, SearchString>(
+  R.uniq,
+  R.join(' & '),
+  R.ifElse(n => n.length === 0, R.always(null), R.identity)
+);
+
+export function addTag(search: SearchString, tag: string): SearchString {
+  return R.pipe(searchToParts, R.append(tag), partsToSearch)(search);
+}
