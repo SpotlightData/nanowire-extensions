@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as R from 'ramda';
 import { useCancelableApolloClient } from '@spotlightdata/ne-panel';
-import { GraphQLLoadUpdateMode } from '@spotlightdata/ne-graphql';
 import { DocumentNode } from 'graphql';
-import { GraphQLPaginationDataI } from '../interfaces';
+import { GraphQLPaginationDataI, GraphQLLoadUpdateMode } from '../interfaces';
 
 const DEFAULT_FIRST_PAGE: GraphQLPaginationDataI = {
   first: 10,
