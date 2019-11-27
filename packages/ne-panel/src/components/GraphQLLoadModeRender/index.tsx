@@ -1,17 +1,11 @@
 import * as React from 'react';
-import {
-  GraphQLLoadUpdateMode,
-  GraphQLErrorDisplay,
-  GraphQLLoadMode,
-} from '@spotlightdata/ne-graphql';
+import { GraphQLErrorDisplay, AnyGraphQLLoadMode } from '@spotlightdata/ne-graphql';
 import { NotFound, LoadingBox, Loading } from '@spotlightdata/ne-components';
-
-type AnyLoadMode<T> = GraphQLLoadUpdateMode<T> | GraphQLLoadMode<T>;
 
 export interface GraphQLLoadModeRenderProps<T> {
   spinner?: 'box' | 'regular';
-  mode: AnyLoadMode<T>;
-  render(data: T, state: AnyLoadMode<T>['state']): React.ReactElement;
+  mode: AnyGraphQLLoadMode<T>;
+  render(data: T, state: AnyGraphQLLoadMode<T>['state']): React.ReactElement;
 }
 
 export function GraphQLLoadModeRender<T>({

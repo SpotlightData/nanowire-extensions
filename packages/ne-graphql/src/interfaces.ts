@@ -11,4 +11,6 @@ export type GraphQLLoadMode<T> =
 
 export type GraphQLLoadUpdateMode<T> = GraphQLLoadMode<T> | { state: 'updating'; data: T };
 
+export type AnyGraphQLLoadMode<T> = GraphQLLoadUpdateMode<T> | GraphQLLoadMode<T>;
+
 export type GraphQLErrorHandler = (errors: GraphQLLoadErrors) => void;
