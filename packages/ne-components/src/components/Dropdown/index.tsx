@@ -9,7 +9,7 @@ export interface DropdownEntry {
   disabled?: boolean;
 }
 
-type Key = string | number;
+export type Key = string | number;
 
 export interface DropdownProps<K extends Key> extends Omit<AntDropDownProps, 'overlay'> {
   maxWidth?: number;

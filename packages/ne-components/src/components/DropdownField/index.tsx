@@ -2,18 +2,22 @@ import React from 'react';
 
 import { FieldError } from '../FieldError';
 import { FieldRenderProps } from 'react-final-form';
-import { FieldWrapper } from './FieldWrapper';
-import { DropdownProps, Dropdown } from './Dropdown';
+import { FieldWrapper } from '../FieldWrapper';
+import { DropdownProps, Dropdown, Key } from '../Dropdown';
 
-export interface DropdownFieldProps
+export interface DropdownFieldProps<K extends Key>
   extends FieldRenderProps<string, HTMLTextAreaElement>,
-    Omit<DropdownProps, 'onChange' | 'value'> {}
+    Omit<DropdownProps<K>, 'onChange' | 'value'> {}
 
-export const DropdownField: React.FC<DropdownFieldProps> = ({ input, meta, ...rest }) => {
+export function DropdownField<K extends Key>({
+  input,
+  meta,
+  ...rest
+}: DropdownFieldProps<K>): React.ReactElement {
   return (
     <FieldWrapper>
-      <Dropdown value={input.value} onChange={input.onChange} {...rest} />
+      <Dropdown value={input.value as K} onChange={input.onChange} {...rest} />
       <FieldError meta={meta} />
     </FieldWrapper>
   );
-};
+}
