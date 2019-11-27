@@ -1,5 +1,5 @@
 import * as R from 'ramda';
-import { searchTextIn } from './string';
+import { searchTextIn } from '../string';
 
 interface Search {
   caseSensitive: boolean;
@@ -192,3 +192,5 @@ export function createMarkedTextRows<T>(
   }, []);
   return entries;
 }
+
+
