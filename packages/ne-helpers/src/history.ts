@@ -12,11 +12,10 @@ export function getQuery(context: History): Dictionary<string> {
 
 export function updateSearch(search: string, updates: Pair[], removes: string[] = []): string {
   return R.pipe(
-    R.prop('search'),
     queryUrlToObject,
     R.toPairs,
     R.concat(updates),
-    R.uniqBy((p: Pair) => p[0]),
+    R.uniqBy(R.nth(0)),
     R.filter((p: Pair) => !removes.includes(p[0])),
     p => R.fromPairs(p),
     queryObjectToString
