@@ -10,11 +10,11 @@ const DEFAULT_FIRST_PAGE: GraphQLPaginationDataI = {
   totalCount: 0,
 };
 
-interface PaginatedControllerSpec<D, V, T, FM> {
+export interface PaginatedQuerySpec<D, V, T, FM> {
   formatData(data: D, variables: V): { output: T; totalCount: number };
-  formatVariables(variables: V): FM;
-  shouldQuery?: (variables: V) => boolean;
-  generateDependencies?: (variables: V, page: GraphQLPaginationDataI) => any[];
+  formatVariables(variables: V & GraphQLPaginationDataI): FM;
+  shouldQuery?: (variables: V & GraphQLPaginationDataI) => boolean;
+  generateDependencies?: (variables: V & GraphQLPaginationDataI) => any[];
   query: DocumentNode;
   firstPage?: GraphQLPaginationDataI;
 }
@@ -26,7 +26,7 @@ export function usePaginatedQuery<D, V, T, FM>({
   shouldQuery: shouldQueryArg,
   firstPage: firstPageArg,
   generateDependencies: generateDependenciesArg,
-}: PaginatedControllerSpec<D, V, T, FM>) {
+}: PaginatedQuerySpec<D, V, T, FM>) {
   const shouldQuery = shouldQueryArg || R.T;
   const firstPage = firstPageArg || DEFAULT_FIRST_PAGE;
   const generateDependencies = generateDependenciesArg || R.always([]);
@@ -69,10 +69,10 @@ export function usePaginatedQuery<D, V, T, FM>({
     };
 
     React.useEffect(() => {
-      if (shouldQuery(variables)) {
+      if (shouldQuery({ ...variables, ...page })) {
         return requery(firstPage);
       }
-    }, generateDependencies(variables, page));
+    }, generateDependencies({ ...variables, ...page }));
 
     return { mode, page, setPage };
   };
