@@ -10,12 +10,8 @@ export function getQuery(context: History): Dictionary<string> {
   return queryUrlToObject(context.location.search);
 }
 
-export function updateLocation(
-  context: Location,
-  updates: Pair[],
-  removes: string[] = []
-): Location {
-  const search = R.pipe(
+export function updateSearch(search: string, updates: Pair[], removes: string[] = []): string {
+  return R.pipe(
     R.prop('search'),
     queryUrlToObject,
     R.toPairs,
@@ -24,15 +20,12 @@ export function updateLocation(
     R.filter((p: Pair) => !removes.includes(p[0])),
     p => R.fromPairs(p),
     queryObjectToString
-  )(context);
-
-  location.search = search;
-  return context;
+  )(search);
 }
 
 // Allows to create new location to be pushed using history.push
 export function updateQuery(context: History, updates: Pair[], removes: string[] = []): History {
-  context.location.search = updateLocation(context.location, updates, removes).search;
+  context.location.search = updateSearch(context.location.search, updates, removes);
   return context;
 }
 
