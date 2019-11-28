@@ -12,7 +12,7 @@ const DEFAULT_FIRST_PAGE: GraphQLPaginationDataI = {
 
 export interface PaginatedQuerySpec<D, V, T, FM> {
   formatData(data: D, variables: V): { output: T; totalCount: number };
-  formatVariables(variables: V & GraphQLPaginationDataI): FM;
+  formatVariables(variables: V & GraphQLPaginationDataI): FM & GraphQLPaginationDataI;
   shouldQuery?: (variables: V & GraphQLPaginationDataI) => boolean;
   generateDependencies?: (variables: V & GraphQLPaginationDataI) => any[];
   query: DocumentNode;
@@ -37,7 +37,7 @@ export function usePaginatedQuery<D, V, T, FM>({
     const [page, setPageRaw] = React.useState<GraphQLPaginationDataI>(firstPage);
 
     const queryData = React.useCallback((variables: V, pagination: GraphQLPaginationDataI) => {
-      return client.query<D, FM>({
+      return client.query<D, FM & GraphQLPaginationDataI>({
         query: query,
         overrides: {
           fetchPolicy: 'no-cache',
