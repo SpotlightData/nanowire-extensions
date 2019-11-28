@@ -32,7 +32,7 @@ export function updateLocation(
 
 // Allows to create new location to be pushed using history.push
 export function updateQuery(context: History, updates: Pair[], removes: string[] = []): History {
-  context.location = updateLocation(context.location, updates, removes);
+  context.location.search = updateLocation(context.location, updates, removes).search;
   return context;
 }
 
