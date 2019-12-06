@@ -5,7 +5,7 @@
     "test": "lerna run test",
     "lerna": "lerna",
     "build": "lerna run build",
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap && lerna link",
     "dev": "lerna run build --stream --parallel",
     "lerna:publish": "lerna publish from-git --yes",
     "lerna:postversion": "chan release --group-changes $(node -p -e \"require('./lerna.json').version\") && git add CHANGELOG.md && git commit -m \"Update: changelog\" && git push --follow-tags",
