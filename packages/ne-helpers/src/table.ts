@@ -1,6 +1,6 @@
 import { keyToAccessor, AccessorKey } from './functions';
 
-function stringSort(a: string, b: string) {
+export function stringSort(a: string, b: string) {
   return a.localeCompare(b);
 }
 
