@@ -22,7 +22,7 @@ export interface CancelableQueryInput<D, V> extends CancelableClientInput<D, V> 
 
 type Unsubscribe = () => void;
 
-interface CancelableApolloClient {
+export interface CancelableApolloClient {
   mutate: <D, V>(input: CancelableMutateInput<D, V>) => Unsubscribe;
   query: <D, V>(input: CancelableQueryInput<D, V>) => Unsubscribe;
 }
