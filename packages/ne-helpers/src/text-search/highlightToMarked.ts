@@ -15,17 +15,20 @@ export const DEFAULT_HIGHLIGHT_MARKER_SYMBOL = '#$#';
 const lower = (str: string): string => str.toLowerCase();
 
 // Add empty string just to verify that the word itself matches
-const commonSuffixes = ['ed', 'ing', ''];
+const commonSuffixes = ['ed', 'ing', 'ion'];
 export function checkSuffixMatches(str: string, term: string) {
   const strL = lower(str);
   const termL = lower(term);
   return commonSuffixes.some(s => levenshteinDistance(strL, termL + s) < 3);
 }
 
-
 // Converts postgreSQL ts_headline marked text to array of MarkedEntries
 // Can also be used for other generic search
-export function highlightToMarked(terms: string[], text: string, highlightSymbol: string = DEFAULT_HIGHLIGHT_MARKER_SYMBOL): MarkedTextEntry[] {
+export function highlightToMarked(
+  terms: string[],
+  text: string,
+  highlightSymbol: string = DEFAULT_HIGHLIGHT_MARKER_SYMBOL
+): MarkedTextEntry[] {
   const parts = text.split(highlightSymbol);
   const maxLength = longestStringLen(terms);
   /*
@@ -39,8 +42,9 @@ export function highlightToMarked(terms: string[], text: string, highlightSymbol
       /*
       Use this instead of exact match, so things like:
       'smartphone' and 'Smartphones' match
+      We also reverse it in case we are we need to match collaboration -> collaborate
       */
-      if (checkSuffixMatches(str, term)) {
+      if (checkSuffixMatches(str, term) || checkSuffixMatches(term, str)) {
         return [index, 'marked'];
         // If we matched the term, we need to backtrace
         // and mark previous occurence as regular
