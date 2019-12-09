@@ -126,12 +126,28 @@ export function fleschReadabilityToString(score: number): string {
   return 'Could not match the score';
 }
 
-export function sentimentToString(score: number): string {
-  if (score > -0.05 && score < 0.05) {
-    return 'Neutral';
-  }
-  if (score > 0.05) {
+export const between = R.curry((value: number, a: number, b: number) => {
+  return value <= a && value >= b;
+});
+
+export function isPositive(sentiment: number): boolean {
+  return between(sentiment, 1, 0.33);
+}
+
+export function isNegative(sentiment: number): boolean {
+  return between(sentiment, -0.33, -1);
+}
+
+export function sentimentLabel(sentiment: number): string {
+  const bt = between(sentiment);
+  if (bt(1, 0.66)) {
+    return 'Strongly positive';
+  } else if (bt(0.66, 0.33)) {
     return 'Positive';
+  } else if (bt(-0.33, -0.66)) {
+    return 'Negative';
+  } else if (bt(-0.66, -1)) {
+    return 'Strongly negative';
   }
-  return 'Negative';
+  throw Error(`Sentiment ${sentiment} is not in range of [1, -1]`);
 }
