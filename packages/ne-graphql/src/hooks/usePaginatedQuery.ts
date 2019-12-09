@@ -19,7 +19,7 @@ export interface PaginatedQuerySpec<D, V, T, FM> {
   firstPage?: GraphQLPaginationDataI;
 }
 
-export function usePaginatedQuery<D, V, T, FM>({
+export function usePaginatedQuery<D, V, T, FM = V>({
   formatData,
   formatVariables,
   query,
