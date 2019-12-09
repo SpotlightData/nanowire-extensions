@@ -2,7 +2,7 @@ import * as React from 'react';
 import { MarkedTextEntry } from '@spotlightdata/ne-helpers';
 import { Typography } from 'antd';
 
-export const MarkedRowRender: React.FC<{ entries: MarkedTextEntry[]; activeClass?: string }> = ({
+export const MarkedTextRender: React.FC<{ entries: MarkedTextEntry[]; activeClass?: string }> = ({
   entries,
   activeClass = 'color-blue-7',
 }) => (
