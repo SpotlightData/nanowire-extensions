@@ -32,4 +32,4 @@ export * from './NotFound';
 export * from './Popover';
 export * from './TagAutocomplete';
 export * from './SearchBar';
-export * from './MarkedRowRender';
+export * from './MarkedTextRender';
