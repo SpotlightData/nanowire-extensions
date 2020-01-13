@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { CollapsiblePanelBareProps } from './interface';
 
 export interface CollapsiblePanelClasses {
@@ -31,7 +32,7 @@ export const collapsiblePanelStyle = {
       '&:first-child': {
         float: 'left',
         cursor: 'pointer',
-        userSelect: 'none',
+        userSelect: 'none' as React.CSSProperties['userSelect'],
         marginTop: (props: CollapsiblePanelBareProps) => calcCollapsiblePanelMargin(props.height),
       },
       '&:last-child': {

@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 export interface SidebarClasses extends Record<string, string> {
   root: string;
   collapsed: string;
@@ -21,7 +23,7 @@ export const sidebarStyle = {
           ...transition,
         },
         '& > a': {
-          fontWeight: '300',
+          fontWeight: '300' as React.CSSProperties['fontWeight'],
           display: 'block',
           textDecoration: 'none',
           color: 'inherit',

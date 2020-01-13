@@ -2,7 +2,7 @@ import * as React from 'react';
 import injectSheet from 'react-jss';
 import { Dictionary } from 'ts-essentials';
 
-interface ScrollListClasses {
+interface ScrollListClasses extends Dictionary<string> {
   container: string;
   table: string;
   row: string;
@@ -10,14 +10,18 @@ interface ScrollListClasses {
 }
 
 const style = {
-  container: { overflowY: 'scroll' },
+  container: { overflowY: 'scroll' as React.CSSProperties['overflowY'] },
   table: { width: '100%' },
   row: {
     border: '1px solid #ebedf0',
     padding: '8px 12px',
     cursor: 'pointer',
   },
-  activeRow: { extend: 'row', fontWeight: 'bold', color: '#1890ff' },
+  activeRow: {
+    extend: 'row',
+    fontWeight: 'bold' as React.CSSProperties['fontWeight'],
+    color: '#1890ff',
+  },
 };
 
 export interface ScrollListProps<T> {

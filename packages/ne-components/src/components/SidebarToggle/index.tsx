@@ -10,7 +10,7 @@ const style = {
     margin: 'auto 1em',
     marginLeft: '0',
     cursor: 'pointer',
-    userSelect: 'none',
+    userSelect: 'none' as React.CSSProperties['userSelect'],
   },
 };
 
