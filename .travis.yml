@@ -13,6 +13,7 @@ before_script:
   - yarn run lerna run build
 
 install:
+  - yarn add -g lerna
   - yarn install
   - yarn bootstrap
 
