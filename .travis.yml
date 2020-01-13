@@ -14,7 +14,6 @@ before_script:
 
 install:
   - yarn add -g lerna
-  - yarn install
   - yarn bootstrap
 
 script:
