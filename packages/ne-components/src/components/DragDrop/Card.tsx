@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react';
 import * as R from 'ramda';
 import { DragSource, DropTarget, ConnectDropTarget, ConnectDragSource } from 'react-dnd';
