@@ -2,13 +2,14 @@ import * as React from 'react';
 import injectSheet from 'react-jss';
 import cn from 'classnames';
 import { Spin } from 'antd';
+import { Dictionary } from 'ts-essentials';
 
 const style = {
   container: {
-    pointerEvents: 'none',
+    pointerEvents: 'none' as React.CSSProperties['pointerEvents'],
   },
 };
-export interface LoadingBareClasses {
+export interface LoadingBareClasses extends Dictionary<string> {
   container: string;
 }
 
