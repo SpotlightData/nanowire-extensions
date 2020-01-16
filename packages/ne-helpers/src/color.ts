@@ -52,3 +52,8 @@ export function getPrimaryHighlightColor(index: number): string {
 export function getSecondaryHighlightColor(index: number): string {
   return inRange(index, secondaryColors);
 }
+
+export function safeColorGen(rand: () => number): string {
+  const color = '#' + ((rand() * 0xffffff) << 0).toString(16);
+  return color.length === 7 ? color : safeColorGen(rand);
+}
