@@ -3,11 +3,21 @@ import * as R from 'ramda';
 export const weakContains = (s1: string, s2: string, from: number = 0) =>
   s1.toLowerCase().includes(s2.toLowerCase(), from);
 
-export const capitalizeString = (str: string) =>
-  str[0].toUpperCase() + str.substring(1, str.length);
+export const capitalizeString = (n: string) =>
+  n[0].toLocaleUpperCase() + n.substring(1, n.length).toLocaleLowerCase();
 
-export const pretifyString = (str: string) =>
-  capitalizeString(str.replace(/_/gm, ' ').toLocaleLowerCase());
+export function prettyString(string: string) {
+  // To avoid slice from throwing
+  return string
+    .split('_')
+    .map(n => {
+      if (n.length === 0) {
+        return n;
+      }
+      return capitalizeString(n);
+    })
+    .join(' ');
+}
 
 export const isLetter = (char: string) => {
   if (typeof char !== 'string' || char.length !== 1) {
