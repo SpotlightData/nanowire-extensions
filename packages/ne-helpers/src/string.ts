@@ -6,7 +6,7 @@ export const weakContains = (s1: string, s2: string, from: number = 0) =>
 export const capitalizeString = (n: string) =>
   n.length === 0 ? n : n[0].toLocaleUpperCase() + n.substring(1, n.length).toLocaleLowerCase();
 
-export function prettyString(string: string) {
+export function pretifyString(string: string) {
   return string
     .split('_')
     .map(capitalizeString)
