@@ -4,18 +4,12 @@ export const weakContains = (s1: string, s2: string, from: number = 0) =>
   s1.toLowerCase().includes(s2.toLowerCase(), from);
 
 export const capitalizeString = (n: string) =>
-  n[0].toLocaleUpperCase() + n.substring(1, n.length).toLocaleLowerCase();
+  n.length === 0 ? n : n[0].toLocaleUpperCase() + n.substring(1, n.length).toLocaleLowerCase();
 
 export function prettyString(string: string) {
-  // To avoid slice from throwing
   return string
     .split('_')
-    .map(n => {
-      if (n.length === 0) {
-        return n;
-      }
-      return capitalizeString(n);
-    })
+    .map(capitalizeString)
     .join(' ');
 }
 
