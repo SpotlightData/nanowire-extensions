@@ -16,7 +16,7 @@ export interface LoadingProps {
 export const Loading: React.FC<LoadingProps> = ({ className }) => {
   const classes = useClasses();
   return (
-    <div className={cn('loading-spinner', classes.container || className)}>
+    <div className={cn('loading-spinner', className || classes.container)}>
       <Spin size="large" />
     </div>
   );
