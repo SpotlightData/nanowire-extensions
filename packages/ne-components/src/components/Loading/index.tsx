@@ -1,30 +1,23 @@
 import * as React from 'react';
-import injectSheet from 'react-jss';
+import { createUseStyles } from 'react-jss';
 import cn from 'classnames';
 import { Spin } from 'antd';
-import { Dictionary } from 'ts-essentials';
 
-const style = {
+const useClasses = createUseStyles({
   container: {
     pointerEvents: 'none' as React.CSSProperties['pointerEvents'],
   },
-};
-export interface LoadingBareClasses extends Dictionary<string> {
-  container: string;
-}
+});
 
-export interface LoadingBareProps {
-  classes: LoadingBareClasses;
+export interface LoadingProps {
   className?: string;
 }
 
-export const LoadingBare: React.FC<LoadingBareProps> = ({ className, classes }) => {
+export const Loading: React.FC<LoadingProps> = ({ className }) => {
+  const classes = useClasses();
   return (
-    <div className={cn(classes.container, className || 'loading-spinner')}>
+    <div className={cn('loading-spinner', classes.container || className)}>
       <Spin size="large" />
     </div>
   );
 };
-
-LoadingBare.displayName = 'Loading';
-export const Loading = React.memo(injectSheet(style)(LoadingBare));

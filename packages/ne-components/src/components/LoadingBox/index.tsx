@@ -1,12 +1,20 @@
 import * as React from 'react';
 import { Loading } from '../Loading';
 import { Row } from 'antd';
+import { createUseStyles } from 'react-jss';
+import cn from 'classnames';
 
-const style = { height: '200px' };
-export const LoadingBox: React.FC<{}> = React.memo(({}) => {
+const useStyles = createUseStyles({
+  row: {
+    height: 200,
+  },
+});
+
+export const LoadingBox: React.FC<{ className?: string }> = ({ className }) => {
+  const classes = useStyles();
   return (
-    <Row style={style}>
+    <Row className={cn('loading-box', className || classes.row)}>
       <Loading />
     </Row>
   );
-});
+};
