@@ -4,12 +4,14 @@ import { ApolloError } from 'apollo-client';
 export type GraphQLLoadErrors = ReadonlyArray<GraphQLError | ApolloError>;
 
 export type GraphQLLoadMode<T> =
-  | { state: 'loading' }
-  | { state: 'not-found' }
-  | { state: 'failed'; errors: GraphQLLoadErrors }
-  | { state: 'loaded'; data: T };
+  | { state: 'loading'; updated?: number }
+  | { state: 'not-found'; updated?: number }
+  | { state: 'failed'; errors: GraphQLLoadErrors; updated?: number }
+  | { state: 'loaded'; data: T; updated?: number };
 
-export type GraphQLLoadUpdateMode<T> = GraphQLLoadMode<T> | { state: 'updating'; data: T };
+export type GraphQLLoadUpdateMode<T> =
+  | GraphQLLoadMode<T>
+  | { state: 'updating'; data: T; updated?: number };
 
 export type AnyGraphQLLoadMode<T> = GraphQLLoadUpdateMode<T> | GraphQLLoadMode<T>;
 
