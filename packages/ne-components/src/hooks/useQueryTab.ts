@@ -7,7 +7,7 @@ export function useQueryTab(
   tabKey: string = 'tab'
 ): [string, (tab: string) => void] {
   const history = useHistory();
-  let tab: string = getQuery(history).tab;
+  let tab: string = getQuery(history)[tabKey];
   if (!allowed.includes(tab)) {
     tab = initialTab;
   }
