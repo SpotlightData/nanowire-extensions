@@ -13,6 +13,16 @@ export function pretifyString(string: string) {
     .join(' ');
 }
 
+export function deCamelize(text: string, separator: string = '_'): string {
+  return text
+    .replace(/([\p{Lowercase_Letter}\d])(\p{Uppercase_Letter})/gu, `$1${separator}$2`)
+    .replace(
+      /(\p{Uppercase_Letter}+)(\p{Uppercase_Letter}\p{Lowercase_Letter}+)/gu,
+      `$1${separator}$2`
+    )
+    .toLowerCase();
+}
+
 export const isLetter = (char: string) => {
   if (typeof char !== 'string' || char.length !== 1) {
     throw new TypeError(`Expected string of length1, received: ${typeof char}`);
