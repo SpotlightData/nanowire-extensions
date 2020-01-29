@@ -1,4 +1,4 @@
-import { GraphQLError } from 'graphql';
+import { GraphQLError, DocumentNode } from 'graphql';
 import { ApolloError } from 'apollo-client';
 
 export type GraphQLLoadErrors = ReadonlyArray<GraphQLError | ApolloError>;
@@ -24,4 +24,12 @@ export interface GraphQLPaginationI {
 
 export interface GraphQLPaginationDataI extends GraphQLPaginationI {
   totalCount: number;
+}
+
+export interface CreateQuerySpec<D, V, T, FM> {
+  formatData(data: D, variables: V): T;
+  formatVariables?: (variables: V) => FM;
+  shouldQuery?: (variables: V) => boolean;
+  generateDependencies?: (variables: V) => any[];
+  query: DocumentNode;
 }

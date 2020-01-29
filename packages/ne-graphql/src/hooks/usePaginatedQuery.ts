@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as R from 'ramda';
 import { useCancelableApolloClient } from './useCancelableApolloClient';
-import { DocumentNode } from 'graphql';
-import { GraphQLPaginationDataI, GraphQLLoadUpdateMode } from '../interfaces';
+import { GraphQLPaginationDataI, GraphQLLoadUpdateMode, CreateQuerySpec } from '../interfaces';
 
 const DEFAULT_FIRST_PAGE: GraphQLPaginationDataI = {
   first: 10,
@@ -10,18 +9,25 @@ const DEFAULT_FIRST_PAGE: GraphQLPaginationDataI = {
   totalCount: 0,
 };
 
-export interface PaginatedQuerySpec<D, V, T, FM> {
-  formatData(data: D, variables: V): { output: T; totalCount: number };
-  formatVariables(variables: V & GraphQLPaginationDataI): FM & GraphQLPaginationDataI;
-  shouldQuery?: (variables: V & GraphQLPaginationDataI) => boolean;
-  generateDependencies?: (variables: V & GraphQLPaginationDataI) => any[];
-  query: DocumentNode;
+export interface PaginatedQuerySpec<D, V, T, FM>
+  extends CreateQuerySpec<
+    D,
+    V & GraphQLPaginationDataI,
+    { output: T; totalCount: number },
+    FM & GraphQLPaginationDataI
+  > {
   firstPage?: GraphQLPaginationDataI;
+}
+
+export interface PaginatedQueryOutput<T> {
+  mode: GraphQLLoadUpdateMode<T>;
+  page: GraphQLPaginationDataI;
+  setPage: (nPage: GraphQLPaginationDataI) => void;
 }
 
 export function usePaginatedQuery<D, V, T, FM = V>({
   formatData,
-  formatVariables,
+  formatVariables: formatVariablesArg,
   query,
   shouldQuery: shouldQueryArg,
   firstPage: firstPageArg,
@@ -30,24 +36,28 @@ export function usePaginatedQuery<D, V, T, FM = V>({
   const shouldQuery = shouldQueryArg || R.T;
   const firstPage = firstPageArg || DEFAULT_FIRST_PAGE;
   const generateDependencies = generateDependenciesArg || R.always([]);
+  const formatVariables = (formatVariablesArg || R.identity) as (
+    variables: V & GraphQLPaginationDataI
+  ) => FM & GraphQLPaginationDataI;
 
-  return (variables: V) => {
+  return (variables: V): PaginatedQueryOutput<T> => {
     const client = useCancelableApolloClient();
     const [mode, setMode] = React.useState<GraphQLLoadUpdateMode<T>>({ state: 'loading' });
     const [page, setPageRaw] = React.useState<GraphQLPaginationDataI>(firstPage);
 
     const queryData = React.useCallback((variables: V, pagination: GraphQLPaginationDataI) => {
+      const fullVariables = { ...variables, ...pagination };
       return client.query<D, FM & GraphQLPaginationDataI>({
         query: query,
         overrides: {
           fetchPolicy: 'no-cache',
         },
-        variables: formatVariables({ ...variables, ...pagination }),
+        variables: formatVariables(fullVariables),
         onFail(errors) {
           setMode({ state: 'failed', errors });
         },
         onData(data) {
-          const { output, totalCount } = formatData(data, variables);
+          const { output, totalCount } = formatData(data, fullVariables);
           setPageRaw({ ...pagination, totalCount });
           setMode({ state: 'loaded', data: output });
         },
