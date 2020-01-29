@@ -1,18 +1,23 @@
-import moment from 'moment';
 import { keyToAccessor, AccessorKey } from './functions';
+import { format } from 'date-fns';
 
-export const defaultFormat = 'Do MMM YYYY';
-export const detailedFormat = 'Do MMM YYYY h:mm:ss a';
+export const DATE_WITH_TIME = 'kk:mm dd-MM-yyyy';
+export const SIMPLE_DATE = 'dd-MM-yyyy';
 
-export function detailedTimeFormat(date: moment.MomentInput) {
-  return moment(date).format(detailedFormat);
+export const defaultFormat = 'dd-MM-yyyy';
+export const detailedFormat = 'kk:mm dd-MM-yyyy';
+
+export type DateInput = string | number | Date;
+
+export function detailedTimeFormat(date: DateInput) {
+  return format(new Date(date), detailedFormat);
 }
 
-export function defaultTimeFormat(date: moment.MomentInput) {
-  return moment(date).format(defaultFormat);
+export function defaultTimeFormat(date: DateInput) {
+  return format(new Date(date), defaultFormat);
 }
 
-const value = (time: string | Date) => moment(time).valueOf();
+const value = (time: DateInput) => new Date(time).getTime();
 
 export function timeSort<T>(key: AccessorKey) {
   const accessor = keyToAccessor<T, string>(key);

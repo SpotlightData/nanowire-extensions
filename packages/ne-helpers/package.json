@@ -16,6 +16,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "date-fns": "^2.9.0",
     "ramda": "0.26.0"
   },
   "devDependencies": {
@@ -25,14 +26,12 @@
     "@types/yup": "^0.26.24",
     "history": "^4.10.1",
     "jest": "^24.9.0",
-    "moment": "^2.24.0",
     "ts-essentials": "^3.0.2",
     "ts-jest": "^24.1.0",
     "yup": "^0.27.0"
   },
   "peerDependencies": {
     "history": "^4.10.1",
-    "moment": "^2.24.0",
     "yup": "^0.27.0"
   }
 }
