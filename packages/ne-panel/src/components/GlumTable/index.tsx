@@ -10,7 +10,6 @@ import {
 import { Table } from '@spotlightdata/ne-components';
 import { TableProps, SortOrder } from 'antd/lib/table';
 import { sortEnumOf } from '../../helpers';
-import { PaginationProps } from 'antd/lib/pagination';
 
 export function tableResultsFromGLUM<T>(
   mode: GraphQLLoadUpdateMode<T[]>
