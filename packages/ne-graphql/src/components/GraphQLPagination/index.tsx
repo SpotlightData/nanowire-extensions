@@ -4,7 +4,8 @@ import { Pagination } from 'antd';
 import { GraphQLPaginationDataI } from '../../interfaces';
 import { PaginationProps } from 'antd/lib/pagination';
 
-interface GraphQLPaginationProps extends GraphQLPaginationDataI, Omit<PaginationProps, 'onChange'> {
+export type StrippedPaginationProps = Omit<PaginationProps, 'onChange' | 'setPage'>;
+export interface GraphQLPaginationProps extends GraphQLPaginationDataI, StrippedPaginationProps {
   onChange?: (config: GraphQLPaginationDataI) => void;
   setPage?: (config: GraphQLPaginationDataI) => void;
 }
