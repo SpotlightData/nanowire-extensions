@@ -5,7 +5,7 @@ import { useTransition, animated } from 'react-spring';
 import { KeyValueColor, kvsToString } from '@spotlightdata/ne-helpers';
 import { usePrevious } from 'react-use';
 
-interface DistributionBarProps {
+export interface DistributionBarProps {
   entries: KeyValueColor<number>[];
   height: number;
   onClick?: (item: KeyValueColor<number>) => void;
