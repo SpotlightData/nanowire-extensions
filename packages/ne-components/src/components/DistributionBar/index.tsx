@@ -2,17 +2,13 @@ import * as React from 'react';
 import * as R from 'ramda';
 import { Row, Tooltip } from 'antd';
 import { useTransition, animated } from 'react-spring';
-import { KeyValueColor } from '@spotlightdata/ne-helpers';
+import { KeyValueColor, kvsToString } from '@spotlightdata/ne-helpers';
 import { usePrevious } from 'react-use';
 
 interface DistributionBarProps {
   entries: KeyValueColor<number>[];
   height: number;
   onClick?: (item: KeyValueColor<number>) => void;
-}
-
-function kvsToString(entries: KeyValueColor<number>[]) {
-  return entries.map(n => n.key + n.value).join('');
 }
 
 export const DistributionBar: React.FC<DistributionBarProps> = ({ entries, onClick, height }) => {
