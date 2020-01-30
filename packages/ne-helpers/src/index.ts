@@ -12,3 +12,4 @@ export * from './text-search';
 export * from './color';
 export * from './markers';
 export * from './interfaces';
+export * from './generic';

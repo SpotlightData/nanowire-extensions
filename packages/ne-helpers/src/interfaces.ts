@@ -16,3 +16,7 @@ export interface KeyValue<T, K = string> {
   key: K;
   value: T;
 }
+
+export interface KeyValueColor<V> extends KeyValue<V> {
+  color: string;
+}
