@@ -9,6 +9,7 @@ import {
 import { Table } from '@spotlightdata/ne-components';
 import { TableProps, SortOrder } from 'antd/lib/table';
 import { sortEnumOf } from '../../helpers';
+import { PaginationProps } from 'antd/lib/pagination';
 
 export function tableResultsFromGLUM<T>(
   mode: GraphQLLoadUpdateMode<T[]>
@@ -28,6 +29,7 @@ export interface GlumTableProps<D> extends TableProps<D> {
   page: GraphQLPaginationDataI;
   setPage: (nPage: GraphQLPaginationDataI) => void;
   onSort?: (order: string) => void;
+  paginationProps?: PaginationProps;
 }
 
 export function GlumTable<D>({
@@ -35,6 +37,7 @@ export function GlumTable<D>({
   page,
   setPage,
   onSort,
+  paginationProps = {},
   ...rest
 }: GlumTableProps<D>): React.ReactElement {
   if (mode.state === 'failed') {
@@ -54,7 +57,7 @@ export function GlumTable<D>({
         {...rest}
       />
       <Row type="flex" justify="end" className="margin-top-half">
-        <GraphQLPagination {...page} onChange={setPage} size="small" />
+        <GraphQLPagination {...page} setPage={setPage} {...paginationProps} />
       </Row>
     </React.Fragment>
   );
