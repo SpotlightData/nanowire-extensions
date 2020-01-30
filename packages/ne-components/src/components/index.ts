@@ -34,3 +34,4 @@ export * from './TagAutocomplete';
 export * from './SearchBar';
 export * from './MarkedTextRender';
 export * from './ReadMoreSnippet';
+export * from './DistributionBar';
