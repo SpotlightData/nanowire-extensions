@@ -3,8 +3,9 @@ import { Row } from 'antd';
 import {
   GraphQLErrorDisplay,
   GraphQLPagination,
-  GraphQLPaginationDataI,
   GraphQLLoadUpdateMode,
+  PaginatedQueryOutput,
+  StrippedPaginationProps,
 } from '@spotlightdata/ne-graphql';
 import { Table } from '@spotlightdata/ne-components';
 import { TableProps, SortOrder } from 'antd/lib/table';
@@ -24,12 +25,9 @@ export function tableResultsFromGLUM<T>(
   };
 }
 
-export interface GlumTableProps<D> extends TableProps<D> {
-  mode: GraphQLLoadUpdateMode<D[]>;
-  page: GraphQLPaginationDataI;
-  setPage: (nPage: GraphQLPaginationDataI) => void;
+export interface GlumTableProps<D> extends TableProps<D>, PaginatedQueryOutput<D[]> {
   onSort?: (order: string) => void;
-  paginationProps?: PaginationProps;
+  paginationProps?: StrippedPaginationProps;
 }
 
 export function GlumTable<D>({
