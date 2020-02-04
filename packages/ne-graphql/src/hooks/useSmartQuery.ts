@@ -36,7 +36,7 @@ export function createUseSmartQuery<D, V, T, FM = V>({
     }, [mode.updated, mode.updated]);
 
     React.useEffect(() => {
-      if (!mode.updated || !shouldQuery(formatVariables(variables))) {
+      if (!(mode.updated || shouldQuery(formatVariables(variables)))) {
         return;
       }
       if (mode.state === 'updating' || mode.state === 'loaded') {
