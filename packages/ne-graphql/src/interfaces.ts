@@ -27,9 +27,9 @@ export interface GraphQLPaginationDataI extends GraphQLPaginationI {
 }
 
 export interface CreateQuerySpec<D, V, T, FM> {
-  formatData(data: D, variables: V): T;
+  formatData(data: D, variables: FM): T;
   formatVariables?: (variables: V) => FM;
-  shouldQuery?: (variables: V) => boolean;
+  shouldQuery?: (variables: FM) => boolean;
   generateDependencies?: (variables: V) => any[];
   query: DocumentNode;
 }
