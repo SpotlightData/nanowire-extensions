@@ -46,18 +46,19 @@ export function usePaginatedQuery<D, V, T, FM = V>({
     const [page, setPageRaw] = React.useState<GraphQLPaginationDataI>(firstPage);
 
     const queryData = React.useCallback((variables: V, pagination: GraphQLPaginationDataI) => {
-      const fullVariables = { ...variables, ...pagination };
+      const formatted = formatVariables({ ...variables, ...pagination });
+
       return client.query<D, FM & GraphQLPaginationDataI>({
         query: query,
         overrides: {
           fetchPolicy: 'no-cache',
         },
-        variables: formatVariables(fullVariables),
+        variables: formatted,
         onFail(errors) {
           setMode({ state: 'failed', errors });
         },
         onData(data) {
-          const { output, totalCount } = formatData(data, fullVariables);
+          const { output, totalCount } = formatData(data, formatted);
           setPageRaw({ ...pagination, totalCount });
           setMode({ state: 'loaded', data: output });
         },
@@ -79,7 +80,7 @@ export function usePaginatedQuery<D, V, T, FM = V>({
     };
 
     React.useEffect(() => {
-      if (shouldQuery({ ...variables, ...page })) {
+      if (shouldQuery(formatVariables({ ...variables, ...page }))) {
         return requery(firstPage);
       }
     }, generateDependencies({ ...variables, ...page }));

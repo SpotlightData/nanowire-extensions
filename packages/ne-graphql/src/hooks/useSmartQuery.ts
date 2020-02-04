@@ -19,23 +19,24 @@ export function createUseSmartQuery<D, V, T, FM = V>({
     const [mode, setMode] = React.useState<GraphQLLoadUpdateMode<T>>({ state: 'loading' });
 
     React.useEffect(() => {
-      if (!(mode.state === 'loading' || mode.state === 'updating') || !shouldQuery(variables)) {
+      const formatted = formatVariables(variables);
+      if (!(mode.state === 'loading' || mode.state === 'updating') || !shouldQuery(formatted)) {
         return;
       }
       return client.query<D, FM>({
         query,
-        variables: formatVariables(variables),
+        variables: formatted,
         onFail(errors) {
           setMode({ state: 'failed', errors, updated: Date.now() });
         },
         onData(data) {
-          setMode({ state: 'loaded', data: formatData(data, variables), updated: Date.now() });
+          setMode({ state: 'loaded', data: formatData(data, formatted), updated: Date.now() });
         },
       });
     }, [mode.updated, mode.updated]);
 
     React.useEffect(() => {
-      if (!mode.updated || !shouldQuery(variables)) {
+      if (!mode.updated || !shouldQuery(formatVariables(variables))) {
         return;
       }
       if (mode.state === 'updating' || mode.state === 'loaded') {
