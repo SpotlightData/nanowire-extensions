@@ -14,12 +14,16 @@ export function createUseSmartQuery<D, V, T, FM = V>({
   const formatVariables = (formatVariablesArg || R.identity) as (variables: V) => FM;
 
   return (variables: V): GraphQLLoadUpdateMode<T> => {
+    // Track whether we ever queried the data
+    const querried = React.useRef<boolean>(false);
     const client = useCancelableApolloClient();
     const [mode, setMode] = React.useState<GraphQLLoadUpdateMode<T>>({ state: 'loading' });
+    const formatted = formatVariables(variables);
+    const willQuery = shouldQuery(formatted);
 
     React.useEffect(() => {
-      const formatted = formatVariables(variables);
-      if (!(mode.state === 'loading' || mode.state === 'updating') || !shouldQuery(formatted)) {
+      querried.current = true;
+      if (!(mode.state === 'loading' || mode.state === 'updating') || !willQuery) {
         return;
       }
       return client.query<D, FM>({
@@ -40,7 +44,7 @@ export function createUseSmartQuery<D, V, T, FM = V>({
     }, [mode.updated, mode.updated]);
 
     React.useEffect(() => {
-      if (!(mode.updated || shouldQuery(formatVariables(variables)))) {
+      if (!willQuery || !querried.current) {
         return;
       }
       if (mode.state === 'updating' || mode.state === 'loaded') {
@@ -48,7 +52,7 @@ export function createUseSmartQuery<D, V, T, FM = V>({
       } else {
         setMode({ state: 'loading', updated: Date.now() });
       }
-    }, generateDependencies(variables));
+    }, generateDependencies(variables).concat([willQuery]));
 
     return mode;
   };
