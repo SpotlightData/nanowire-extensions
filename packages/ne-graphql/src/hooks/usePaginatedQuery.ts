@@ -33,7 +33,7 @@ export function usePaginatedQuery<D, V, T, FM = V>({
   firstPage: firstPageArg,
   generateDependencies: generateDependenciesArg,
   notFoundEnabled = true,
-}: PaginatedQuerySpec<D[], V, T[], FM>) {
+}: PaginatedQuerySpec<D, V, T[], FM>) {
   const shouldQuery = shouldQueryArg || R.T;
   const firstPage = firstPageArg || DEFAULT_FIRST_PAGE;
   const generateDependencies = generateDependenciesArg || R.always([]);
@@ -49,7 +49,7 @@ export function usePaginatedQuery<D, V, T, FM = V>({
     const queryData = React.useCallback((variables: V, pagination: GraphQLPaginationDataI) => {
       const formatted = formatVariables({ ...variables, ...pagination });
 
-      return client.query<D[], FM & GraphQLPaginationDataI>({
+      return client.query<D, FM & GraphQLPaginationDataI>({
         query: query,
         overrides: {
           fetchPolicy: 'no-cache',
