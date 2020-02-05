@@ -7,11 +7,10 @@ export function createUseSmartQuery<D, V, T, FM = V>({
   formatData,
   formatVariables: formatVariablesArg,
   query,
-  shouldQuery: shouldQueryArg,
-  generateDependencies: generateDependenciesArg,
+  shouldQuery = R.T,
+  generateDependencies = R.always([]),
+  notFoundEnabled = true,
 }: CreateQuerySpec<D, V, T, FM>) {
-  const shouldQuery = shouldQueryArg || R.T;
-  const generateDependencies = generateDependenciesArg || R.always([]);
   const formatVariables = (formatVariablesArg || R.identity) as (variables: V) => FM;
 
   return (variables: V): GraphQLLoadUpdateMode<T> => {
@@ -30,7 +29,12 @@ export function createUseSmartQuery<D, V, T, FM = V>({
           setMode({ state: 'failed', errors, updated: Date.now() });
         },
         onData(data) {
-          setMode({ state: 'loaded', data: formatData(data, formatted), updated: Date.now() });
+          const output = formatData(data, formatted);
+          if (output === null && notFoundEnabled) {
+            setMode({ state: 'not-found', updated: Date.now() });
+          } else {
+            setMode({ state: 'loaded', data: formatData(data, formatted), updated: Date.now() });
+          }
         },
       });
     }, [mode.updated, mode.updated]);

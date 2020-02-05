@@ -32,6 +32,7 @@ export interface CreateQuerySpec<D, V, T, FM> {
   shouldQuery?: (variables: FM) => boolean;
   generateDependencies?: (variables: V) => any[];
   query: DocumentNode;
+  notFoundEnabled?: boolean;
 }
 
 export interface GraphQLRangeBounds<T> {
