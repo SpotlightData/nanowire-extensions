@@ -41,6 +41,6 @@ export interface GraphQLRangeBounds<T> {
 }
 
 export interface GraphQLRange<T> {
-  start?: GraphQLRangeBounds<T>;
-  end?: GraphQLRangeBounds<T>;
+  start: GraphQLRangeBounds<T>;
+  end: GraphQLRangeBounds<T>;
 }

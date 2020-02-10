@@ -16,3 +16,7 @@ export function rangeToGraphQLRange<T>(
     },
   };
 }
+
+export function graphqlRangeToRange<T>(range: GraphQLRange<T>): Range<T> {
+  return [range.start.value, range.end.value];
+}
