@@ -3,6 +3,7 @@ import * as R from 'ramda';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
+import { BatchHttpLink } from 'apollo-link-batch-http';
 
 const gqlFetch = (uri: RequestInfo, options?: RequestInit) => {
   options.headers = R.mergeRight(options.headers, {
@@ -17,7 +18,7 @@ const gqlFetch = (uri: RequestInfo, options?: RequestInit) => {
 
 export function createApolloClient(): ApolloClient<NormalizedCacheObject> {
   return new ApolloClient({
-    link: new HttpLink({
+    link: new BatchHttpLink({
       fetch: gqlFetch,
       uri: '/graphql',
     }),
