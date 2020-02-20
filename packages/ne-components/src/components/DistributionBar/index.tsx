@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as R from 'ramda';
 import { Row, Tooltip } from 'antd';
 import { useTransition, animated } from 'react-spring';
-import { KeyValueColor, kvsToString } from '@spotlightdata/ne-helpers';
+import { KeyValueColor, kvsToString, percentage } from '@spotlightdata/ne-helpers';
 import { usePrevious } from 'react-use';
 
 export interface DistributionBarProps {
@@ -36,7 +36,7 @@ export const DistributionBar: React.FC<DistributionBarProps> = ({ entries, onCli
   return (
     <Row type="flex">
       {transitions.map(({ item, key, props }) => (
-        <Tooltip title={`${item.key} (${item.value})`} key={key}>
+        <Tooltip title={`${item.key} ${item.value} (${percentage(item.value, sum)})`} key={key}>
           <animated.div
             key={key}
             data-key={item.key}
