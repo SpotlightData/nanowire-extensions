@@ -41,7 +41,11 @@ export const DistributionBar: React.FC<DistributionBarProps> = ({ entries, onCli
             key={key}
             data-key={item.key}
             onClick={onClickBox}
-            style={{ ...props, backgroundColor: item.color, cursor: 'pointer' }}
+            style={{
+              ...props,
+              backgroundColor: item.color,
+              cursor: onClick ? 'pointer' : 'inherit',
+            }}
           />
         </Tooltip>
       ))}
