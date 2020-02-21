@@ -7,7 +7,7 @@
     "--no-lockfile"
   ],
   "useWorkspaces": true,
-  "version": "3.0.0-beta.29",
+  "version": "3.0.0-beta.30",
   "command": {
     "publish": {
       "allowBranch": "master",
