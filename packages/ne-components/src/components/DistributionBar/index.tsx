@@ -36,7 +36,7 @@ export const DistributionBar: React.FC<DistributionBarProps> = ({ entries, onCli
   return (
     <Row type="flex">
       {transitions.map(({ item, key, props }) => (
-        <Tooltip title={`${item.key} ${item.value} (${percentage(item.value, sum)})`} key={key}>
+        <Tooltip title={`${item.key} ${item.value} (${percentage(item.value, sum)}%)`} key={key}>
           <animated.div
             key={key}
             data-key={item.key}
