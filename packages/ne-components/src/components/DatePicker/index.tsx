@@ -1,14 +1,14 @@
 import * as React from 'react';
 
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { DatePicker as AntDatePicker } from 'antd';
 
 import { defaultFormat } from '@spotlightdata/ne-helpers';
-import { RangePickerProps } from 'antd/lib/date-picker/interface';
+import { RangePickerBaseProps } from 'antd/lib/date-picker/generatePicker';
 
 const { RangePicker } = AntDatePicker;
 
-export interface DatePickerProps extends RangePickerProps {
+export interface DatePickerProps extends RangePickerBaseProps<Moment> {
   minValue: string | number;
   maxValue: string | number;
   onFinished: (range: { min: number; max: number }) => void;
