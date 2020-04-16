@@ -13,12 +13,12 @@ const NotFoundBare: React.FC<{
       <Helmet>
         <title>404 NOT FOUND</title>
       </Helmet>
-      <Row type="flex" justify="center">
+      <Row justify="center">
         <div className={classes.body}>
-          <Row type="flex" justify="center">
+          <Row justify="center">
             <Title level={1}>404 NOT FOUND</Title>
           </Row>
-          <Row type="flex" justify="center">
+          <Row justify="center">
             <Paragraph>Resource was not found, make sure the url is correct</Paragraph>
           </Row>
         </div>

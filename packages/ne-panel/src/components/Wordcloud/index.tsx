@@ -29,7 +29,7 @@ export const Wordcloud: React.FC<WordcloudProps> = ({
   ...rest
 }) => {
   return (
-    <Row type="flex" style={{ height: defaultHeight }}>
+    <Row style={{ height: defaultHeight }}>
       <ContainerDimensions>
         {({ width: w, height: h }) => {
           const height = vIfZero(h, defaultHeight);
@@ -42,7 +42,7 @@ export const Wordcloud: React.FC<WordcloudProps> = ({
               spec={createWordCloundSchema({
                 width,
                 height,
-                values: words.map(n => ({ text: n.text, count: n.value })),
+                values: words.map((n) => ({ text: n.text, count: n.value })),
               })}
             />
           );

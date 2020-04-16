@@ -20,12 +20,12 @@ const GraphQLErrorDisplayBare: React.FC<GraphQLErrorDisplayBareProps> = ({ error
   console.error(errors);
   return (
     <Card className={classes.root}>
-      <Row type="flex" justify="center">
+      <Row justify="center">
         <Title level={1} className={classes.title}>
           Page has crashed
         </Title>
       </Row>
-      <Row type="flex" justify="center" className={classes.notice}>
+      <Row justify="center" className={classes.notice}>
         <Text>Please report the issue to info@spotlightdata.co.uk</Text>
       </Row>
       {errors.map((error, i) => {
@@ -38,7 +38,7 @@ const GraphQLErrorDisplayBare: React.FC<GraphQLErrorDisplayBareProps> = ({ error
           string = JSON.stringify(error, null, 2);
         }
         return (
-          <Row type="flex" justify="center" key={i}>
+          <Row justify="center" key={i}>
             <div className={classes.code}>
               <code>{string}</code>
             </div>

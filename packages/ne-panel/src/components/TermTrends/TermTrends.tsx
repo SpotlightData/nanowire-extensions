@@ -90,10 +90,10 @@ function useController<D>(props: TermTrendsProps<D>) {
     >({
       query: props.query,
       variables,
-      onData: data => {
+      onData: (data) => {
         const all = props.transform(data);
         const filled = fillKeywordGaps(all, props.hasValues)
-          .map(n => {
+          .map((n) => {
             return {
               date: Date.parse(n.datePublished),
               count: parseInt(n.hasCount, 10),
@@ -103,7 +103,7 @@ function useController<D>(props: TermTrendsProps<D>) {
           .sort((a, b) => a.text.localeCompare(b.text));
         setMode({ state: 'loaded', data: filled });
       },
-      onFail: errors => setMode({ state: 'failed', errors }),
+      onFail: (errors) => setMode({ state: 'failed', errors }),
       // @ts-ignore
       overrides: {},
     });
@@ -146,7 +146,7 @@ export function TermTrends<D>(props: TermTrendsProps<D>): React.ReactElement {
       <Dropdown
         options={spacingOptions}
         value={spacing}
-        onChange={key => setSpacing(key as Spacing)}
+        onChange={(key) => setSpacing(key as Spacing)}
         label="Choose Spacing"
       />
     );
@@ -154,7 +154,7 @@ export function TermTrends<D>(props: TermTrendsProps<D>): React.ReactElement {
 
   return (
     <React.Fragment>
-      <Row type="flex" style={{ marginBottom: '1em' }}>
+      <Row style={{ marginBottom: '1em' }}>
         {datePicker} {spacingPicker}
       </Row>
 

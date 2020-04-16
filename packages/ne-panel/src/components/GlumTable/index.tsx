@@ -53,7 +53,7 @@ export function GlumTable<D>({
         }
         {...rest}
       />
-      <Row type="flex" justify="end" className="margin-top-half">
+      <Row justify="end" className="margin-top-half">
         <GraphQLPagination {...page} setPage={setPage} {...paginationProps} />
       </Row>
     </React.Fragment>
