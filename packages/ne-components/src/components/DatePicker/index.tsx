@@ -8,7 +8,7 @@ import { RangePickerBaseProps } from 'antd/lib/date-picker/generatePicker';
 
 const { RangePicker } = AntDatePicker;
 
-export interface DatePickerProps extends RangePickerBaseProps<Moment> {
+export interface DatePickerProps extends Omit<RangePickerBaseProps<Moment>, 'picker'> {
   minValue: string | number;
   maxValue: string | number;
   onFinished: (range: { min: number; max: number }) => void;

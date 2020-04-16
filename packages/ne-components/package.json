@@ -23,6 +23,7 @@
     "react-animate-height": "^2.0.15",
     "react-dnd": "5.0.0",
     "react-dnd-html5-backend": "5.0.1",
+    "@ant-design/icons": "4.0.6",
     "shortid": "^2.2.15"
   },
   "devDependencies": {
