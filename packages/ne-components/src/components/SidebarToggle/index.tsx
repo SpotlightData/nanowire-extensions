@@ -2,7 +2,7 @@ import * as React from 'react';
 import injectSheet from 'react-jss';
 import cn from 'classnames';
 import { Icon as LegacyIcon } from '@ant-design/compatible';
-import { IconProps } from 'antd/lib/icon';
+import { IconProps } from '@ant-design/compatible/lib/icon';
 
 const style = {
   root: {
