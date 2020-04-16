@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Popover, Row, Button, Icon } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Popover, Row, Button } from 'antd';
 import { PopoverProps } from 'antd/lib/popover';
 import { TooltipTrigger } from 'antd/lib/tooltip';
 
@@ -49,7 +50,7 @@ export class ContentPopconfirm extends React.Component<ContentPopconfirmProps, S
     const fullContent = (
       <div style={{ padding: '0.3em' }}>
         <Row>
-          <Icon
+          <LegacyIcon
             type={icon}
             theme="filled"
             style={{ fontSize: '14px', color: iconColor, marginRight: '0.5em' }}

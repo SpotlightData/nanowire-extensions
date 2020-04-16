@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as R from 'ramda';
-import { Menu, Dropdown as AntDropdown, Button, Icon } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { Menu, Dropdown as AntDropdown, Button } from 'antd';
 import { Dictionary } from 'ts-essentials';
 import { DropDownProps as AntDropDownProps } from 'antd/lib/dropdown';
 
@@ -59,7 +60,7 @@ export function Dropdown<K extends Key>({
   return (
     <AntDropdown overlay={menu} {...rest}>
       <Button className="ant-dropdown-link">
-        {selected ? selected.text : label} <Icon type="down" />
+        {selected ? selected.text : label} <DownOutlined />
       </Button>
     </AntDropdown>
   );

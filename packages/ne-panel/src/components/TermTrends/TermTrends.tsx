@@ -9,7 +9,7 @@ import { DocumentNode } from 'graphql';
 import { LineChartValue } from '../../charts';
 import { TermTrendsFilters, TermResult } from './interface';
 import { fillKeywordGaps } from './utils';
-import { Row, Menu, Button, Icon } from 'antd';
+import { Row, Menu, Button } from 'antd';
 // @ts-ignore
 import useDeepCompareEffect from 'use-deep-compare-effect';
 
