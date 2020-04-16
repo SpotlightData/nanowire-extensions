@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Table as AntTable } from 'antd';
-import { TableProps, TableSize } from 'antd/lib/table';
+import { TableProps } from 'antd/lib/table';
 
 const defaultTableProps = {
   rowKey: (record: any) => record._id,
@@ -9,9 +9,9 @@ const defaultTableProps = {
   pagination: {
     pageSize: 10,
   },
-  size: 'middle' as TableSize,
+  size: 'middle' as TableProps<any>['size'],
 };
 
-export function Table<T>(props: TableProps<T>): React.ReactElement {
+export function Table<T extends Object>(props: TableProps<T>): React.ReactElement {
   return <AntTable {...defaultTableProps} {...props} />;
 }

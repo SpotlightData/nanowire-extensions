@@ -34,7 +34,7 @@ export function TagAutocompleteBare({
   search,
 }: TagAutocompleteBareProps): React.ReactElement {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
-  const inputRef = React.createRef<AutoComplete>();
+  const inputRef = React.createRef<any>();
 
   return (
     <div
@@ -43,7 +43,7 @@ export function TagAutocompleteBare({
         inputRef.current.focus();
       }}
     >
-      {tags.map(tag => (
+      {tags.map((tag) => (
         <Tag key={tag.value} closable onClose={() => onRemove(tag.value)}>
           {tag.text}
         </Tag>
@@ -58,7 +58,7 @@ export function TagAutocompleteBare({
         value={search}
         style={{ width: '100%' }}
         dataSource={suggestions}
-        onChange={text => {
+        onChange={(text) => {
           onSearch(text as string);
         }}
         onSearch={onSearch}
