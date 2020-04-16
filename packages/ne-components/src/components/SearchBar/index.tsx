@@ -50,10 +50,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   }, [input, disabled]);
 
   return (
-    <Row type="flex" justify="end">
+    <Row justify="end">
       <Input
         value={input}
-        onInput={e => {
+        onInput={(e) => {
           e.preventDefault();
           e.stopPropagation();
           const element = e.target as HTMLInputElement;

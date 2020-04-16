@@ -19,7 +19,7 @@ export const DistributionBar: React.FC<DistributionBarProps> = ({ entries, onCli
 
   const setWidth = (n: KeyValueColor<number>) => ({ height, width: `${(n.value / sum) * 100}%` });
 
-  const transitions = useTransition(entries, item => item.key, {
+  const transitions = useTransition(entries, (item) => item.key, {
     from: { width: '0%', height },
     enter: setWidth,
     leave: { width: '0%', height },
@@ -29,7 +29,7 @@ export const DistributionBar: React.FC<DistributionBarProps> = ({ entries, onCli
 
   const onClickBox = (e: React.MouseEvent<HTMLDivElement>) => {
     const key = (e.target as HTMLDivElement).dataset.key;
-    const selected = R.find(R.propEq('key', key), entries);
+    const selected = R.find(R.propEq('key', key), entries) as KeyValueColor<number>;
     if (selected && typeof onClick !== 'undefined') {
       onClick(selected);
     }
@@ -60,7 +60,7 @@ export const DistributionBar: React.FC<DistributionBarProps> = ({ entries, onCli
 
   return (
     <div ref={rowRef}>
-      <Row type="flex" onMouseLeave={onLeave} style={{ position: 'relative' }}>
+      <Row onMouseLeave={onLeave} style={{ position: 'relative' }}>
         <div
           ref={tooltipRef}
           className="ant-tooltip"

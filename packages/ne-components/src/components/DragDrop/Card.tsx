@@ -5,7 +5,7 @@ import { DragSource, DropTarget, ConnectDropTarget, ConnectDragSource } from 're
 
 import injectSheet from 'react-jss';
 import cn from 'classnames';
-import { Icon } from 'antd';
+import { CloseCircleOutlined } from '@ant-design/icons';
 import { ITEM_TYPES } from './itemTypes';
 import { DragDropData } from './interface';
 
@@ -65,13 +65,11 @@ class CardBare extends React.PureComponent<CardBareProps> {
       connectDropTarget(
         <div style={{ opacity }} className={cn(classes.container, 'drag-drop-card')} id={id}>
           <span>{data.title}</span>
-          <Icon
-            type="close-circle"
+          <CloseCircleOutlined
             className={cn(classes.icon, 'drag-drop-card-close')}
             onClick={() => onRemove(index)}
             role="button"
-            tabIndex={0}
-          />
+            tabIndex={0} />
         </div>
       )
     );

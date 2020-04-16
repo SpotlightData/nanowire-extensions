@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Popover, Row, Button, Icon } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Popover, Row, Button } from 'antd';
 import { PopoverProps } from 'antd/lib/popover';
-import { TooltipTrigger } from 'antd/lib/tooltip';
 
 export interface ContentPopconfirmProps extends PopoverProps {
   okText?: string;
@@ -49,7 +49,7 @@ export class ContentPopconfirm extends React.Component<ContentPopconfirmProps, S
     const fullContent = (
       <div style={{ padding: '0.3em' }}>
         <Row>
-          <Icon
+          <LegacyIcon
             type={icon}
             theme="filled"
             style={{ fontSize: '14px', color: iconColor, marginRight: '0.5em' }}
@@ -61,7 +61,7 @@ export class ContentPopconfirm extends React.Component<ContentPopconfirmProps, S
           <Button
             className="left-floated"
             size="small"
-            onClick={e => this.handleVisibleChange(false)}
+            onClick={(e) => this.handleVisibleChange(false)}
           >
             {cancelText}
           </Button>
@@ -69,7 +69,7 @@ export class ContentPopconfirm extends React.Component<ContentPopconfirmProps, S
             className="right-floated"
             size="small"
             type="primary"
-            onClick={e => {
+            onClick={(e) => {
               this.handleVisibleChange(false);
               onConfirm();
             }}
@@ -84,7 +84,7 @@ export class ContentPopconfirm extends React.Component<ContentPopconfirmProps, S
       <Popover
         content={fullContent}
         placement="top"
-        trigger={'click' as TooltipTrigger}
+        trigger={'click'}
         visible={visible}
         onVisibleChange={this.handleVisibleChange}
         {...props}

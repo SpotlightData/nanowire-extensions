@@ -95,7 +95,7 @@ function useController<D, V>({
             data: { rows: grouped, totalCount },
           });
         },
-        e => onFail([e])
+        (e) => onFail([e])
       );
     return () => $query.unsubscribe();
   }, [mode.state]);
@@ -123,12 +123,12 @@ const [sourceBpts, textBpts] = siblingBreakpoints({
 
 const MarkedTextRender: React.FC<{ data: TaggedRow }> = ({ data }) => {
   return (
-    <Row type="flex">
+    <Row>
       <Col {...sourceBpts}>
         <Typography.Text strong>{data.source.split(' ')[0]}</Typography.Text>
       </Col>
       <Col {...textBpts}>
-        {data.occurrences.map(occ => (
+        {data.occurrences.map((occ) => (
           <Typography.Text key={sid.generate()} style={{ color: occ.meta.color || undefined }}>
             {occ.text}
           </Typography.Text>
@@ -162,12 +162,12 @@ export function SearchMarkerDisplay<D, V>(props: SearchMarkerDisplayProps<D, V>)
         {Object.entries(data.rows).map(([key, value]) => {
           return (
             <div key={key}>
-              <Row type="flex" justify="end" style={{ paddingRight: '1em' }}>
+              <Row justify="end" style={{ paddingRight: '1em' }}>
                 <a href={'/' + makePath(key)} target="_blank">
                   VIEW
                 </a>
               </Row>
-              {value.map(n => {
+              {value.map((n) => {
                 return <MarkedTextRender key={n.source + n.id} data={n} />;
               })}
               <Divider />
@@ -176,7 +176,7 @@ export function SearchMarkerDisplay<D, V>(props: SearchMarkerDisplayProps<D, V>)
         })}
       </div>
 
-      <Row type="flex" justify="end" style={{ marginTop: '1em' }}>
+      <Row justify="end" style={{ marginTop: '1em' }}>
         <GraphQLPagination
           totalCount={data.totalCount}
           first={position.first}

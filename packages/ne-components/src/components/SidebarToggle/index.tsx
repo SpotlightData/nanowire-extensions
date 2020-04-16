@@ -1,8 +1,8 @@
 import * as React from 'react';
 import injectSheet from 'react-jss';
 import cn from 'classnames';
-import { Icon } from 'antd';
-import { IconProps } from 'antd/lib/icon';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { IconProps } from '@ant-design/compatible/lib/icon';
 
 const style = {
   root: {
@@ -25,7 +25,7 @@ export interface SidebarToggleBareProps extends IconProps {
 }
 
 const SidebarToggleBare = ({ onClick, open, classes, className, ...rest }) => (
-  <Icon
+  <LegacyIcon
     type={open ? 'menu-fold' : 'menu-unfold'}
     onClick={onClick}
     role="button"

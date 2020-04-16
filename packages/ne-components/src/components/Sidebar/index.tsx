@@ -3,7 +3,9 @@ import * as R from 'ramda';
 
 import { History } from 'history';
 import { withRouter } from 'react-router-dom';
-import { Layout, Menu, Icon, Row, Col } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Layout, Menu, Row, Col } from 'antd';
 
 import cn from 'classnames';
 import injectSheet from 'react-jss';
@@ -48,7 +50,7 @@ class SidebarBare extends React.Component<SidebarBareProps, any> {
     if (isMobile && isOpen) {
       return (
         <div className={className} role="button" tabIndex={-1} onClick={() => toggle(false)}>
-          <Icon type="close" />
+          <CloseOutlined />
         </div>
       );
     } else {
@@ -89,7 +91,7 @@ class SidebarBare extends React.Component<SidebarBareProps, any> {
       <Menu.Item key={item.link}>
         <Row>
           <Col span={4}>
-            <Icon type={item.icon} />
+            <LegacyIcon type={item.icon} />
           </Col>
           <Col span={20}>
             <a>{item.name}</a>

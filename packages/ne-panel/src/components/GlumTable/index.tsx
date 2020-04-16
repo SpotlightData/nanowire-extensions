@@ -8,7 +8,7 @@ import {
   StrippedPaginationProps,
 } from '@spotlightdata/ne-graphql';
 import { Table } from '@spotlightdata/ne-components';
-import { TableProps, SortOrder } from 'antd/lib/table';
+import { TableProps } from 'antd/lib/table';
 import { sortEnumOf } from '../../helpers';
 
 export function tableResultsFromGLUM<T>(
@@ -49,11 +49,12 @@ export function GlumTable<D>({
         loading={updating}
         size="small"
         onChange={(_pg, _filt, sorter) =>
+          // @ts-ignore
           onSort ? onSort(sortEnumOf(sorter.field, sorter.order)) : undefined
         }
         {...rest}
       />
-      <Row type="flex" justify="end" className="margin-top-half">
+      <Row justify="end" className="margin-top-half">
         <GraphQLPagination {...page} setPage={setPage} {...paginationProps} />
       </Row>
     </React.Fragment>
