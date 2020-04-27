@@ -19,7 +19,8 @@ export const DistributionBar: React.FC<DistributionBarProps> = ({
   height,
   total,
 }) => {
-  const sum = total || R.reduce((acc, b) => acc + b.value, 0, entries);
+  const sum = R.reduce((acc, b) => acc + b.value, 0, entries);
+  const totalCount = total || sum;
   const prev = usePrevious(kvsToString(entries));
   const tooltipRef = React.createRef<HTMLDivElement>();
   const rowRef = React.createRef<HTMLDivElement>();
@@ -77,7 +78,7 @@ export const DistributionBar: React.FC<DistributionBarProps> = ({
         </div>
         {transitions.map(({ item, key, props }) => (
           <animated.div
-            data-tip={`${item.key} ${item.value} (${percentage(item.value, sum)}%)`}
+            data-tip={`${item.key} ${item.value} (${percentage(item.value, totalCount)}%)`}
             key={key}
             data-key={item.key}
             data-value={item.value}
