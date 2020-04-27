@@ -9,10 +9,17 @@ export interface DistributionBarProps {
   entries: KeyValueColor<number>[];
   height: number;
   onClick?: (item: KeyValueColor<number>) => void;
+  // Useful for when we aren't displaying all elements
+  total?: number;
 }
 
-export const DistributionBar: React.FC<DistributionBarProps> = ({ entries, onClick, height }) => {
-  const sum = R.reduce((acc, b) => acc + b.value, 0, entries);
+export const DistributionBar: React.FC<DistributionBarProps> = ({
+  entries,
+  onClick,
+  height,
+  total,
+}) => {
+  const sum = total || R.reduce((acc, b) => acc + b.value, 0, entries);
   const prev = usePrevious(kvsToString(entries));
   const tooltipRef = React.createRef<HTMLDivElement>();
   const rowRef = React.createRef<HTMLDivElement>();
