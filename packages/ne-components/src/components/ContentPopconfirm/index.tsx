@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Icon as LegacyIcon } from '@ant-design/compatible';
 import { Popover, Row, Button } from 'antd';
 import { PopoverProps } from 'antd/lib/popover';
+import { ExclamationCircleFilled } from '@ant-design/icons';
 
 export interface ContentPopconfirmProps extends PopoverProps {
   okText?: string;
@@ -9,7 +9,7 @@ export interface ContentPopconfirmProps extends PopoverProps {
   content?: string | React.ReactNode;
   onConfirm: () => void;
   title: string | React.ReactNode;
-  icon?: string;
+  icon?: React.ReactNode;
   iconColor?: string;
 }
 
@@ -49,9 +49,7 @@ export class ContentPopconfirm extends React.Component<ContentPopconfirmProps, S
     const fullContent = (
       <div style={{ padding: '0.3em' }}>
         <Row>
-          <LegacyIcon
-            type={icon}
-            theme="filled"
+          <ExclamationCircleFilled
             style={{ fontSize: '14px', color: iconColor, marginRight: '0.5em' }}
           />
           {title}
