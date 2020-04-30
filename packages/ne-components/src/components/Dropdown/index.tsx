@@ -45,7 +45,7 @@ export function Dropdown<K extends Key>({
   const menu = React.useMemo(
     () => (
       <Menu onClick={({ key }) => onChange(key)} style={{ maxWidth }}>
-        {Object.keys(options).map(key => (
+        {Object.keys(options).map((key) => (
           <Menu.Item key={key} disabled={options[key].disabled}>
             {options[key].text}
           </Menu.Item>
