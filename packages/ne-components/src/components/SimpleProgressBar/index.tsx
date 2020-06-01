@@ -46,5 +46,6 @@ const SimpleProgressBarBare: React.FC<SimpleProgressBarProps> = ({ classes }) =>
 
 // @ts-ignore
 export const SimpleProgressBar = injectSheet<string, object, SimpleProgressBarBareProps>(styles)(
+  // @ts-ignore
   SimpleProgressBarBare
 );
