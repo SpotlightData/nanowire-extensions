@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "5.0.5",
+  "version": "5.0.6",
   "description": "Components and helpers shared between panels",
   "license": "MIT",
   "main": "dist/index.js",
@@ -16,7 +16,7 @@
     "test": "exit 0"
   },
   "dependencies": {
-    "@spotlightdata/ne-components": "^5.0.5",
+    "@spotlightdata/ne-components": "^5.0.6",
     "@spotlightdata/ne-graphql": "^5.0.4",
     "@spotlightdata/ne-helpers": "^5.0.2",
     "@use-it/event-listener": "^0.1.3",
