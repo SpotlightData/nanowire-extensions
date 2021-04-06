@@ -1,13 +1,9 @@
 {
-  "packages": [
-    "packages/**"
-  ],
+  "packages": ["packages/**"],
   "npmClient": "yarn",
-  "npmClientArgs": [
-    "--no-lockfile"
-  ],
+  "npmClientArgs": ["--no-lockfile"],
   "useWorkspaces": true,
-  "version": "5.0.6",
+  "version": "6.0.0",
   "command": {
     "publish": {
       "allowBranch": "master",
