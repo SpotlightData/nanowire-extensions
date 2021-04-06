@@ -29,12 +29,16 @@ export interface GlumTableProps<D> extends TableProps<D>, PaginatedQueryOutput<D
   paginationProps?: StrippedPaginationProps;
 }
 
+const defaultPaginationProps = {
+  showSizeChanger: false,
+};
+
 export function GlumTable<D>({
   mode,
   page,
   setPage,
   onSort,
-  paginationProps = {},
+  paginationProps = defaultPaginationProps,
   ...rest
 }: GlumTableProps<D>): React.ReactElement {
   if (mode.state === 'failed') {
